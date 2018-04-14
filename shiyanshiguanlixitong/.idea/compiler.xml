@@ -6,6 +6,9 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="component" />
+        <module name="dal" />
+        <module name="service" />
         <module name="webapp" />
       </profile>
     </annotationProcessing>
