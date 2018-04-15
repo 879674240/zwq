@@ -16,7 +16,6 @@
     </modules>
     <!-- 集中定义依赖版本号 -->
     <properties>
-        <project.version>1.0-SNAPSHOT</project.version>
         <spring.version>4.3.5.RELEASE</spring.version>
         <spring.security.version>3.2.4.RELEASE</spring.security.version>
         <spring-session-data-redis.version>1.1.0.RELEASE</spring-session-data-redis.version>
@@ -34,18 +33,29 @@
 
     <dependencyManagement>
         <dependencies>
+            <!--?????-->
             <dependency>
-                <groupId>com.xupt</groupId>
+                <groupId>com.example</groupId>
                 <artifactId>component</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.xupt</groupId>
+                <groupId>com.example</groupId>
                 <artifactId>dal</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.xupt</groupId>
+                <groupId>com.example</groupId>
+                <artifactId>facade</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.example</groupId>
+                <artifactId>integration</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.example</groupId>
                 <artifactId>service</artifactId>
                 <version>${project.version}</version>
             </dependency>
@@ -183,7 +193,6 @@
                 <version>${druid.version}</version>
             </dependency>
 
-            <!-- ??????WEB??? -->
             <dependency>
                 <groupId>javax.servlet.jsp</groupId>
                 <artifactId>jsp-api</artifactId>
@@ -191,8 +200,9 @@
             </dependency>
             <dependency>
                 <groupId>javax.servlet</groupId>
-                <artifactId>servlet-api</artifactId>
-                <version>3.1</version>
+                <artifactId>javax.servlet-api</artifactId>
+                <version>3.0.1</version>
+                <scope>provided</scope>
             </dependency>
             <dependency>
                 <groupId>javax.servlet</groupId>

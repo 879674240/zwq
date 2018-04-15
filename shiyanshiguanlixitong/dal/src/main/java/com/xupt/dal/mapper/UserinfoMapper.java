@@ -16,5 +16,5 @@ public interface UserinfoMapper {
     int insert(UserinfoEntity entity);
     int updateById(@Param("id") Integer id);
     UserinfoEntity getById(@Param("id") Integer id);
-    UserinfoEntity query();
+    List<UserinfoEntity> query();
 }

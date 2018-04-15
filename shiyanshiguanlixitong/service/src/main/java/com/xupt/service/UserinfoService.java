@@ -5,13 +5,14 @@ import com.xupt.dal.model.UserinfoEntity;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class UserinfoService {
     @Resource
     private UserinfoMapper userinfoMapper;
-    public UserinfoEntity query(){
-        UserinfoEntity userinfoEntity = userinfoMapper.query();
-        return userinfoEntity;
+    public List<UserinfoEntity> query(){
+        List<UserinfoEntity> userinfoEntitys = userinfoMapper.query();
+        return userinfoEntitys;
     }
 }
