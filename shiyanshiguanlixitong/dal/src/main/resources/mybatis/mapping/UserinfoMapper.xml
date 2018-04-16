@@ -32,10 +32,16 @@
             <if test="id != null">AND id=#{id}</if>
         </trim>
     </sql>
-    <insert id="insert" parameterType="Object" keyProperty="id" useGeneratedKeys="true">
+    <insert id="insert" parameterType="com.xupt.dal.model.UserinfoEntity" keyProperty="id" useGeneratedKeys="true">
         INSERT INTO userinfo(<include refid="insertFields"/>) values(<include refid="insertValues"/>)
     </insert>
     <select id="query" resultMap="UserinfoMap">
         select * from userinfo
     </select>
+    <select id="queryByName" parameterType="Object" resultMap="UserinfoMap">
+        select * from userinfo where name = #{name}
+    </select>
+    <update id="updateByName" parameterType="Object" >
+        update userinfo set password=#{passwoed} where name = #{name}
+    </update>
 </mapper>

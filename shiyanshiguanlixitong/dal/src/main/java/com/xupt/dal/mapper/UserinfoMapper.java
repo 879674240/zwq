@@ -17,4 +17,6 @@ public interface UserinfoMapper {
     int updateById(@Param("id") Integer id);
     UserinfoEntity getById(@Param("id") Integer id);
     List<UserinfoEntity> query();
+    UserinfoEntity queryByName(@Param("name") String name);
+    int updateByName(@Param("name")String name,@Param("passwoed")String passwoed);
 }
