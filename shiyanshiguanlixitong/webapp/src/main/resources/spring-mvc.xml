@@ -41,7 +41,7 @@
     <mvc:interceptors>
         <mvc:interceptor>
            <!--默认拦截的连接-->
-            <mvc:mapping path="/api/*"/>
+            <mvc:mapping path="/api/test/*"/>
             <!--不拦截的连接-->
             <mvc:exclude-mapping path="/api/user/login"/>
             <bean class="com.xupt.webapp.interceptor.LoginInterceptor"></bean>

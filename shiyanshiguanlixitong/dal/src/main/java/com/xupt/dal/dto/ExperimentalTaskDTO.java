@@ -1,4 +1,4 @@
-package com.xupt.dal.model;
+package com.xupt.dal.dto;
 
 
 
@@ -7,9 +7,9 @@ package com.xupt.dal.model;
  * @time: 2018-04-13 20:10:41
  * @description: experimental_task()
  */
-public class ExperimentalTaskEntity {
+public class ExperimentalTaskDTO {
     /**
-     * 
+     *
      * not-null:true
      * default:'null'
      */
@@ -63,6 +63,20 @@ public class ExperimentalTaskEntity {
      * default:'0'
      */
     private Integer numberr;
+
+    /**
+     * 偏移量
+     * not-null:true
+     * default:'0'
+     */
+    private int offSet;
+
+    /**
+     * 页面大小
+     * not-null:true
+     * default:'0'
+     */
+    private int pageSize;
 
     public void setId(Integer id) {
         this.id = id;
@@ -128,4 +142,19 @@ public class ExperimentalTaskEntity {
         return numberr;
     }
 
+    public int getOffSet() {
+        return offSet;
+    }
+
+    public void setOffSet(int offSet) {
+        this.offSet = offSet;
+    }
+
+    public int getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
+    }
 }

@@ -1,15 +1,8 @@
-package com.xupt.dal.model;
+package com.xupt.service.dto;
 
-
-
-/**
- * @author: lenovo
- * @time: 2018-04-13 20:10:41
- * @description: experimental_task()
- */
-public class ExperimentalTaskEntity {
+public class ExperimentalTaskParam {
     /**
-     * 
+     *
      * not-null:true
      * default:'null'
      */
@@ -64,68 +57,97 @@ public class ExperimentalTaskEntity {
      */
     private Integer numberr;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    /**
+     * 当前页
+     * not-null:true
+     * default:'0'
+     */
+    private int currentPage;
+
+    /**
+     * 页面大小
+     * not-null:true
+     * default:'0'
+     */
+    private int pageSize;
 
     public Integer getId() {
         return id;
     }
 
-    public void setNum(Integer num) {
-        this.num = num;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Integer getNum() {
         return num;
     }
 
-    public void setMajor(String major) {
-        this.major = major;
+    public void setNum(Integer num) {
+        this.num = num;
     }
 
     public String getMajor() {
         return major;
     }
 
-    public void setClasss(String classs) {
-        this.classs = classs;
+    public void setMajor(String major) {
+        this.major = major;
     }
 
     public String getClasss() {
         return classs;
     }
 
-    public void setStudentNum(Integer studentNum) {
-        this.studentNum = studentNum;
+    public void setClasss(String classs) {
+        this.classs = classs;
     }
 
     public Integer getStudentNum() {
         return studentNum;
     }
 
-    public void setSubject(String subject) {
-        this.subject = subject;
+    public void setStudentNum(Integer studentNum) {
+        this.studentNum = studentNum;
     }
 
     public String getSubject() {
         return subject;
     }
 
-    public void setCompulsoryElective(String compulsoryElective) {
-        this.compulsoryElective = compulsoryElective;
+    public void setSubject(String subject) {
+        this.subject = subject;
     }
 
     public String getCompulsoryElective() {
         return compulsoryElective;
     }
 
-    public void setNumberr(Integer numberr) {
-        this.numberr = numberr;
+    public void setCompulsoryElective(String compulsoryElective) {
+        this.compulsoryElective = compulsoryElective;
     }
 
     public Integer getNumberr() {
         return numberr;
     }
 
+    public void setNumberr(Integer numberr) {
+        this.numberr = numberr;
+    }
+
+    public int getCurrentPage() {
+        return currentPage;
+    }
+
+    public void setCurrentPage(int currentPage) {
+        this.currentPage = currentPage;
+    }
+
+    public int getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
+    }
 }

@@ -9,10 +9,10 @@
         <result column="student_num" property="studentNum"/>
         <result column="subject" property="subject"/>
         <result column="compulsory_elective" property="compulsoryElective"/>
-        <result column="number" property="number"/>
+        <result column="numberr" property="numberr"/>
     </resultMap>
     <sql id="fields">
-        id,num,major,classs,student_num,subject,compulsory_elective,number
+        id,num,major,classs,student_num,subject,compulsory_elective,numberr
     </sql>
     <sql id="insertValues">
         <trim suffixOverrides=",">
@@ -22,7 +22,7 @@
             <if test="studentNum != null">#{studentNum},</if>
             <if test="subject != null">#{subject},</if>
             <if test="compulsoryElective != null">#{compulsoryElective},</if>
-            <if test="number != null">#{number},</if>
+            <if test="numberr != null">#{numberr},</if>
         </trim>
     </sql>
     <sql id="insertFields">
@@ -33,7 +33,7 @@
             <if test="studentNum != null">student_num,</if>
             <if test="subject != null">subject,</if>
             <if test="compulsoryElective != null">compulsory_elective,</if>
-            <if test="number != null">number,</if>
+            <if test="numberr != null">numberr,</if>
         </trim>
     </sql>
     <sql id="updateFields">
@@ -44,15 +44,34 @@
             <if test="studentNum != null">student_num=#{studentNum},</if>
             <if test="subject != null">subject=#{subject},</if>
             <if test="compulsoryElective != null">compulsory_elective=#{compulsoryElective},</if>
-            <if test="number != null">number=#{number},</if>
+            <if test="numberr != null">numberr=#{numberr},</if>
         </set>
     </sql>
     <sql id="searchFields">
-        <trim prefixOverrides="AND">
-            <if test="id != null">AND id=#{id}</if>
+        <trim prefix="WHERE" prefixOverrides="AND|OR">
+            <if test="major != null">AND major like concat(concat("%",#{major}),"%")</if>
+            <if test="classs != null">AND classs like concat(concat("%",#{classs}),"%")</if>
+            <if test="subject != null">AND subject like concat(concat("%",#{subject}),"%")</if>
+            <if test="compulsoryElective != null">AND compulsory_elective like concat(concat("%",#{compulsoryElective}),"%")</if>
+            <if test="numberr != null">AND numberr like concat(concat("%",#{numberr}),"%")</if>
         </trim>
     </sql>
     <insert id="insert" parameterType="Object" keyProperty="id" useGeneratedKeys="true">
         INSERT INTO experimental_task(<include refid="insertFields"/>) values(<include refid="insertValues"/>)
     </insert>
+    <select id="queryById" parameterType="Object" resultMap="ExperimentalTaskMap">
+        select <include refid="fields"/> from experimental_task where id = #{id}
+    </select>
+    <select id="queryByPage" parameterType="com.xupt.dal.dto.ExperimentalTaskDTO" resultMap="ExperimentalTaskMap">
+        select <include refid="fields"/> from experimental_task <include refid="searchFields"/> limit #{offSet},#{pageSize}
+    </select>
+    <update id="update" parameterType="com.xupt.dal.model.ExperimentalTaskEntity">
+        update experimental_task <include refid="updateFields"/> where id=#{id}
+    </update>
+    <delete id="delete" parameterType="Object">
+        delete from experimental_task where id = #{id}
+    </delete>
+    <select id="count" parameterType="com.xupt.dal.dto.ExperimentalTaskDTO" resultType="Integer">
+        select count(0) from experimental_task <include refid="searchFields"/> limit #{offSet},#{pageSize}
+    </select>
 </mapper>

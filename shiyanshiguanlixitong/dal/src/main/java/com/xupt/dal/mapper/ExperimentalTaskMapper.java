@@ -1,8 +1,11 @@
 package com.xupt.dal.mapper;
 
+import com.xupt.dal.dto.ExperimentalTaskDTO;
 import com.xupt.dal.model.ExperimentalTaskEntity;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+import java.util.List;
+
 
 /**
  * @author: lenovo
@@ -12,6 +15,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ExperimentalTaskMapper {
     int insert(ExperimentalTaskEntity entity);
-    int updateById(@Param("id") Integer id);
-    ExperimentalTaskEntity getById(@Param("id") Integer id);
+    int update(ExperimentalTaskEntity entity);
+    ExperimentalTaskEntity queryById(@Param("id") Integer id);
+    List<ExperimentalTaskEntity> queryByPage(ExperimentalTaskDTO experimentalTaskDTO);
+    int delete(@Param("id") Integer id);
+    int count(ExperimentalTaskDTO experimentalTaskDTO);
 }
