@@ -35,7 +35,16 @@
     <insert id="insert" parameterType="Object" keyProperty="id" useGeneratedKeys="true">
         INSERT INTO innum(<include refid="insertFields"/>) values(<include refid="insertValues"/>)
     </insert>
-    <select id="query" parameterType="Object" resultType="InnumMap">
+    <select id="query" parameterType="Object" resultMap="InnumMap">
         select * from innum where type = #{type}
     </select>
+    <select id="queryById" parameterType="Object" resultMap="InnumMap">
+        select * from innum where id =#{id}
+    </select>
+    <update id="update" parameterType="com.xupt.dal.model.InnumEntity">
+         update innum <include refid="updateFields"/> where id = #{id}
+    </update>
+    <delete id="delete" parameterType="Object">
+        delete from innum where id =#{id}
+    </delete>
 </mapper>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xupt.dal.mapper.ScheduleMapper">
+    <resultMap id="ScheduleMap" type="com.xupt.dal.model.ScheduleEntity">
+        <result column="id" property="id"/>
+        <result column="weekly" property="weekly"/>
+        <result column="week" property="week"/>
+        <result column="timeSlot" property="timeslot"/>
+        <result column="arrange" property="arrange"/>
+        <result column="operator" property="operator"/>
+        <result column="room" property="room"/>
+        <result column="remark" property="remark"/>
+        <result column="reserve1" property="reserve1"/>
+        <result column="reserve2" property="reserve2"/>
+        <result column="reserve3" property="reserve3"/>
+        <result column="reserve4" property="reserve4"/>
+        <result column="reserve5" property="reserve5"/>
+    </resultMap>
+    <sql id="fields">
+        id,weekly,week,timeSlot,arrange,operator,room,remark,reserve1,reserve2,reserve3,reserve4,reserve5
+    </sql>
+    <sql id="insertValues">
+        <trim suffixOverrides=",">
+            <if test="weekly != null">#{weekly},</if>
+            <if test="week != null">#{week},</if>
+            <if test="timeslot != null">#{timeslot},</if>
+            <if test="arrange != null">#{arrange},</if>
+            <if test="operator != null">#{operator},</if>
+            <if test="room != null">#{room},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="reserve1 != null">#{reserve1},</if>
+            <if test="reserve2 != null">#{reserve2},</if>
+            <if test="reserve3 != null">#{reserve3},</if>
+            <if test="reserve4 != null">#{reserve4},</if>
+            <if test="reserve5 != null">#{reserve5},</if>
+        </trim>
+    </sql>
+    <sql id="insertFields">
+        <trim suffixOverrides=",">
+            <if test="weekly != null">weekly,</if>
+            <if test="week != null">week,</if>
+            <if test="timeslot != null">timeSlot,</if>
+            <if test="arrange != null">arrange,</if>
+            <if test="operator != null">operator,</if>
+            <if test="room != null">room,</if>
+            <if test="remark != null">remark,</if>
+            <if test="reserve1 != null">reserve1,</if>
+            <if test="reserve2 != null">reserve2,</if>
+            <if test="reserve3 != null">reserve3,</if>
+            <if test="reserve4 != null">reserve4,</if>
+            <if test="reserve5 != null">reserve5,</if>
+        </trim>
+    </sql>
+    <sql id="updateFields">
+        <set>
+            <if test="weekly != null">weekly=#{weekly},</if>
+            <if test="week != null">week=#{week},</if>
+            <if test="timeslot != null">timeSlot=#{timeslot},</if>
+            <if test="arrange != null">arrange=#{arrange},</if>
+            <if test="operator != null">operator=#{operator},</if>
+            <if test="room != null">room=#{room},</if>
+            <if test="remark != null">remark=#{remark},</if>
+            <if test="reserve1 != null">reserve1=#{reserve1},</if>
+            <if test="reserve2 != null">reserve2=#{reserve2},</if>
+            <if test="reserve3 != null">reserve3=#{reserve3},</if>
+            <if test="reserve4 != null">reserve4=#{reserve4},</if>
+            <if test="reserve5 != null">reserve5=#{reserve5},</if>
+        </set>
+    </sql>
+    <sql id="searchFields">
+        <trim prefixOverrides="AND">
+            <if test="id != null">AND id=#{id}</if>
+        </trim>
+    </sql>
+    <insert id="insert" parameterType="Object" keyProperty="id" useGeneratedKeys="true">
+        INSERT INTO schedule(<include refid="insertFields"/>) values(<include refid="insertValues"/>)
+    </insert>
+</mapper>
