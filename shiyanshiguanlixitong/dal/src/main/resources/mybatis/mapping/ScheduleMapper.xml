@@ -72,7 +72,16 @@
             <if test="id != null">AND id=#{id}</if>
         </trim>
     </sql>
-    <insert id="insert" parameterType="Object" keyProperty="id" useGeneratedKeys="true">
+    <insert id="insert" parameterType="com.xupt.dal.model.ScheduleEntity" keyProperty="id" useGeneratedKeys="true">
         INSERT INTO schedule(<include refid="insertFields"/>) values(<include refid="insertValues"/>)
     </insert>
+    <select id="queryByLabRoom" parameterType="Object" resultMap="ScheduleMap">
+        select <include refid="fields"/> from schedule where room = #{room}
+    </select>
+    <update id="update" parameterType="com.xupt.dal.model.ScheduleEntity">
+        update schedule <include refid="updateFields"/> where id = #{id}
+    </update>
+    <delete id="delete" parameterType="Object">
+        delete from schedule where id = #{id}
+    </delete>
 </mapper>
