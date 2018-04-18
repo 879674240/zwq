@@ -25,13 +25,13 @@ public class ScheduleController {
         List<ScheduleEntity> scheduleEntities = null;
         try {
             scheduleEntities = scheduleService.queryByLabRoom(room);
+            response.setCode(1);
+            response.setData(scheduleEntities);
+            response.setMessage("查询实验安排数据成功！");
         }catch (Exception e){
             response.setCode(0);
             response.setMessage("查询实验安排数据失败！");
         }
-        response.setCode(1);
-        response.setData(scheduleEntities);
-        response.setMessage("查询实验安排数据成功！");
         return response;
     }
 
@@ -42,18 +42,25 @@ public class ScheduleController {
      */
     @RequestMapping(value = "insert")
     public Response<Integer> insert(ScheduleEntity scheduleEntity){
-        return null;
+        Response<Integer> response = new Response<>();
+        int result = 0;
+        try {
+            result = scheduleService.insert(scheduleEntity);
+            if(result!=0){
+                response.setCode(1);
+                response.setData(result);
+                response.setMessage("插入实验安排数据成功！");
+            }else{
+                response.setMessage("还是时间段已有课程安排！");
+            }
+        }catch (Exception e){
+            response.setCode(0);
+            response.setMessage("插入实验安排数据失败！");
+        }
+
+        return response;
     }
 
-    /**
-     * 更新实验
-     * @param scheduleEntity
-     * @return
-     */
-    @RequestMapping(value = "update")
-    public Response<Integer> update(ScheduleEntity scheduleEntity){
-        return null;
-    }
 
     /**
      * 删除实验
@@ -62,6 +69,18 @@ public class ScheduleController {
      */
     @RequestMapping(value = "delete")
     public Response<Integer> delete(Integer id){
-        return null;
+
+        Response<Integer> response = new Response<>();
+        int result = 0;
+        try {
+            result = scheduleService.delete(id);
+            response.setCode(1);
+            response.setData(result);
+            response.setMessage("删除实验安排数据成功！");
+        }catch (Exception e){
+            response.setCode(0);
+            response.setMessage("删除实验安排数据失败！");
+        }
+        return response;
     }
 }
