@@ -4,7 +4,7 @@ package com.xupt.dal.model;
 
 /**
  * @author: lenovo
- * @time: 2018-04-13 20:10:41
+ * @time: 2018-04-19 18:05:43
  * @description: experimental_task()
  */
 public class ExperimentalTaskEntity {
@@ -14,13 +14,6 @@ public class ExperimentalTaskEntity {
      * default:'null'
      */
     private Integer id;
-
-    /**
-     * 编号
-     * not-null:true
-     * default:'0'
-     */
-    private Integer num;
 
     /**
      * 专业
@@ -51,11 +44,25 @@ public class ExperimentalTaskEntity {
     private String subject;
 
     /**
-     * 必修/选修
+     * 课时
+     * not-null:true
+     * default:'24'
+     */
+    private Integer hours;
+
+    /**
+     * 0:必修/1:选修
+     * not-null:true
+     * default:'0'
+     */
+    private Integer compulsoryElective;
+
+    /**
+     * 任课老师
      * not-null:true
      * default:''
      */
-    private String compulsoryElective;
+    private String teacher;
 
     /**
      * 编号
@@ -64,20 +71,26 @@ public class ExperimentalTaskEntity {
      */
     private Integer numberr;
 
+    /**
+     * 预留字段1
+     * not-null:true
+     * default:''
+     */
+    private String reserve1;
+
+    /**
+     * 预留字段2
+     * not-null:true
+     * default:''
+     */
+    private String reserve2;
+
     public void setId(Integer id) {
         this.id = id;
     }
 
     public Integer getId() {
         return id;
-    }
-
-    public void setNum(Integer num) {
-        this.num = num;
-    }
-
-    public Integer getNum() {
-        return num;
     }
 
     public void setMajor(String major) {
@@ -112,12 +125,28 @@ public class ExperimentalTaskEntity {
         return subject;
     }
 
-    public void setCompulsoryElective(String compulsoryElective) {
+    public void setHours(Integer hours) {
+        this.hours = hours;
+    }
+
+    public Integer getHours() {
+        return hours;
+    }
+
+    public void setCompulsoryElective(Integer compulsoryElective) {
         this.compulsoryElective = compulsoryElective;
     }
 
-    public String getCompulsoryElective() {
+    public Integer getCompulsoryElective() {
         return compulsoryElective;
+    }
+
+    public void setTeacher(String teacher) {
+        this.teacher = teacher;
+    }
+
+    public String getTeacher() {
+        return teacher;
     }
 
     public void setNumberr(Integer numberr) {
@@ -126,6 +155,22 @@ public class ExperimentalTaskEntity {
 
     public Integer getNumberr() {
         return numberr;
+    }
+
+    public void setReserve1(String reserve1) {
+        this.reserve1 = reserve1;
+    }
+
+    public String getReserve1() {
+        return reserve1;
+    }
+
+    public void setReserve2(String reserve2) {
+        this.reserve2 = reserve2;
+    }
+
+    public String getReserve2() {
+        return reserve2;
     }
 
 }

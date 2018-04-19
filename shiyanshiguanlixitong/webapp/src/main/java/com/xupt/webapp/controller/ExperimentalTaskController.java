@@ -113,7 +113,7 @@ public class ExperimentalTaskController {
     }
 
     /**
-     * 获取实验任务失败
+     * 获取实验任务
      * @param id
      * @return
      */

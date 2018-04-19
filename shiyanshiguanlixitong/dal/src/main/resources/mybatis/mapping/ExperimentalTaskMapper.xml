@@ -3,48 +3,60 @@
 <mapper namespace="com.xupt.dal.mapper.ExperimentalTaskMapper">
     <resultMap id="ExperimentalTaskMap" type="com.xupt.dal.model.ExperimentalTaskEntity">
         <result column="id" property="id"/>
-        <result column="num" property="num"/>
         <result column="major" property="major"/>
         <result column="classs" property="classs"/>
         <result column="student_num" property="studentNum"/>
         <result column="subject" property="subject"/>
+        <result column="hours" property="hours"/>
         <result column="compulsory_elective" property="compulsoryElective"/>
+        <result column="teacher" property="teacher"/>
         <result column="numberr" property="numberr"/>
+        <result column="reserve1" property="reserve1"/>
+        <result column="reserve2" property="reserve2"/>
     </resultMap>
     <sql id="fields">
-        id,num,major,classs,student_num,subject,compulsory_elective,numberr
+        id,major,classs,student_num,subject,hours,compulsory_elective,teacher,numberr,reserve1,reserve2
     </sql>
     <sql id="insertValues">
         <trim suffixOverrides=",">
-            <if test="num != null">#{num},</if>
             <if test="major != null">#{major},</if>
             <if test="classs != null">#{classs},</if>
             <if test="studentNum != null">#{studentNum},</if>
             <if test="subject != null">#{subject},</if>
+            <if test="hours != null">#{hours},</if>
             <if test="compulsoryElective != null">#{compulsoryElective},</if>
+            <if test="teacher != null">#{teacher},</if>
             <if test="numberr != null">#{numberr},</if>
+            <if test="reserve1 != null">#{reserve1},</if>
+            <if test="reserve2 != null">#{reserve2},</if>
         </trim>
     </sql>
     <sql id="insertFields">
         <trim suffixOverrides=",">
-            <if test="num != null">num,</if>
             <if test="major != null">major,</if>
             <if test="classs != null">classs,</if>
             <if test="studentNum != null">student_num,</if>
             <if test="subject != null">subject,</if>
+            <if test="hours != null">hours,</if>
             <if test="compulsoryElective != null">compulsory_elective,</if>
+            <if test="teacher != null">teacher,</if>
             <if test="numberr != null">numberr,</if>
+            <if test="reserve1 != null">reserve1,</if>
+            <if test="reserve2 != null">reserve2,</if>
         </trim>
     </sql>
     <sql id="updateFields">
         <set>
-            <if test="num != null">num=#{num},</if>
             <if test="major != null">major=#{major},</if>
             <if test="classs != null">classs=#{classs},</if>
             <if test="studentNum != null">student_num=#{studentNum},</if>
             <if test="subject != null">subject=#{subject},</if>
+            <if test="hours != null">hours=#{hours},</if>
             <if test="compulsoryElective != null">compulsory_elective=#{compulsoryElective},</if>
+            <if test="teacher != null">teacher=#{teacher},</if>
             <if test="numberr != null">numberr=#{numberr},</if>
+            <if test="reserve1 != null">reserve1=#{reserve1},</if>
+            <if test="reserve2 != null">reserve2=#{reserve2},</if>
         </set>
     </sql>
     <sql id="searchFields">

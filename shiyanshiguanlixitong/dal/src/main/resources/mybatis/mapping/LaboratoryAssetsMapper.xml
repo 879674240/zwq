@@ -44,11 +44,29 @@
         </set>
     </sql>
     <sql id="searchFields">
-        <trim prefixOverrides="AND">
-            <if test="id != null">AND id=#{id}</if>
+        <trim prefix="WHERE" prefixOverrides="AND|OR">
+            <if test="num != null">AND num like concat(concat("%",#{num}),"%")</if>
+            <if test="belong != null">AND belong like concat(concat("%",#{belong}),"%")</if>
+            <if test="status != null">AND status like concat(concat("%",#{status}),"%")</if>
+            <if test="personInCharge != null">AND person_in_charge like concat(concat("%",#{personInCharge}),"%")</if>
         </trim>
     </sql>
-    <insert id="insert" parameterType="Object" keyProperty="id" useGeneratedKeys="true">
+    <insert id="insert" parameterType="com.xupt.dal.model.LaboratoryAssetsEntity" keyProperty="id" useGeneratedKeys="true">
         INSERT INTO laboratory_assets(<include refid="insertFields"/>) values(<include refid="insertValues"/>)
     </insert>
+    <update id="update" parameterType="com.xupt.dal.model.LaboratoryAssetsEntity">
+        update laboratory_assets <include refid="updateFields"/> where id = #{id}
+    </update>
+    <delete id="delete" parameterType="Object">
+        delete from laboratory_assets where id = #{id}
+    </delete>
+    <select id="query" parameterType="com.xupt.dal.dto.LaboratoryAssetsDTO" resultMap="LaboratoryAssetsMap">
+        select <include refid="fields"/> from laboratory_assets <include refid="searchFields"/> limit #{offSet},#{pageSize}
+    </select>
+    <select id="queryById" parameterType="Object" resultMap="LaboratoryAssetsMap">
+        select <include refid="fields"/> from laboratory_assets where id = #{id}
+    </select>
+    <select id="count" parameterType="com.xupt.dal.dto.LaboratoryAssetsDTO" resultType="Integer">
+        select count(0) from laboratory_assets <include refid="searchFields"/> limit #{offSet},#{pageSize}
+    </select>
 </mapper>
