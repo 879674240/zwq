@@ -74,6 +74,9 @@
     <select id="queryById" parameterType="Object" resultMap="ExperimentalTaskMap">
         select <include refid="fields"/> from experimental_task where id = #{id}
     </select>
+    <select id="queryByNum" parameterType="Object" resultMap="ExperimentalTaskMap">
+        select <include refid="fields"/> from experimental_task where numberr = #{numberr}
+    </select>
     <select id="queryByPage" parameterType="com.xupt.dal.dto.ExperimentalTaskDTO" resultMap="ExperimentalTaskMap">
         select <include refid="fields"/> from experimental_task <include refid="searchFields"/> limit #{offSet},#{pageSize}
     </select>

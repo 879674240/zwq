@@ -18,6 +18,7 @@ public interface ExperimentalTaskMapper {
     int update(ExperimentalTaskEntity entity);
     ExperimentalTaskEntity queryById(@Param("id") Integer id);
     List<ExperimentalTaskEntity> queryByPage(ExperimentalTaskDTO experimentalTaskDTO);
+    ExperimentalTaskEntity queryByNum(@Param("numberr")String numberr);
     int delete(@Param("id") Integer id);
     int count(ExperimentalTaskDTO experimentalTaskDTO);
 }

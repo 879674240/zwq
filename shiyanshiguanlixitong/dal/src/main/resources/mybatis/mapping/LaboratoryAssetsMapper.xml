@@ -26,7 +26,7 @@
     <sql id="insertFields">
         <trim suffixOverrides=",">
             <if test="num != null">num,</if>
-            <if test="name != null">name,</if>
+            <if test="name != null">`name`,</if>
             <if test="status != null">status,</if>
             <if test="belong != null">belong,</if>
             <if test="personInCharge != null">person_in_charge,</if>
@@ -36,7 +36,7 @@
     <sql id="updateFields">
         <set>
             <if test="num != null">num=#{num},</if>
-            <if test="name != null">name=#{name},</if>
+            <if test="name != null">`name`=#{name},</if>
             <if test="status != null">status=#{status},</if>
             <if test="belong != null">belong=#{belong},</if>
             <if test="personInCharge != null">person_in_charge=#{personInCharge},</if>

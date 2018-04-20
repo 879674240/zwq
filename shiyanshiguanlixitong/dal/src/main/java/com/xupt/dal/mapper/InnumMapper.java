@@ -15,7 +15,9 @@ import java.util.List;
 public interface InnumMapper {
     int insert(InnumEntity entity);
     List<InnumEntity> query(@Param("type") Integer type);
+    List<InnumEntity> queryByOrder(@Param("type") Integer type,@Param("order")Integer order);
     InnumEntity queryById(@Param("id")Integer id);
+    InnumEntity queryByKey(@Param("key")String key);
     int update(InnumEntity entity);
     int delete(@Param("id")Integer id);
 

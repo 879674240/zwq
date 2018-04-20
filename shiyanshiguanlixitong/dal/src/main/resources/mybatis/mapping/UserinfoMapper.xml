@@ -12,7 +12,7 @@
         <result column="reserve2" property="reserve2"/>
     </resultMap>
     <sql id="fields">
-        id,name,password,type,realname,remark,reserve1,reserve2
+        id,`name`,password,`type`,realname,remark,reserve1,reserve2
     </sql>
     <sql id="insertValues">
         <trim suffixOverrides=",">
@@ -27,9 +27,9 @@
     </sql>
     <sql id="insertFields">
         <trim suffixOverrides=",">
-            <if test="name != null">name,</if>
+            <if test="name != null">`name`,</if>
             <if test="password != null">password,</if>
-            <if test="type != null">type,</if>
+            <if test="type != null">`type`,</if>
             <if test="realname != null">realname,</if>
             <if test="remark != null">remark,</if>
             <if test="reserve1 != null">reserve1,</if>
@@ -38,9 +38,9 @@
     </sql>
     <sql id="updateFields">
         <set>
-            <if test="name != null">name=#{name},</if>
+            <if test="name != null">`name`=#{name},</if>
             <if test="password != null">password=#{password},</if>
-            <if test="type != null">type=#{type},</if>
+            <if test="type != null">`type`=#{type},</if>
             <if test="realname != null">realname=#{realname},</if>
             <if test="remark != null">remark=#{remark},</if>
             <if test="reserve1 != null">reserve1=#{reserve1},</if>
@@ -59,9 +59,9 @@
         select * from userinfo
     </select>
     <select id="queryByName" parameterType="Object" resultMap="UserinfoMap">
-        select * from userinfo where name = #{name}
+        select * from userinfo where `name` = #{name}
     </select>
     <update id="updateByName" parameterType="Object" >
-        update userinfo set password=#{passwoed} where name = #{name}
+        update userinfo set password=#{passwoed} where `name` = #{name}
     </update>
 </mapper>

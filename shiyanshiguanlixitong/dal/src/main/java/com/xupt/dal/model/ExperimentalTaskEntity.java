@@ -9,7 +9,7 @@ package com.xupt.dal.model;
  */
 public class ExperimentalTaskEntity {
     /**
-     * 
+     * id
      * not-null:true
      * default:'null'
      */
@@ -69,7 +69,7 @@ public class ExperimentalTaskEntity {
      * not-null:true
      * default:'0'
      */
-    private Integer numberr;
+    private String numberr;
 
     /**
      * 预留字段1
@@ -149,11 +149,11 @@ public class ExperimentalTaskEntity {
         return teacher;
     }
 
-    public void setNumberr(Integer numberr) {
+    public void setNumberr(String numberr) {
         this.numberr = numberr;
     }
 
-    public Integer getNumberr() {
+    public String getNumberr() {
         return numberr;
     }
 

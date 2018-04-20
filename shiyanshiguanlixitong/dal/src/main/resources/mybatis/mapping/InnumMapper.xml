@@ -3,28 +3,36 @@
 <mapper namespace="com.xupt.dal.mapper.InnumMapper">
     <resultMap id="InnumMap" type="com.xupt.dal.model.InnumEntity">
         <result column="id" property="id"/>
+        <result column="key" property="key"/>
         <result column="value" property="value"/>
+        <result column="order" property="order"/>
         <result column="type" property="type"/>
     </resultMap>
     <sql id="fields">
-        id,value,type
+        id,key,value,order,type
     </sql>
     <sql id="insertValues">
         <trim suffixOverrides=",">
+            <if test="key != null">#{key},</if>
             <if test="value != null">#{value},</if>
+            <if test="order != null">#{order},</if>
             <if test="type != null">#{type},</if>
         </trim>
     </sql>
     <sql id="insertFields">
         <trim suffixOverrides=",">
-            <if test="value != null">value,</if>
-            <if test="type != null">type,</if>
+            <if test="key != null">`key`,</if>
+            <if test="value != null">`value`,</if>
+            <if test="order != null">`order`,</if>
+            <if test="type != null">`type`,</if>
         </trim>
     </sql>
     <sql id="updateFields">
         <set>
-            <if test="value != null">value=#{value},</if>
-            <if test="type != null">type=#{type},</if>
+            <if test="key != null">`key`=#{key},</if>
+            <if test="value != null">`value`=#{value},</if>
+            <if test="order != null">`order`=#{order},</if>
+            <if test="type != null">`type`=#{type},</if>
         </set>
     </sql>
     <sql id="searchFields">
@@ -36,13 +44,19 @@
         INSERT INTO innum(<include refid="insertFields"/>) values(<include refid="insertValues"/>)
     </insert>
     <select id="query" parameterType="Object" resultMap="InnumMap">
-        select * from innum where type = #{type}
+        select * from innum where `type` = #{type}
+    </select>
+    <select id="queryByOrder" parameterType="Object" resultMap="InnumMap">
+        select * from innum where `type` =#{type} and `order` = #{order}
     </select>
     <select id="queryById" parameterType="Object" resultMap="InnumMap">
         select * from innum where id =#{id}
     </select>
+    <select id="queryByKey" parameterType="Object" resultMap="InnumMap">
+        select * from innum where `key` =#{key}
+    </select>
     <update id="update" parameterType="com.xupt.dal.model.InnumEntity">
-         update innum <include refid="updateFields"/> where id = #{id}
+        update innum <include refid="updateFields"/> where id = #{id}
     </update>
     <delete id="delete" parameterType="Object">
         delete from innum where id =#{id}

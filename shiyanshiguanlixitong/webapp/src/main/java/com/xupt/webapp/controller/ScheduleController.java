@@ -3,6 +3,7 @@ package com.xupt.webapp.controller;
 import com.xupt.component.Response;
 import com.xupt.dal.model.ScheduleEntity;
 import com.xupt.service.ScheduleService;
+import com.xupt.service.dto.ScheduleDTO;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,13 +21,13 @@ public class ScheduleController {
      * @return
      */
     @RequestMapping(value = "query")
-    public Response<List<ScheduleEntity>> query(Integer room){
-        Response<List<ScheduleEntity>> response = new Response<>();
-        List<ScheduleEntity> scheduleEntities = null;
+    public Response<List<ScheduleDTO>> query(Integer room){
+        Response<List<ScheduleDTO>> response = new Response<>();
+        List<ScheduleDTO> scheduleDTOS = null;
         try {
-            scheduleEntities = scheduleService.queryByLabRoom(room);
+            scheduleDTOS = scheduleService.queryByLabRoom(room);
             response.setCode(1);
-            response.setData(scheduleEntities);
+            response.setData(scheduleDTOS);
             response.setMessage("查询实验安排数据成功！");
         }catch (Exception e){
             response.setCode(0);

@@ -78,6 +78,9 @@
     <select id="queryByLabRoom" parameterType="Object" resultMap="ScheduleMap">
         select <include refid="fields"/> from schedule where room = #{room}
     </select>
+    <select id="queryAll"  resultMap="ScheduleMap">
+        select <include refid="fields"/> from schedule
+    </select>
     <select id="queryByTime" parameterType="Object" resultMap="ScheduleMap">
         select <include refid="fields"/> from schedule where weekly = #{weekly} and week = #{week} and timeSlot = #{timeSlot} and room = #{room}
     </select>

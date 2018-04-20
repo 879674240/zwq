@@ -4,6 +4,7 @@ import com.xupt.component.BizException;
 import com.xupt.component.Response;
 import com.xupt.dal.model.InnumEntity;
 import com.xupt.service.InnumService;
+import com.xupt.service.dto.KeyValueDTO;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -90,13 +91,13 @@ public class InnumController {
      * @return
      */
     @RequestMapping(value = "query")
-    public Response<List<InnumEntity>> query(Integer type){
-        Response<List<InnumEntity>> response = new Response<>();
+    public Response<List<KeyValueDTO>> query(Integer type){
+        Response<List<KeyValueDTO>> response = new Response<>();
         response.setCode(0);
-       List<InnumEntity> innumEntities = null;
+       List<KeyValueDTO> keyValueDTOS = null;
         try {
-            innumEntities = innumService.query(type);
-            if (innumEntities ==null){
+            keyValueDTOS = innumService.query(type);
+            if (keyValueDTOS ==null){
                 response.setMessage("没有获取到数据！");
                 return response;
             }
@@ -107,7 +108,34 @@ public class InnumController {
         }
         response.setMessage("获取数据成功！");
         response.setCode(1);
-        response.setData(innumEntities);
+        response.setData(keyValueDTOS);
+        return response;
+    }
+
+    /**
+     * 查询该类型中所属类型的所有枚举类
+     * @param type
+     * @return
+     */
+    @RequestMapping(value = "queryByOrder")
+    public Response<List<KeyValueDTO>> queryByOrder(Integer type, Integer order){
+        Response<List<KeyValueDTO>> response = new Response<>();
+        response.setCode(0);
+        List<KeyValueDTO> keyValueDTOS = null;
+        try {
+            keyValueDTOS = innumService.queryByOrder(type,order);
+            if (keyValueDTOS ==null){
+                response.setMessage("没有获取到数据！");
+                return response;
+            }
+        }catch (Exception e){
+            if (e instanceof BizException){
+                response.setMessage("获取数据失败！");
+            }
+        }
+        response.setMessage("获取数据成功！");
+        response.setCode(1);
+        response.setData(keyValueDTOS);
         return response;
     }
 

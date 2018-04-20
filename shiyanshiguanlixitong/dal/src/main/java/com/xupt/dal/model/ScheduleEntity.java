@@ -55,7 +55,7 @@ public class ScheduleEntity {
      * not-null:true
      * default:'1'
      */
-    private Integer room;
+    private String room;
 
     /**
      * 备注
@@ -147,11 +147,11 @@ public class ScheduleEntity {
         return operator;
     }
 
-    public void setRoom(Integer room) {
+    public void setRoom(String room) {
         this.room = room;
     }
 
-    public Integer getRoom() {
+    public String getRoom() {
         return room;
     }
 
