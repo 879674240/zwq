@@ -14,9 +14,6 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="component" target="1.8" />
-      <module name="dal" target="1.8" />
-      <module name="service" target="1.8" />
-      <module name="webapp" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

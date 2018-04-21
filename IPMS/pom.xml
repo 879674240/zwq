@@ -7,13 +7,13 @@
     <groupId>com.xupt</groupId>
     <artifactId>IPMS</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
     <modules>
+        <module>webapp</module>
+        <module>service</module>
         <module>dal</module>
         <module>common</module>
-        <module>service</module>
-        <module>webapp</module>
     </modules>
-    <packaging>pom</packaging>
 
 
     <!-- 集中定义依赖版本号 -->

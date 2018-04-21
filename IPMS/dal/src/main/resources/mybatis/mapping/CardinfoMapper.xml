@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xupt.dal.mapper.CardinfoMapper">
+    <resultMap id="CardinfoMap" type="com.xupt.dal.model.CardinfoEntity">
+        <result column="id" property="id"/>
+        <result column="idno" property="idno"/>
+        <result column="type" property="type"/>
+        <result column="remain" property="remain"/>
+    </resultMap>
+    <sql id="fields">
+        id,idno,type,remain
+    </sql>
+    <sql id="insertValues">
+        <trim suffixOverrides=",">
+            <if test="idno != null">#{idno},</if>
+            <if test="type != null">#{type},</if>
+            <if test="remain != null">#{remain},</if>
+        </trim>
+    </sql>
+    <sql id="insertFields">
+        <trim suffixOverrides=",">
+            <if test="idno != null">idno,</if>
+            <if test="type != null">type,</if>
+            <if test="remain != null">remain,</if>
+        </trim>
+    </sql>
+    <sql id="updateFields">
+        <set>
+            <if test="idno != null">idno=#{idno},</if>
+            <if test="type != null">type=#{type},</if>
+            <if test="remain != null">remain=#{remain},</if>
+        </set>
+    </sql>
+    <sql id="searchFields">
+        <trim prefixOverrides="AND">
+            <if test="id != null">AND id=#{id}</if>
+        </trim>
+    </sql>
+    <insert id="insert" parameterType="Object" keyProperty="id" useGeneratedKeys="true">
+        INSERT INTO cardinfo(<include refid="insertFields"/>) values(<include refid="insertValues"/>)
+    </insert>
+</mapper>
