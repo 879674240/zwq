@@ -9,6 +9,7 @@ public class PageResult<T> {
     private int pageSize;
     private T data;
     private int count;
+    private int pageCount;
 
     public int getCurrentPage() {
         return currentPage;
@@ -40,5 +41,13 @@ public class PageResult<T> {
 
     public void setCount(int count) {
         this.count = count;
+    }
+
+    public int getPageCount() {
+        return pageCount;
+    }
+
+    public void setPageCount(int pageCount) {
+        this.pageCount = pageCount;
     }
 }

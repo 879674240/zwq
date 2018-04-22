@@ -15,7 +15,7 @@
         <result column="passwd" property="passwd"/>
     </resultMap>
     <sql id="fields">
-        id,idno,name,sex,age,idcardnum,phonenum,email,addr,authtype,passwd
+        id,idno,`name`,sex,age,idcardnum,phonenum,email,addr,authtype,passwd
     </sql>
     <sql id="insertValues">
         <trim suffixOverrides=",">
@@ -34,7 +34,7 @@
     <sql id="insertFields">
         <trim suffixOverrides=",">
             <if test="idno != null">idno,</if>
-            <if test="name != null">name,</if>
+            <if test="name != null">`name`,</if>
             <if test="sex != null">sex,</if>
             <if test="age != null">age,</if>
             <if test="idcardnum != null">idcardnum,</if>
@@ -48,7 +48,7 @@
     <sql id="updateFields">
         <set>
             <if test="idno != null">idno=#{idno},</if>
-            <if test="name != null">name=#{name},</if>
+            <if test="name != null">`name`=#{name},</if>
             <if test="sex != null">sex=#{sex},</if>
             <if test="age != null">age=#{age},</if>
             <if test="idcardnum != null">idcardnum=#{idcardnum},</if>
@@ -75,6 +75,12 @@
         select <include refid="fields"/> from operators where idno = #{idno}
     </select>
     <select id="count" parameterType="com.xupt.dal.dto.OperatorsDTO" resultType="Integer">
-        select count(0) from operators <include refid="searchFields"/> limit #{offset},#{pageSize}
+        select count(0) from operators <include refid="searchFields"/>
     </select>
+    <update id="update" parameterType="com.xupt.dal.model.OperatorsEntity">
+        update operators <include refid="updateFields"/> where id = #{id}
+    </update>
+    <delete id="delete" parameterType="Object">
+        delete from operators where id = #{id}
+    </delete>
 </mapper>

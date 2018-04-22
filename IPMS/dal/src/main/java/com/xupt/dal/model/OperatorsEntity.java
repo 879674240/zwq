@@ -1,18 +1,22 @@
 package com.xupt.dal.model;
 
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * @author: lenovo
  * @time: 2018-04-22 01:05:53
  * @description: operators()
  */
+@ApiModel(value = "用户对象", description = "user2")
 public class OperatorsEntity {
     /**
      * 
      * not-null:true
      * default:'null'
      */
+    @ApiModelProperty(value = "id", required = true)
     private Integer id;
 
     /**
@@ -20,6 +24,7 @@ public class OperatorsEntity {
      * not-null:true
      * default:''
      */
+    @ApiModelProperty(value = "编号", required = true)
     private String idno;
 
     /**
@@ -27,6 +32,7 @@ public class OperatorsEntity {
      * not-null:true
      * default:''
      */
+    @ApiModelProperty(value = "姓名", required = true)
     private String name;
 
     /**
@@ -34,6 +40,7 @@ public class OperatorsEntity {
      * not-null:true
      * default:''
      */
+    @ApiModelProperty(value = "性别", required = true)
     private String sex;
 
     /**
@@ -41,6 +48,7 @@ public class OperatorsEntity {
      * not-null:true
      * default:'1'
      */
+    @ApiModelProperty(value = "年龄", required = true)
     private Integer age;
 
     /**
@@ -48,6 +56,7 @@ public class OperatorsEntity {
      * not-null:true
      * default:''
      */
+    @ApiModelProperty(value = "身份证号", required = true)
     private String idcardnum;
 
     /**
@@ -55,6 +64,7 @@ public class OperatorsEntity {
      * not-null:true
      * default:''
      */
+    @ApiModelProperty(value = "手机号", required = true)
     private String phonenum;
 
     /**
@@ -62,6 +72,7 @@ public class OperatorsEntity {
      * not-null:true
      * default:''
      */
+    @ApiModelProperty(value = "邮箱", required = true)
     private String email;
 
     /**
@@ -69,6 +80,7 @@ public class OperatorsEntity {
      * not-null:true
      * default:''
      */
+    @ApiModelProperty(value = "地址", required = true)
     private String addr;
 
     /**
@@ -76,6 +88,7 @@ public class OperatorsEntity {
      * not-null:true
      * default:''
      */
+    @ApiModelProperty(value = "权限类型", required = true)
     private String authtype;
 
     /**
@@ -83,6 +96,7 @@ public class OperatorsEntity {
      * not-null:true
      * default:''
      */
+    @ApiModelProperty(value = "密码", required = true)
     private String passwd;
 
     public void setId(Integer id) {

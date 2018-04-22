@@ -4,30 +4,34 @@
     <resultMap id="CardinfoMap" type="com.xupt.dal.model.CardinfoEntity">
         <result column="id" property="id"/>
         <result column="idno" property="idno"/>
-        <result column="type" property="type"/>
+        <result column="cardno" property="cardno"/>
+        <result column="types" property="types"/>
         <result column="remain" property="remain"/>
     </resultMap>
     <sql id="fields">
-        id,idno,type,remain
+        id,idno,cardno,types,remain
     </sql>
     <sql id="insertValues">
         <trim suffixOverrides=",">
             <if test="idno != null">#{idno},</if>
-            <if test="type != null">#{type},</if>
+            <if test="cardno != null">#{cardno},</if>
+            <if test="types != null">#{types},</if>
             <if test="remain != null">#{remain},</if>
         </trim>
     </sql>
     <sql id="insertFields">
         <trim suffixOverrides=",">
             <if test="idno != null">idno,</if>
-            <if test="type != null">type,</if>
+            <if test="cardno != null">cardno,</if>
+            <if test="types != null">types,</if>
             <if test="remain != null">remain,</if>
         </trim>
     </sql>
     <sql id="updateFields">
         <set>
             <if test="idno != null">idno=#{idno},</if>
-            <if test="type != null">type=#{type},</if>
+            <if test="cardno != null">cardno=#{cardno},</if>
+            <if test="types != null">types=#{types},</if>
             <if test="remain != null">remain=#{remain},</if>
         </set>
     </sql>

@@ -18,6 +18,6 @@ public interface OperatorsMapper {
     List<OperatorsEntity> query(OperatorsDTO operatorsDTO);
     int count(OperatorsDTO operatorsDTO);
     OperatorsEntity queryByIdno(String idno);
-    int updateById(@Param("id") Integer id);
-    OperatorsEntity getById(@Param("id") Integer id);
+    int update(OperatorsEntity entity);
+    int delete(@Param("id")Integer id);
 }

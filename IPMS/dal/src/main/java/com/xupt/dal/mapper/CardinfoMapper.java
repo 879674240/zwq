@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * @author: lenovo
- * @time: 2018-04-21 18:48:07
+ * @time: 2018-04-22 23:56:47
  * @description: cardinfo()
  */
 public interface CardinfoMapper {
