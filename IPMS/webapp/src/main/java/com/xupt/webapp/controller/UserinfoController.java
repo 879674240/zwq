@@ -1,53 +1,57 @@
 package com.xupt.webapp.controller;
 
-import com.xupt.OperatorsService;
+import com.xupt.UserinfoService;
 import com.xupt.common.PageResult;
 import com.xupt.common.Response;
-import com.xupt.dal.model.OperatorsEntity;
+import com.xupt.dal.model.UserinfoEntity;
 import com.xupt.dto.ListParam;
-import com.xupt.dto.OperatorsParam;
-import io.swagger.annotations.*;
+import com.xupt.dto.UserinfoParam;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
 
-@Api(value = "operators", description = "操作员管理", produces = MediaType.APPLICATION_JSON_VALUE)
+@Api(value = "userinfo", description = "用户管理", produces = MediaType.APPLICATION_JSON_VALUE)
 @RestController
-@RequestMapping("/api/operators")
-public class OperatorsController {
+@RequestMapping("/api/userinfo")
+public class UserinfoController {
+
     @Resource
-    OperatorsService operatorsService;
-    @ApiOperation(value = "获得操作员列表", notes = "列表信息", httpMethod = "POST", produces = MediaType.APPLICATION_JSON_VALUE)
+    UserinfoService userinfoService;
+
+    @ApiOperation(value = "获得用户列表", notes = "列表信息", httpMethod = "POST", produces = MediaType.APPLICATION_JSON_VALUE)
     @CrossOrigin("*")
     @RequestMapping(value = "/query",method=RequestMethod.POST)
-    public Response<PageResult<List<OperatorsEntity>>> query(@ApiParam(value = "查询参数",required = true) @RequestBody OperatorsParam operatorsParam){
-        Response<PageResult<List<OperatorsEntity>>> response = new Response<>();
-        PageResult<List<OperatorsEntity>> pageResult = new PageResult<>();
+    public Response<PageResult<List<UserinfoEntity>>> query(@ApiParam(value = "查询参数",required = true) @RequestBody UserinfoParam userinfoParam){
+        Response<PageResult<List<UserinfoEntity>>> response = new Response<>();
+        PageResult<List<UserinfoEntity>> pageResult = new PageResult<>();
+
         try {
-            pageResult = operatorsService.query(operatorsParam);
+            pageResult = userinfoService.query(userinfoParam);
             response.setData(pageResult);
             response.setCode(1);
-            response.setMessage("返回操作人员信息成功！");
+            response.setMessage("查询用户信息成功！");
         }catch (Exception e){
             response.setCode(0);
-            response.setMessage("查询操作人员信息异常！");
+            response.setMessage("查询用户信息异常！");
         }
-
         return response;
     }
     @CrossOrigin("*")
-    @ApiOperation(value = "添加操作员", notes = "添加信息", httpMethod = "POST", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "添加用户", notes = "添加用户", httpMethod = "POST", produces = MediaType.APPLICATION_JSON_VALUE)
     @RequestMapping(value = "/insert",method=RequestMethod.POST)
-    public Response<Integer> insert(@ApiParam(value = "操作员信息",required = true) @RequestBody OperatorsEntity operatorsEntity){
+    public Response<Integer> insert(@ApiParam(value = "操作员信息",required = true) @RequestBody UserinfoEntity userinfoEntity){
         Response<Integer> response = new Response<>();
         int result = 0;
         try {
-            result = operatorsService.insert(operatorsEntity);
+            result = userinfoService.insert(userinfoEntity);
             if (result==0){
                 response.setCode(0);
-                response.setMessage("该操作人员已经存在！");
+                response.setMessage("该用户已经存在！");
             }else{
                 response.setCode(1);
                 response.setData(result);
@@ -57,17 +61,19 @@ public class OperatorsController {
             response.setCode(0);
             response.setMessage("添加失败！");
         }
+
         return response;
     }
 
     @CrossOrigin("*")
-    @ApiOperation(value = "修改操作员信息", notes = "修改信息", httpMethod = "POST", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "修改用户信息", notes = "修改信息", httpMethod = "POST", produces = MediaType.APPLICATION_JSON_VALUE)
     @RequestMapping(value = "/update",method=RequestMethod.POST)
-    public Response<Integer> update(@ApiParam(value = "操作员信息",required = true)@RequestBody OperatorsEntity operatorsEntity){
+    public Response<Integer> update(@ApiParam(value = "用户信息",required = true)@RequestBody UserinfoEntity userinfoEntity){
         Response<Integer> response = new Response<>();
         int result = 0;
+
         try {
-            result = operatorsService.update(operatorsEntity);
+            result = userinfoService.update(userinfoEntity);
             response.setCode(1);
             response.setData(result);
             response.setMessage("修改成功！");
@@ -79,30 +85,32 @@ public class OperatorsController {
     }
 
     @CrossOrigin("*")
-    @ApiOperation(value = "删除操作员", notes = "删除信息", httpMethod = "POST", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "删除用户", notes = "删除信息", httpMethod = "POST", produces = MediaType.APPLICATION_JSON_VALUE)
     @RequestMapping(value = "/delete",method=RequestMethod.POST)
-    public Response<Integer> delete(@ApiParam(value = "操作员id",required = true)@RequestBody ListParam listParam){
+    public Response<Integer> delete(@ApiParam(value = "用户id",required = true)@RequestBody ListParam listParam){
         Response<Integer> response = new Response<>();
         int result = 0;
+
         try {
-            result = operatorsService.deleteList(listParam.getIdList());
+            result = userinfoService.deleteList(listParam.getIdList());
             response.setCode(1);
             response.setMessage("删除成功！");
         }catch (Exception e){
             response.setCode(0);
-            response.setMessage("删除失败！");
+            response.setMessage("删除异常！");
         }
         return response;
     }
 
     @CrossOrigin("*")
-    @ApiOperation(value = "重置操作员密码", notes = "修改信息", httpMethod = "POST", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "重置用户密码", notes = "修改信息", httpMethod = "POST", produces = MediaType.APPLICATION_JSON_VALUE)
     @RequestMapping(value = "/updatePawd",method=RequestMethod.POST)
-    public Response<Integer> updatePawd(@ApiParam(value = "操作员信息",required = true) @RequestBody OperatorsEntity operatorsEntity){
+    public Response<Integer> updatePawd(@ApiParam(value = "用户信息",required = true) @RequestBody UserinfoEntity userinfoEntity){
         Response<Integer> response = new Response<>();
         int result = 0;
+
         try {
-            result = operatorsService.updatePawd(operatorsEntity);
+            result = userinfoService.updatePawd(userinfoEntity);
             if (result!=0){
                 response.setCode(1);
                 response.setData(result);

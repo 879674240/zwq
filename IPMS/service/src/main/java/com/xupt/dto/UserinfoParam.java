@@ -3,13 +3,25 @@ package com.xupt.dto;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
-@ApiModel(value = "卡信息查询参数")
-public class CardinfoParam {
+@ApiModel("用户信息查询参数")
+public class UserinfoParam {
+
     /**
-     * 卡号
+     * 姓名
+     * not-null:true
+     * default:''
      */
-    @ApiModelProperty(value = "卡号", required = true)
-    private String cardno;
+    @ApiModelProperty(value = "姓名", required = true)
+    private String username;
+
+    /**
+     * 手机号码
+     * not-null:true
+     * default:''
+     */
+    @ApiModelProperty(value = "手机号", required = true)
+    private String tel;
+
     /**
      * 当前页
      */
@@ -22,12 +34,20 @@ public class CardinfoParam {
     @ApiModelProperty(value = "页大小", required = true)
     private Integer pageSize;
 
-    public String getCardno() {
-        return cardno;
+    public String getUsername() {
+        return username;
     }
 
-    public void setCardno(String cardno) {
-        this.cardno = cardno;
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getTel() {
+        return tel;
+    }
+
+    public void setTel(String tel) {
+        this.tel = tel;
     }
 
     public Integer getCurrentPage() {
@@ -46,3 +66,4 @@ public class CardinfoParam {
         this.pageSize = pageSize;
     }
 }
+

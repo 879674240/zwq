@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xupt.dal.mapper.UserinfoMapper">
+    <resultMap id="UserinfoMap" type="com.xupt.dal.model.UserinfoEntity">
+        <result column="id" property="id"/>
+        <result column="idno" property="idno"/>
+        <result column="username" property="username"/>
+        <result column="sex" property="sex"/>
+        <result column="age" property="age"/>
+        <result column="addr" property="addr"/>
+        <result column="tel" property="tel"/>
+        <result column="cardno" property="cardno"/>
+        <result column="carnum" property="carnum"/>
+        <result column="passwd" property="passwd"/>
+    </resultMap>
+    <sql id="fields">
+        id,idno,username,sex,age,addr,tel,cardno,carnum,passwd
+    </sql>
+    <sql id="insertValues">
+        <trim suffixOverrides=",">
+            <if test="idno != null">#{idno},</if>
+            <if test="username != null">#{username},</if>
+            <if test="sex != null">#{sex},</if>
+            <if test="age != null">#{age},</if>
+            <if test="addr != null">#{addr},</if>
+            <if test="tel != null">#{tel},</if>
+            <if test="cardno != null">#{cardno},</if>
+            <if test="carnum != null">#{carnum},</if>
+            <if test="passwd != null">#{passwd},</if>
+        </trim>
+    </sql>
+    <sql id="insertFields">
+        <trim suffixOverrides=",">
+            <if test="idno != null">idno,</if>
+            <if test="username != null">username,</if>
+            <if test="sex != null">sex,</if>
+            <if test="age != null">age,</if>
+            <if test="addr != null">addr,</if>
+            <if test="tel != null">tel,</if>
+            <if test="cardno != null">cardno,</if>
+            <if test="carnum != null">carnum,</if>
+            <if test="passwd != null">passwd,</if>
+        </trim>
+    </sql>
+    <sql id="updateFields">
+        <set>
+            <if test="idno != null">idno=#{idno},</if>
+            <if test="username != null">username=#{username},</if>
+            <if test="sex != null">sex=#{sex},</if>
+            <if test="age != null">age=#{age},</if>
+            <if test="addr != null">addr=#{addr},</if>
+            <if test="tel != null">tel=#{tel},</if>
+            <if test="cardno != null">cardno=#{cardno},</if>
+            <if test="carnum != null">carnum=#{carnum},</if>
+            <if test="passwd != null">passwd=#{passwd},</if>
+        </set>
+    </sql>
+    <sql id="searchFields">
+        <trim prefix="WHERE" prefixOverrides="AND|OR">
+            <if test="username != null">AND username like concat(concat(#{username}),"%")</if>
+            <if test="tel != null">AND tel like concat(concat("%",#{tel}),"%")</if>
+        </trim>
+    </sql>
+    <insert id="insert" parameterType="Object" keyProperty="id" useGeneratedKeys="true">
+        INSERT INTO userinfo(<include refid="insertFields"/>) values(<include refid="insertValues"/>)
+    </insert>
+    <select id="query" parameterType="com.xupt.dal.dto.UserinfoDTO" resultMap="UserinfoMap">
+        select <include refid="fields"/> from userinfo <include refid="searchFields"/> limit #{offset},#{pageSize}
+    </select>
+    <select id="queryByIdno" parameterType="String" resultMap="UserinfoMap">
+        select <include refid="fields"/> from userinfo where idno = #{idno}
+    </select>
+    <select id="count" parameterType="com.xupt.dal.dto.UserinfoDTO" resultType="Integer">
+        select count(0) from userinfo <include refid="searchFields"/>
+    </select>
+    <update id="update" parameterType="com.xupt.dal.model.UserinfoEntity">
+        update userinfo <include refid="updateFields"/> where id = #{id}
+    </update>
+    <delete id="delete" parameterType="Object">
+        delete from userinfo where id = #{id}
+    </delete>
+</mapper>

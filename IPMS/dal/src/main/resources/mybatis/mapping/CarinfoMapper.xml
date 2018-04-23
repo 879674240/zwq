@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xupt.dal.mapper.CarinfoMapper">
+    <resultMap id="CarinfoMap" type="com.xupt.dal.model.CarinfoEntity">
+        <result column="id" property="id"/>
+        <result column="idno" property="idno"/>
+        <result column="carnum" property="carnum"/>
+        <result column="type" property="type"/>
+    </resultMap>
+    <sql id="fields">
+        id,idno,carnum,type
+    </sql>
+    <sql id="insertValues">
+        <trim suffixOverrides=",">
+            <if test="idno != null">#{idno},</if>
+            <if test="carnum != null">#{carnum},</if>
+            <if test="type != null">#{type},</if>
+        </trim>
+    </sql>
+    <sql id="insertFields">
+        <trim suffixOverrides=",">
+            <if test="idno != null">idno,</if>
+            <if test="carnum != null">carnum,</if>
+            <if test="type != null">type,</if>
+        </trim>
+    </sql>
+    <sql id="updateFields">
+        <set>
+            <if test="idno != null">idno=#{idno},</if>
+            <if test="carnum != null">carnum=#{carnum},</if>
+            <if test="type != null">type=#{type},</if>
+        </set>
+    </sql>
+    <sql id="searchFields">
+        <trim prefix="WHERE" prefixOverrides="AND|OR">
+            <if test="carnum != null">AND carnum like concat(concat(#{carnum}),"%")</if>
+        </trim>
+    </sql>
+    <insert id="insert" parameterType="Object" keyProperty="id" useGeneratedKeys="true">
+        INSERT INTO carinfo(<include refid="insertFields"/>) values(<include refid="insertValues"/>)
+    </insert>
+    <select id="query" parameterType="com.xupt.dal.dto.CarinfoDTO" resultMap="CarinfoMap">
+        select <include refid="fields"/> from carinfo <include refid="searchFields"/> limit #{offset},#{pageSize}
+    </select>
+    <select id="queryByIdno" parameterType="String" resultMap="CarinfoMap">
+        select <include refid="fields"/> from carinfo where idno = #{idno}
+    </select>
+    <select id="count" parameterType="com.xupt.dal.dto.CarinfoDTO" resultType="Integer">
+        select count(0) from carinfo <include refid="searchFields"/>
+    </select>
+    <delete id="delete" parameterType="Object">
+        delete from carinfo where id = #{id}
+    </delete>
+</mapper>

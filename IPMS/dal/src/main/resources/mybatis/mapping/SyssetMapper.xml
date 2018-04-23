@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xupt.dal.mapper.SyssetMapper">
+    <resultMap id="SyssetMap" type="com.xupt.dal.model.SyssetEntity">
+        <result column="id" property="id"/>
+        <result column="parkname" property="parkname"/>
+        <result column="parktotal" property="parktotal"/>
+        <result column="appearlane" property="appearlane"/>
+        <result column="outlane" property="outlane"/>
+        <result column="parkaddr" property="parkaddr"/>
+        <result column="parktel" property="parktel"/>
+    </resultMap>
+    <sql id="fields">
+        id,parkname,parktotal,appearlane,outlane,parkaddr,parktel
+    </sql>
+    <sql id="insertValues">
+        <trim suffixOverrides=",">
+            <if test="parkname != null">#{parkname},</if>
+            <if test="parktotal != null">#{parktotal},</if>
+            <if test="appearlane != null">#{appearlane},</if>
+            <if test="outlane != null">#{outlane},</if>
+            <if test="parkaddr != null">#{parkaddr},</if>
+            <if test="parktel != null">#{parktel},</if>
+        </trim>
+    </sql>
+    <sql id="insertFields">
+        <trim suffixOverrides=",">
+            <if test="parkname != null">parkname,</if>
+            <if test="parktotal != null">parktotal,</if>
+            <if test="appearlane != null">appearlane,</if>
+            <if test="outlane != null">outlane,</if>
+            <if test="parkaddr != null">parkaddr,</if>
+            <if test="parktel != null">parktel,</if>
+        </trim>
+    </sql>
+    <sql id="updateFields">
+        <set>
+            <if test="parkname != null">parkname=#{parkname},</if>
+            <if test="parktotal != null">parktotal=#{parktotal},</if>
+            <if test="appearlane != null">appearlane=#{appearlane},</if>
+            <if test="outlane != null">outlane=#{outlane},</if>
+            <if test="parkaddr != null">parkaddr=#{parkaddr},</if>
+            <if test="parktel != null">parktel=#{parktel},</if>
+        </set>
+    </sql>
+    <sql id="searchFields">
+        <trim prefixOverrides="AND">
+            <if test="id != null">AND id=#{id}</if>
+        </trim>
+    </sql>
+    <insert id="insert" parameterType="Object" keyProperty="id" useGeneratedKeys="true">
+        INSERT INTO sysset(<include refid="insertFields"/>) values(<include refid="insertValues"/>)
+    </insert>
+</mapper>

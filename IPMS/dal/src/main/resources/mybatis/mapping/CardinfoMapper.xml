@@ -36,11 +36,29 @@
         </set>
     </sql>
     <sql id="searchFields">
-        <trim prefixOverrides="AND">
-            <if test="id != null">AND id=#{id}</if>
+        <trim prefix="WHERE" prefixOverrides="AND|OR">
+            <if test="cardno != null">AND cardno like concat(concat(#{cardno}),"%")</if>
         </trim>
     </sql>
     <insert id="insert" parameterType="Object" keyProperty="id" useGeneratedKeys="true">
         INSERT INTO cardinfo(<include refid="insertFields"/>) values(<include refid="insertValues"/>)
     </insert>
+    <select id="query" parameterType="com.xupt.dal.dto.CardinfoDTO" resultMap="CardinfoMap">
+        select <include refid="fields"/> from cardinfo <include refid="searchFields"/> limit #{offset},#{pageSize}
+    </select>
+    <select id="queryByIdno" parameterType="String" resultMap="CardinfoMap">
+        select <include refid="fields"/> from cardinfo where cardno = #{cardno}
+    </select>
+    <select id="queryById" parameterType="Object" resultMap="CardinfoMap">
+        select <include refid="fields"/> from cardinfo where id = #{id}
+    </select>
+    <select id="count" parameterType="com.xupt.dal.dto.CardinfoDTO" resultType="Integer">
+        select count(0) from cardinfo <include refid="searchFields"/>
+    </select>
+    <update id="update" parameterType="com.xupt.dal.model.CardinfoEntity">
+        update cardinfo <include refid="updateFields"/> where id = #{id}
+    </update>
+    <delete id="delete" parameterType="Object">
+        delete from cardinfo where id = #{id}
+    </delete>
 </mapper>

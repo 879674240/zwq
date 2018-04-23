@@ -3,13 +3,13 @@ package com.xupt.dto;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
-@ApiModel(value = "卡信息查询参数")
-public class CardinfoParam {
+@ApiModel("车辆信息参数")
+public class CarinfoParam {
     /**
-     * 卡号
+     * 车牌号
      */
-    @ApiModelProperty(value = "卡号", required = true)
-    private String cardno;
+    @ApiModelProperty(value = "车牌号", required = true)
+    private String carnum;
     /**
      * 当前页
      */
@@ -22,12 +22,12 @@ public class CardinfoParam {
     @ApiModelProperty(value = "页大小", required = true)
     private Integer pageSize;
 
-    public String getCardno() {
-        return cardno;
+    public String getCarnum() {
+        return carnum;
     }
 
-    public void setCardno(String cardno) {
-        this.cardno = cardno;
+    public void setCarnum(String carnum) {
+        this.carnum = carnum;
     }
 
     public Integer getCurrentPage() {

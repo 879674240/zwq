@@ -1,5 +1,6 @@
 package com.xupt.dal.mapper;
 
+import com.xupt.dal.dto.CardinfoDTO;
 import com.xupt.dal.model.CardinfoEntity;
 import org.apache.ibatis.annotations.Param;
 
@@ -7,11 +8,15 @@ import java.util.List;
 
 /**
  * @author: lenovo
- * @time: 2018-04-22 23:56:47
+ * @time: 2018-04-23 15:06:56
  * @description: cardinfo()
  */
 public interface CardinfoMapper {
     int insert(CardinfoEntity entity);
-    int updateById(@Param("id") Integer id);
-    CardinfoEntity getById(@Param("id") Integer id);
+    List<CardinfoEntity> query(CardinfoDTO cardinfoDTO);
+    CardinfoEntity queryByIdno(@Param("cardno")String cardno);
+    CardinfoEntity queryById(@Param("id")Integer id);
+    int count(CardinfoDTO cardinfoDTO);
+    int update(CardinfoEntity cardinfoEntity);
+    int delete(@Param("id")Integer id);
 }

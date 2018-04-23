@@ -3,7 +3,7 @@ package com.xupt.dto;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
-@ApiModel("operatorsParam")
+@ApiModel("操作员信息查询参数")
 public class OperatorsParam {
 
     /**

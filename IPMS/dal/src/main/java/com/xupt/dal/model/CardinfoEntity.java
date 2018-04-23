@@ -1,22 +1,18 @@
 package com.xupt.dal.model;
 
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 
 /**
  * @author: lenovo
- * @time: 2018-04-22 23:56:47
+ * @time: 2018-04-23 15:06:56
  * @description: cardinfo()
  */
-@ApiModel(value = "车卡对象", description = "card")
 public class CardinfoEntity {
     /**
      * 
      * not-null:true
      * default:'null'
      */
-    @ApiModelProperty(value = "id", required = true)
     private Integer id;
 
     /**
@@ -24,7 +20,6 @@ public class CardinfoEntity {
      * not-null:true
      * default:''
      */
-    @ApiModelProperty(value = "卡号", required = true)
     private String idno;
 
     /**
@@ -32,7 +27,6 @@ public class CardinfoEntity {
      * not-null:true
      * default:''
      */
-    @ApiModelProperty(value = "卡编号", required = true)
     private String cardno;
 
     /**
@@ -40,7 +34,6 @@ public class CardinfoEntity {
      * not-null:true
      * default:''
      */
-    @ApiModelProperty(value = "类型", required = true)
     private String types;
 
     /**
@@ -48,7 +41,6 @@ public class CardinfoEntity {
      * not-null:true
      * default:'0'
      */
-    @ApiModelProperty(value = "余额", required = true)
     private Integer remain;
 
     public void setId(Integer id) {

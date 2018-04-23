@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.xupt.dal.mapper.OperatorsMapper">
-    <resultMap id="OperatorsMap" type="com.xupt.dal.model.OperatorsEntity">
+<mapper namespace="com.xupt.dal.mapper.AdminMapper">
+    <resultMap id="AdminMap" type="com.xupt.dal.model.AdminEntity">
         <result column="id" property="id"/>
         <result column="idno" property="idno"/>
         <result column="name" property="name"/>
@@ -13,9 +13,10 @@
         <result column="addr" property="addr"/>
         <result column="authtype" property="authtype"/>
         <result column="passwd" property="passwd"/>
+        <result column="authstatus" property="authstatus"/>
     </resultMap>
     <sql id="fields">
-        id,idno,`name`,sex,age,idcardnum,phonenum,email,addr,authtype,passwd
+        id,idno,name,sex,age,idcardnum,phonenum,email,addr,authtype,passwd,authstatus
     </sql>
     <sql id="insertValues">
         <trim suffixOverrides=",">
@@ -29,12 +30,13 @@
             <if test="addr != null">#{addr},</if>
             <if test="authtype != null">#{authtype},</if>
             <if test="passwd != null">#{passwd},</if>
+            <if test="authstatus != null">#{authstatus},</if>
         </trim>
     </sql>
     <sql id="insertFields">
         <trim suffixOverrides=",">
             <if test="idno != null">idno,</if>
-            <if test="name != null">`name`,</if>
+            <if test="name != null">name,</if>
             <if test="sex != null">sex,</if>
             <if test="age != null">age,</if>
             <if test="idcardnum != null">idcardnum,</if>
@@ -43,12 +45,13 @@
             <if test="addr != null">addr,</if>
             <if test="authtype != null">authtype,</if>
             <if test="passwd != null">passwd,</if>
+            <if test="authstatus != null">authstatus,</if>
         </trim>
     </sql>
     <sql id="updateFields">
         <set>
             <if test="idno != null">idno=#{idno},</if>
-            <if test="name != null">`name`=#{name},</if>
+            <if test="name != null">name=#{name},</if>
             <if test="sex != null">sex=#{sex},</if>
             <if test="age != null">age=#{age},</if>
             <if test="idcardnum != null">idcardnum=#{idcardnum},</if>
@@ -57,6 +60,7 @@
             <if test="addr != null">addr=#{addr},</if>
             <if test="authtype != null">authtype=#{authtype},</if>
             <if test="passwd != null">passwd=#{passwd},</if>
+            <if test="authstatus != null">authstatus=#{authstatus},</if>
         </set>
     </sql>
     <sql id="searchFields">
@@ -66,21 +70,18 @@
         </trim>
     </sql>
     <insert id="insert" parameterType="Object" keyProperty="id" useGeneratedKeys="true">
-        INSERT INTO operators(<include refid="insertFields"/>) values(<include refid="insertValues"/>)
+        INSERT INTO admin(<include refid="insertFields"/>) values(<include refid="insertValues"/>)
     </insert>
-    <select id="query" parameterType="com.xupt.dal.dto.OperatorsDTO" resultMap="OperatorsMap">
-        select <include refid="fields"/> from operators <include refid="searchFields"/> limit #{offset},#{pageSize}
+    <select id="query" resultMap="AdminMap">
+        select <include refid="fields"/> from admin
     </select>
-    <select id="queryByIdno" parameterType="String" resultMap="OperatorsMap">
-        select <include refid="fields"/> from operators where idno = #{idno}
+    <select id="queryByIdno" parameterType="String" resultMap="AdminMap">
+        select <include refid="fields"/> from admin where idno = #{idno}
     </select>
-    <select id="count" parameterType="com.xupt.dal.dto.OperatorsDTO" resultType="Integer">
-        select count(0) from operators <include refid="searchFields"/>
-    </select>
-    <update id="update" parameterType="com.xupt.dal.model.OperatorsEntity">
-        update operators <include refid="updateFields"/> where id = #{id}
+    <update id="update" parameterType="com.xupt.dal.model.AdminEntity">
+        update admin <include refid="updateFields"/> where id = #{id}
     </update>
     <delete id="delete" parameterType="Object">
-        delete from operators where id = #{id}
+        delete from admin where id = #{id}
     </delete>
 </mapper>
