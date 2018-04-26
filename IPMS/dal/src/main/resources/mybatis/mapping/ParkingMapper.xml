@@ -7,7 +7,7 @@
         <result column="status" property="status"/>
     </resultMap>
     <sql id="fields">
-        id,position,status
+        id,`position`,status
     </sql>
     <sql id="insertValues">
         <trim suffixOverrides=",">
@@ -17,13 +17,13 @@
     </sql>
     <sql id="insertFields">
         <trim suffixOverrides=",">
-            <if test="position != null">position,</if>
+            <if test="position != null">`position`,</if>
             <if test="status != null">status,</if>
         </trim>
     </sql>
     <sql id="updateFields">
         <set>
-            <if test="position != null">position=#{position},</if>
+            <if test="position != null">`position`=#{position},</if>
             <if test="status != null">status=#{status},</if>
         </set>
     </sql>
@@ -35,4 +35,7 @@
     <insert id="insert" parameterType="Object" keyProperty="id" useGeneratedKeys="true">
         INSERT INTO parking(<include refid="insertFields"/>) values(<include refid="insertValues"/>)
     </insert>
+    <select id="query" parameterType="Object" resultMap="ParkingMap">
+        select <include refid="fields"/> from parking where status = 0
+    </select>
 </mapper>

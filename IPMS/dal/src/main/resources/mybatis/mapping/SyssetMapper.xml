@@ -51,4 +51,13 @@
     <insert id="insert" parameterType="Object" keyProperty="id" useGeneratedKeys="true">
         INSERT INTO sysset(<include refid="insertFields"/>) values(<include refid="insertValues"/>)
     </insert>
+    <select id="query" resultMap="SyssetMap">
+        select <include refid="fields"/> from sysset
+    </select>
+    <select id="queryById" parameterType="Object" resultMap="SyssetMap">
+        select <include refid="fields"/> from sysset where id = #{id}
+    </select>
+    <update id="update" parameterType="com.xupt.dal.model.SyssetEntity">
+        update sysset <include refid="updateFields"/> where id = #{id}
+    </update>
 </mapper>

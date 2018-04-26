@@ -12,6 +12,7 @@ import java.util.List;
  */
 public interface SyssetMapper {
     int insert(SyssetEntity entity);
-    int updateById(@Param("id") Integer id);
-    SyssetEntity getById(@Param("id") Integer id);
+    SyssetEntity query();
+    SyssetEntity queryBydId(@Param("id")Integer id);
+    int update(SyssetEntity syssetEntity);
 }

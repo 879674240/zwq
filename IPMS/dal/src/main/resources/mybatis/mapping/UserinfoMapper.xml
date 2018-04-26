@@ -9,12 +9,14 @@
         <result column="age" property="age"/>
         <result column="addr" property="addr"/>
         <result column="tel" property="tel"/>
+        <result column="idcardnum" property="idcardnum"/>
+        <result column="email" property="email"/>
         <result column="cardno" property="cardno"/>
         <result column="carnum" property="carnum"/>
         <result column="passwd" property="passwd"/>
     </resultMap>
     <sql id="fields">
-        id,idno,username,sex,age,addr,tel,cardno,carnum,passwd
+        id,idno,username,sex,age,addr,tel,idcardnum,email,cardno,carnum,passwd
     </sql>
     <sql id="insertValues">
         <trim suffixOverrides=",">
@@ -24,6 +26,8 @@
             <if test="age != null">#{age},</if>
             <if test="addr != null">#{addr},</if>
             <if test="tel != null">#{tel},</if>
+            <if test="idcardnum != null">#{idcardnum},</if>
+            <if test="email != null">#{email},</if>
             <if test="cardno != null">#{cardno},</if>
             <if test="carnum != null">#{carnum},</if>
             <if test="passwd != null">#{passwd},</if>
@@ -37,6 +41,8 @@
             <if test="age != null">age,</if>
             <if test="addr != null">addr,</if>
             <if test="tel != null">tel,</if>
+            <if test="idcardnum != null">idcardnum,</if>
+            <if test="email != null">email,</if>
             <if test="cardno != null">cardno,</if>
             <if test="carnum != null">carnum,</if>
             <if test="passwd != null">passwd,</if>
@@ -50,6 +56,8 @@
             <if test="age != null">age=#{age},</if>
             <if test="addr != null">addr=#{addr},</if>
             <if test="tel != null">tel=#{tel},</if>
+            <if test="idcardnum != null">idcardnum=#{idcardnum},</if>
+            <if test="email != null">email=#{email},</if>
             <if test="cardno != null">cardno=#{cardno},</if>
             <if test="carnum != null">carnum=#{carnum},</if>
             <if test="passwd != null">passwd=#{passwd},</if>

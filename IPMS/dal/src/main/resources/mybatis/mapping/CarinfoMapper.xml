@@ -48,6 +48,9 @@
     <select id="count" parameterType="com.xupt.dal.dto.CarinfoDTO" resultType="Integer">
         select count(0) from carinfo <include refid="searchFields"/>
     </select>
+    <delete id="update" parameterType="com.xupt.dal.model.CarinfoEntity">
+        update carinfo <include refid="updateFields"/> where id = #{id}
+    </delete>
     <delete id="delete" parameterType="Object">
         delete from carinfo where id = #{id}
     </delete>

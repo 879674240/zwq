@@ -32,7 +32,7 @@ public class SwaggerConfig {
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title("帅气的小刚 APIs")
-                .description("这是一个很菜的停车管理系统！菜滴很！")
+                .description("停车管理系统")
                 .termsOfServiceUrl("http://baidu.com")
                 .contact("Zwq")
                 .version("1.0.0")

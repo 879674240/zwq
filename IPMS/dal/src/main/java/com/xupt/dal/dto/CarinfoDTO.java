@@ -2,7 +2,7 @@ package com.xupt.dal.dto;
 
 public class CarinfoDTO {
     /**
-     * 卡号
+     * 车牌号
      */
     private String carnum;
     /**

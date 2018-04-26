@@ -12,6 +12,7 @@ import java.util.List;
  */
 public interface StopMapper {
     int insert(StopEntity entity);
+    StopEntity queryByCardno(@Param("cardno")String cardno);
     int updateById(@Param("id") Integer id);
     StopEntity getById(@Param("id") Integer id);
 }

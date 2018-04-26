@@ -1,5 +1,6 @@
 package com.xupt.dal.mapper;
 
+import com.xupt.dal.dto.CarinfoDTO;
 import com.xupt.dal.model.CarinfoEntity;
 import org.apache.ibatis.annotations.Param;
 
@@ -12,6 +13,9 @@ import java.util.List;
  */
 public interface CarinfoMapper {
     int insert(CarinfoEntity entity);
-    int updateById(@Param("id") Integer id);
-    CarinfoEntity getById(@Param("id") Integer id);
+    List<CarinfoEntity> query(CarinfoDTO carinfoDTO);
+    CarinfoEntity queryByIdno(@Param("idno")String idno);
+    int count(CarinfoDTO carinfoDTO);
+    int update(CarinfoEntity carinfoEntity);
+    int delete(@Param("id") Integer id);
 }

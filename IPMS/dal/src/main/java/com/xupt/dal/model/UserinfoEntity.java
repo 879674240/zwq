@@ -4,7 +4,7 @@ package com.xupt.dal.model;
 
 /**
  * @author: lenovo
- * @time: 2018-04-23 14:33:38
+ * @time: 2018-04-25 23:36:28
  * @description: userinfo()
  */
 public class UserinfoEntity {
@@ -56,6 +56,20 @@ public class UserinfoEntity {
      * default:''
      */
     private String tel;
+
+    /**
+     * 身份证号
+     * not-null:true
+     * default:''
+     */
+    private String idcardnum;
+
+    /**
+     * 邮箱
+     * not-null:true
+     * default:''
+     */
+    private String email;
 
     /**
      * 卡号
@@ -132,6 +146,22 @@ public class UserinfoEntity {
 
     public String getTel() {
         return tel;
+    }
+
+    public void setIdcardnum(String idcardnum) {
+        this.idcardnum = idcardnum;
+    }
+
+    public String getIdcardnum() {
+        return idcardnum;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     public void setCardno(String cardno) {

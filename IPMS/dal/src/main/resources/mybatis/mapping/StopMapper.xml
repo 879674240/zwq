@@ -51,4 +51,7 @@
     <insert id="insert" parameterType="Object" keyProperty="id" useGeneratedKeys="true">
         INSERT INTO stop(<include refid="insertFields"/>) values(<include refid="insertValues"/>)
     </insert>
+    <select id="queryByCardno" parameterType="Object" resultMap="StopMap">
+        select <include refid="fields"/> from stop where cardno = #{cardno}
+    </select>
 </mapper>
