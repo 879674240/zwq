@@ -72,18 +72,11 @@ public class UserinfoEntity {
     private String email;
 
     /**
-     * 卡号
+     * 车架号
      * not-null:true
      * default:''
      */
-    private String cardno;
-
-    /**
-     * 车牌号
-     * not-null:true
-     * default:''
-     */
-    private String carnum;
+    private String cardriverno;
 
     /**
      * 密码
@@ -164,20 +157,12 @@ public class UserinfoEntity {
         return email;
     }
 
-    public void setCardno(String cardno) {
-        this.cardno = cardno;
+    public String getCardriverno() {
+        return cardriverno;
     }
 
-    public String getCardno() {
-        return cardno;
-    }
-
-    public void setCarnum(String carnum) {
-        this.carnum = carnum;
-    }
-
-    public String getCarnum() {
-        return carnum;
+    public void setCardriverno(String cardriverno) {
+        this.cardriverno = cardriverno;
     }
 
     public void setPasswd(String passwd) {

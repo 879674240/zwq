@@ -18,4 +18,6 @@ public interface UserinfoMapper {
     UserinfoEntity queryByIdno(String idno);
     int update(UserinfoEntity entity);
     int delete(@Param("id")Integer id);
+    List<UserinfoEntity> queryAll();
+    UserinfoEntity queryByCardriverno(@Param("cardriverno")String cardriverno);
 }

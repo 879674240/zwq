@@ -99,4 +99,22 @@ public class CardInfoController {
         response.setMessage("充值成功！");
         return response;
     }
+
+    @CrossOrigin("*")
+    @ApiOperation(value = "获取idno信息", notes = "获取idno信息", httpMethod = "POST", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/queryIdno",method=RequestMethod.POST)
+    public Response<List<String>> queryIdno(){
+        Response<List<String>> response = new Response<>();
+        List<String> idnos = null;
+        try {
+            idnos = cardinfoService.queryIdno();
+            response.setData(idnos);
+            response.setCode(1);
+            response.setMessage("获取idno信息成功！");
+        }catch (Exception e){
+            response.setCode(0);
+            response.setMessage("获取idno信息异常！");
+        }
+        return response;
+    }
 }

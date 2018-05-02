@@ -1,9 +1,8 @@
 package com.xupt;
 
-import com.xupt.dal.mapper.ParkingMapper;
-import com.xupt.dal.mapper.StopMapper;
-import com.xupt.dal.model.ParkingEntity;
-import com.xupt.dal.model.StopEntity;
+import com.xupt.dal.mapper.*;
+import com.xupt.dal.model.*;
+import com.xupt.dto.ParkingInfo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -15,7 +14,12 @@ public class StopService {
     StopMapper stopMapper;
     @Resource
     ParkingMapper parkingMapper;
-
+    @Resource
+    CardinfoMapper cardinfoMapper;
+    @Resource
+    UserinfoMapper userinfoMapper;
+    @Resource
+    CarinfoMapper carinfoMapper;
     /**
      * 添加停车信息
      * @param stopEntity
@@ -28,11 +32,34 @@ public class StopService {
             return result;
         }
         result = stopMapper.insert(stopEntity);
+        ParkingEntity parkingEntity = new ParkingEntity();
+        parkingEntity.setPosition(stopEntity.getCarposi());
+        parkingEntity.setStatus(1);
+        parkingMapper.updateByPosi(parkingEntity);
         return result;
     }
 
     public List<ParkingEntity> queryPark(){
         List<ParkingEntity> parkingEntities = parkingMapper.query();
         return parkingEntities;
+    }
+
+    public ParkingInfo queryByCarnum(String carnum){
+        ParkingInfo parkingInfo = new ParkingInfo();
+        CarinfoEntity carinfoEntity = carinfoMapper.queryCarnum(carnum);
+        parkingInfo.setType(carinfoEntity.getType());
+        parkingInfo.setCarnum(carnum);
+        String carddriverno = carinfoEntity.getCardriverno();
+        UserinfoEntity userinfoEntity = userinfoMapper.queryByCardriverno(carddriverno);
+        CardinfoEntity cardinfoEntity = cardinfoMapper.queryByIdno(userinfoEntity.getIdno());
+        parkingInfo.setCardno(cardinfoEntity.getCardno());
+        String types;
+        if(cardinfoEntity.getTypes().equals("临时卡")){
+            types = "临时车辆收费";
+        }else{
+            types = "固定车辆收费";
+        }
+        parkingInfo.setTypes(types);
+        return parkingInfo;
     }
 }

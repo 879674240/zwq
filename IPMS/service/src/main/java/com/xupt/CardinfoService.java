@@ -3,12 +3,15 @@ package com.xupt;
 import com.xupt.common.PageResult;
 import com.xupt.dal.dto.CardinfoDTO;
 import com.xupt.dal.mapper.CardinfoMapper;
+import com.xupt.dal.mapper.UserinfoMapper;
 import com.xupt.dal.model.CardinfoEntity;
+import com.xupt.dal.model.UserinfoEntity;
 import com.xupt.dto.CardinfoParam;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -16,7 +19,8 @@ import java.util.List;
 public class CardinfoService {
     @Resource
     CardinfoMapper cardinfoMapper;
-
+    @Resource
+    UserinfoMapper userinfoMapper;
     /**
      * 分页查询
      * @param cardinfoParam
@@ -30,7 +34,7 @@ public class CardinfoService {
         List<CardinfoEntity> cardinfoEntities = cardinfoMapper.query(cardinfoDTO);
         int count = cardinfoMapper.count(cardinfoDTO);
         pageResult.setData(cardinfoEntities);
-        pageResult.setPageCount(count);
+        pageResult.setCount(count);
         pageResult.setCurrentPage(cardinfoParam.getCurrentPage());
         pageResult.setPageSize(cardinfoParam.getPageSize());
         return pageResult;
@@ -43,11 +47,10 @@ public class CardinfoService {
      */
     public int insert(CardinfoEntity cardinfoEntity){
         int result = 0;
-        CardinfoEntity cardinfoEntity1 = cardinfoMapper.queryByIdno(cardinfoEntity.getCardno());
+        CardinfoEntity cardinfoEntity1 = cardinfoMapper.queryByCardno(cardinfoEntity.getCardno());
         if (cardinfoEntity1!=null){
             return result;
         }
-        cardinfoEntity.setIdno("10"+cardinfoEntity.getCardno());
         result =  cardinfoMapper.insert(cardinfoEntity);
 
         return result;
@@ -81,4 +84,22 @@ public class CardinfoService {
         return sum;
     }
 
+    /**
+     * 查询没有车卡的用户表的idno
+     * @return
+     */
+    public List<String>queryIdno(){
+        List<UserinfoEntity> userinfoEntities = userinfoMapper.queryAll();
+        List<CardinfoEntity> cardinfoEntities = cardinfoMapper.queryAll();
+        List<String> userIdnos = new ArrayList<>();
+        List<String> cardIdnos = new ArrayList<>();
+        for (UserinfoEntity userinfoEntity:userinfoEntities){
+            userIdnos.add(userinfoEntity.getIdno());
+        }
+        for (CardinfoEntity cardinfoEntity:cardinfoEntities){
+            cardIdnos.add(cardinfoEntity.getIdno());
+        }
+        userIdnos.removeAll(cardIdnos);
+        return userIdnos;
+    }
 }

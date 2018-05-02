@@ -13,6 +13,6 @@ import java.util.List;
 public interface ParkingMapper {
     int insert(ParkingEntity entity);
     List<ParkingEntity> query();
-    int updateById(@Param("id") Integer id);
+    int updateByPosi(ParkingEntity parkingEntity);
     ParkingEntity getById(@Param("id") Integer id);
 }

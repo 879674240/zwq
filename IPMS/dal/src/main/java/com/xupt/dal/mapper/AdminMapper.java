@@ -16,6 +16,7 @@ public interface AdminMapper {
     int insert(AdminEntity adminEntity);
     List<AdminEntity> query();
     AdminEntity queryByIdno(String idno);
+    AdminEntity queryById(@Param("id") Integer id);
     int update(AdminEntity adminEntity);
     int delete(@Param("id")Integer id);
 }

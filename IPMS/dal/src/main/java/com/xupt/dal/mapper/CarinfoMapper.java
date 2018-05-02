@@ -14,8 +14,9 @@ import java.util.List;
 public interface CarinfoMapper {
     int insert(CarinfoEntity entity);
     List<CarinfoEntity> query(CarinfoDTO carinfoDTO);
-    CarinfoEntity queryByIdno(@Param("idno")String idno);
+    CarinfoEntity queryByCardriverno(@Param("cardriverno")String cardriverno);
     int count(CarinfoDTO carinfoDTO);
     int update(CarinfoEntity carinfoEntity);
     int delete(@Param("id") Integer id);
+    CarinfoEntity queryCarnum(@Param("carnum")String carnum);
 }

@@ -4,6 +4,8 @@ import com.xupt.StopService;
 import com.xupt.common.Response;
 import com.xupt.dal.model.ParkingEntity;
 import com.xupt.dal.model.StopEntity;
+import com.xupt.dto.CarnumParam;
+import com.xupt.dto.ParkingInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -56,6 +58,24 @@ public class StopController {
         }catch (Exception e){
             response.setCode(0);
             response.setMessage("获取空位信息异常！");
+        }
+        return response;
+    }
+
+    @CrossOrigin("*")
+    @ApiOperation(value = "根据车牌号获取信息", notes = "根据车牌号获取信息", httpMethod = "POST", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/queryByCarnum",method=RequestMethod.POST)
+    public Response<ParkingInfo> queryByCarnum(@RequestBody @ApiParam(value = "车牌号",required = true) CarnumParam carnum){
+        Response<ParkingInfo> response = new Response<>();
+        ParkingInfo parkingInfos = null;
+        try {
+            parkingInfos = stopService.queryByCarnum(carnum.getCarnum());
+            response.setData(parkingInfos);
+            response.setCode(1);
+            response.setMessage("获取信息成功！");
+        }catch (Exception e){
+            response.setCode(0);
+            response.setMessage("获取信息异常！");
         }
         return response;
     }

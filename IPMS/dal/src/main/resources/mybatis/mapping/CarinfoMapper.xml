@@ -3,31 +3,39 @@
 <mapper namespace="com.xupt.dal.mapper.CarinfoMapper">
     <resultMap id="CarinfoMap" type="com.xupt.dal.model.CarinfoEntity">
         <result column="id" property="id"/>
-        <result column="idno" property="idno"/>
+        <result column="cardriverno" property="cardriverno"/>
         <result column="carnum" property="carnum"/>
+        <result column="carlogo" property="carlogo"/>
+        <result column="carcolor" property="carcolor"/>
         <result column="type" property="type"/>
     </resultMap>
     <sql id="fields">
-        id,idno,carnum,type
+        id,cardriverno,carnum,carlogo,carcolor,type
     </sql>
     <sql id="insertValues">
         <trim suffixOverrides=",">
-            <if test="idno != null">#{idno},</if>
+            <if test="cardriverno != null">#{cardriverno},</if>
             <if test="carnum != null">#{carnum},</if>
+            <if test="carlogo != null">#{carlogo},</if>
+            <if test="carcolor != null">#{carcolor},</if>
             <if test="type != null">#{type},</if>
         </trim>
     </sql>
     <sql id="insertFields">
         <trim suffixOverrides=",">
-            <if test="idno != null">idno,</if>
+            <if test="cardriverno != null">cardriverno,</if>
             <if test="carnum != null">carnum,</if>
+            <if test="carlogo != null">carlogo,</if>
+            <if test="carcolor != null">carcolor,</if>
             <if test="type != null">type,</if>
         </trim>
     </sql>
     <sql id="updateFields">
         <set>
-            <if test="idno != null">idno=#{idno},</if>
+            <if test="cardriverno != null">cardriverno=#{cardriverno},</if>
             <if test="carnum != null">carnum=#{carnum},</if>
+            <if test="carlogo != null">carlogo=#{carlogo},</if>
+            <if test="carcolor != null">carcolor=#{carcolor},</if>
             <if test="type != null">type=#{type},</if>
         </set>
     </sql>
@@ -42,8 +50,11 @@
     <select id="query" parameterType="com.xupt.dal.dto.CarinfoDTO" resultMap="CarinfoMap">
         select <include refid="fields"/> from carinfo <include refid="searchFields"/> limit #{offset},#{pageSize}
     </select>
-    <select id="queryByIdno" parameterType="String" resultMap="CarinfoMap">
-        select <include refid="fields"/> from carinfo where idno = #{idno}
+    <select id="queryByCardriverno" parameterType="String" resultMap="CarinfoMap">
+        select <include refid="fields"/> from carinfo where cardriverno = #{cardriverno}
+    </select>
+    <select id="queryCarnum" parameterType="String" resultMap="CarinfoMap">
+        select <include refid="fields"/> from carinfo where carnum = #{carnum}
     </select>
     <select id="count" parameterType="com.xupt.dal.dto.CarinfoDTO" resultType="Integer">
         select count(0) from carinfo <include refid="searchFields"/>

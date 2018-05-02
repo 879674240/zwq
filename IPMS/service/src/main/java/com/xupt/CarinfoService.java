@@ -42,23 +42,11 @@ public class CarinfoService {
      */
     public int insert(CarinfoEntity carinfoEntity){
         int result = 0;
-        CarinfoEntity carinfoEntity1 = carinfoMapper.queryByIdno(carinfoEntity.getIdno());
+        CarinfoEntity carinfoEntity1 = carinfoMapper.queryByCardriverno(carinfoEntity.getCardriverno());
         if (carinfoEntity1!=null){
             return result;
         }
         result = carinfoMapper.insert(carinfoEntity);
-        int id = carinfoEntity.getId();
-        String idno = "";
-        if(id<10){
-            idno = "66000"+id;
-        }else if(id<100){
-            idno = "6600"+id;
-        }else if(id<1000){
-            idno = "660"+id;
-        }else{
-            idno = "66"+id;
-        }
-        carinfoEntity.setIdno(idno);
         int result2 = carinfoMapper.update(carinfoEntity);
         return result+result2;
     }

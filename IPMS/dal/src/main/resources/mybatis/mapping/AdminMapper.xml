@@ -78,6 +78,9 @@
     <select id="queryByIdno" parameterType="String" resultMap="AdminMap">
         select <include refid="fields"/> from admin where idno = #{idno}
     </select>
+    <select id="queryById" parameterType="Integer" resultMap="AdminMap">
+        select <include refid="fields"/> from admin where id = #{id}
+    </select>
     <update id="update" parameterType="com.xupt.dal.model.AdminEntity">
         update admin <include refid="updateFields"/> where id = #{id}
     </update>

@@ -46,8 +46,11 @@
     <select id="query" parameterType="com.xupt.dal.dto.CardinfoDTO" resultMap="CardinfoMap">
         select <include refid="fields"/> from cardinfo <include refid="searchFields"/> limit #{offset},#{pageSize}
     </select>
-    <select id="queryByIdno" parameterType="String" resultMap="CardinfoMap">
+    <select id="queryByCardno" parameterType="String" resultMap="CardinfoMap">
         select <include refid="fields"/> from cardinfo where cardno = #{cardno}
+    </select>
+    <select id="queryByIdno" parameterType="String" resultMap="CardinfoMap">
+        select <include refid="fields"/> from cardinfo where idno = #{idno}
     </select>
     <select id="queryById" parameterType="Object" resultMap="CardinfoMap">
         select <include refid="fields"/> from cardinfo where id = #{id}
@@ -61,4 +64,7 @@
     <delete id="delete" parameterType="Object">
         delete from cardinfo where id = #{id}
     </delete>
+    <select id="queryAll" resultMap="CardinfoMap">
+        select <include refid="fields"/> from cardinfo
+    </select>
 </mapper>

@@ -35,6 +35,9 @@
     <insert id="insert" parameterType="Object" keyProperty="id" useGeneratedKeys="true">
         INSERT INTO parking(<include refid="insertFields"/>) values(<include refid="insertValues"/>)
     </insert>
+    <update id="updateByPosi" parameterType="String">
+        update parking <set>status=#{status}</set> where `position` = #{position}
+    </update>
     <select id="query" parameterType="Object" resultMap="ParkingMap">
         select <include refid="fields"/> from parking where status = 0
     </select>

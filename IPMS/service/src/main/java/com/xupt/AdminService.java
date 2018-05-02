@@ -46,6 +46,13 @@ public class AdminService {
      */
     public int update(AdminEntity adminEntity){
         int result = 0;
+        if(adminEntity.getAuthstatus()!=null){
+            if (adminEntity.getAuthstatus().equals("已启用")){
+                adminEntity.setAuthstatus("已禁用");
+            }else{
+                adminEntity.setAuthstatus("已启用");
+            }
+        }
         result = adminMapper.update(adminEntity);
         return result;
     }
