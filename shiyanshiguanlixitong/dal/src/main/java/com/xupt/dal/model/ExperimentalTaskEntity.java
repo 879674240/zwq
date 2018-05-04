@@ -1,12 +1,15 @@
 package com.xupt.dal.model;
 
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * @author: lenovo
  * @time: 2018-04-19 18:05:43
  * @description: experimental_task()
  */
+@ApiModel(value = "实验任务", description = "task")
 public class ExperimentalTaskEntity {
     /**
      * id
@@ -20,6 +23,7 @@ public class ExperimentalTaskEntity {
      * not-null:true
      * default:''
      */
+    @ApiModelProperty(value = "专业", required = true)
     private String major;
 
     /**
@@ -27,6 +31,7 @@ public class ExperimentalTaskEntity {
      * not-null:true
      * default:''
      */
+    @ApiModelProperty(value = "班级", required = true)
     private String classs;
 
     /**
@@ -34,6 +39,7 @@ public class ExperimentalTaskEntity {
      * not-null:true
      * default:'0'
      */
+    @ApiModelProperty(value = "学生人数", required = true)
     private Integer studentNum;
 
     /**
@@ -41,6 +47,7 @@ public class ExperimentalTaskEntity {
      * not-null:true
      * default:''
      */
+    @ApiModelProperty(value = "课程", required = true)
     private String subject;
 
     /**
@@ -48,6 +55,7 @@ public class ExperimentalTaskEntity {
      * not-null:true
      * default:'24'
      */
+    @ApiModelProperty(value = "课时", required = true)
     private Integer hours;
 
     /**
@@ -55,13 +63,15 @@ public class ExperimentalTaskEntity {
      * not-null:true
      * default:'0'
      */
-    private Integer compulsoryElective;
+    @ApiModelProperty(value = "0:必修/1:选修", required = true)
+    private String compulsoryElective;
 
     /**
      * 任课老师
      * not-null:true
      * default:''
      */
+    @ApiModelProperty(value = "任课老师", required = true)
     private String teacher;
 
     /**
@@ -69,6 +79,7 @@ public class ExperimentalTaskEntity {
      * not-null:true
      * default:'0'
      */
+    @ApiModelProperty(value = "编号", required = true)
     private String numberr;
 
     /**
@@ -133,11 +144,11 @@ public class ExperimentalTaskEntity {
         return hours;
     }
 
-    public void setCompulsoryElective(Integer compulsoryElective) {
+    public void setCompulsoryElective(String compulsoryElective) {
         this.compulsoryElective = compulsoryElective;
     }
 
-    public Integer getCompulsoryElective() {
+    public String getCompulsoryElective() {
         return compulsoryElective;
     }
 

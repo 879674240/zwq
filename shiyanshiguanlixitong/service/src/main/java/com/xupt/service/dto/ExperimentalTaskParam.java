@@ -1,5 +1,9 @@
 package com.xupt.service.dto;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+@ApiModel(value = "实验任务查询参数", description = "user2")
 public class ExperimentalTaskParam {
     /**
      *
@@ -13,6 +17,7 @@ public class ExperimentalTaskParam {
      * not-null:true
      * default:'0'
      */
+    @ApiModelProperty(value = "编号", required = true)
     private Integer num;
 
     /**
@@ -20,6 +25,7 @@ public class ExperimentalTaskParam {
      * not-null:true
      * default:''
      */
+    @ApiModelProperty(value = "专业", required = true)
     private String major;
 
     /**
@@ -27,6 +33,7 @@ public class ExperimentalTaskParam {
      * not-null:true
      * default:''
      */
+    @ApiModelProperty(value = "班级", required = true)
     private String classs;
 
     /**
@@ -34,6 +41,7 @@ public class ExperimentalTaskParam {
      * not-null:true
      * default:'0'
      */
+    @ApiModelProperty(value = "学生人数", required = true)
     private Integer studentNum;
 
     /**
@@ -41,6 +49,7 @@ public class ExperimentalTaskParam {
      * not-null:true
      * default:''
      */
+    @ApiModelProperty(value = "课程", required = true)
     private String subject;
 
     /**
@@ -48,6 +57,7 @@ public class ExperimentalTaskParam {
      * not-null:true
      * default:''
      */
+    @ApiModelProperty(value = "0:必修,1:选修", required = true)
     private String compulsoryElective;
 
     /**
@@ -55,6 +65,7 @@ public class ExperimentalTaskParam {
      * not-null:true
      * default:'0'
      */
+    @ApiModelProperty(value = "编号", required = true)
     private Integer numberr;
 
     /**
@@ -62,6 +73,7 @@ public class ExperimentalTaskParam {
      * not-null:true
      * default:'0'
      */
+    @ApiModelProperty(value = "当前页", required = true)
     private int currentPage;
 
     /**
@@ -69,6 +81,7 @@ public class ExperimentalTaskParam {
      * not-null:true
      * default:'0'
      */
+    @ApiModelProperty(value = "页面大小", required = true)
     private int pageSize;
 
     public Integer getId() {

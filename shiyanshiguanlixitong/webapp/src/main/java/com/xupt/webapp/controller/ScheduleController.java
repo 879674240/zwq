@@ -4,8 +4,10 @@ import com.xupt.component.Response;
 import com.xupt.dal.model.ScheduleEntity;
 import com.xupt.service.ScheduleService;
 import com.xupt.service.dto.ScheduleDTO;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -20,8 +22,10 @@ public class ScheduleController {
      * @param room
      * @return
      */
-    @RequestMapping(value = "query")
-    public Response<List<ScheduleDTO>> query(Integer room){
+    @CrossOrigin("*")
+    @ApiOperation(value = "实验室房间号来查看课程安排", notes = "实验室房间号来查看课程安排", httpMethod = "POST", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/query",method = RequestMethod.POST)
+    public Response<List<ScheduleDTO>> query(@ApiParam(value = "实验室房间号",required = true) @RequestBody Integer room){
         Response<List<ScheduleDTO>> response = new Response<>();
         List<ScheduleDTO> scheduleDTOS = null;
         try {
@@ -41,8 +45,10 @@ public class ScheduleController {
      * @param scheduleEntity
      * @return
      */
-    @RequestMapping(value = "insert")
-    public Response<Integer> insert(ScheduleEntity scheduleEntity){
+    @CrossOrigin("*")
+    @ApiOperation(value = "安排实验", notes = "安排实验", httpMethod = "POST", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/insert",method = RequestMethod.POST)
+    public Response<Integer> insert(@ApiParam(value = "实验安排模型",required = true) @RequestBody ScheduleEntity scheduleEntity){
         Response<Integer> response = new Response<>();
         int result = 0;
         try {
@@ -68,8 +74,10 @@ public class ScheduleController {
      * @param id
      * @return
      */
-    @RequestMapping(value = "delete")
-    public Response<Integer> delete(Integer id){
+    @CrossOrigin("*")
+    @ApiOperation(value = "删除实验", notes = "删除实验", httpMethod = "POST", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/delete",method = RequestMethod.POST)
+    public Response<Integer> delete(@ApiParam(value = "所删除id集合",required = true) @RequestBody Integer id){
 
         Response<Integer> response = new Response<>();
         int result = 0;

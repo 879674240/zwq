@@ -7,6 +7,7 @@ import com.xupt.dal.dto.ExperimentalTaskDTO;
 import com.xupt.dal.mapper.ExperimentalTaskMapper;
 import com.xupt.dal.model.ExperimentalTaskEntity;
 import com.xupt.service.dto.ExperimentalTaskParam;
+import com.xupt.service.dto.ListParam;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -26,9 +27,14 @@ public class ExperimentalTaskService {
     public int insert(ExperimentalTaskEntity entity) throws BizException {
         int result = 0;
         try {
+            ExperimentalTaskEntity experimentalTaskEntity = new ExperimentalTaskEntity();
+            experimentalTaskEntity = experimentalTaskMapper.queryByNum(entity.getNumberr());
+            if(experimentalTaskEntity != null){
+                return result;
+            }
             result = experimentalTaskMapper.insert(entity);
         }catch (Exception e){
-            throw new BizException("实验任务录入失败!");
+            throw new BizException("实验任务录入异常!");
         }
         return result;
     }
@@ -44,7 +50,7 @@ public class ExperimentalTaskService {
         try{
             result = experimentalTaskMapper.update(entity);
         }catch (Exception e){
-            throw new BizException("实验任务更新失败!");
+            throw new BizException("实验任务更新异常!");
         }
         return result;
     }
@@ -60,7 +66,7 @@ public class ExperimentalTaskService {
         try {
             experimentalTaskEntity = experimentalTaskMapper.queryById(id);
         }catch (Exception e){
-            throw new BizException("查询实验任务失败!");
+            throw new BizException("查询实验任务异常!");
         }
         return experimentalTaskEntity;
     }
@@ -94,14 +100,16 @@ public class ExperimentalTaskService {
 
     /**
      * 删除实验任务
-     * @param id
+     * @param idList
      * @return
      * @throws BizException
      */
-    public int delete(Integer id) throws BizException {
-        int result;
+    public int delete(List<Integer> idList) throws BizException {
+        int result = 0;
         try {
-            result = experimentalTaskMapper.delete(id);
+            for(Integer id:idList){
+                result = experimentalTaskMapper.delete(id);
+            }
         }catch (Exception e){
             throw new BizException("删除实验任务失败！");
         }

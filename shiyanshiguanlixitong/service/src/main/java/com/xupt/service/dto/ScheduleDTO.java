@@ -1,5 +1,9 @@
 package com.xupt.service.dto;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+@ApiModel(value = "排课计划页面返回数据", description = "user2")
 public class ScheduleDTO {
     /**
      *
@@ -13,6 +17,7 @@ public class ScheduleDTO {
      * not-null:true
      * default:'1'
      */
+    @ApiModelProperty(value = "周次", required = true)
     private Integer weekly;
 
     /**
@@ -20,6 +25,7 @@ public class ScheduleDTO {
      * not-null:true
      * default:'1'
      */
+    @ApiModelProperty(value = "星期", required = true)
     private Integer week;
 
     /**
@@ -27,6 +33,7 @@ public class ScheduleDTO {
      * not-null:true
      * default:'0'
      */
+    @ApiModelProperty(value = "时间段", required = true)
     private Integer timeslot;
 
     /**
@@ -34,6 +41,7 @@ public class ScheduleDTO {
      * not-null:true
      * default:''
      */
+    @ApiModelProperty(value = "任务安排", required = true)
     private String arrange;
 
     /**
@@ -41,6 +49,7 @@ public class ScheduleDTO {
      * not-null:true
      * default:''
      */
+    @ApiModelProperty(value = "操作人", required = true)
     private String operator;
 
     /**
@@ -48,6 +57,7 @@ public class ScheduleDTO {
      * not-null:true
      * default:'1'
      */
+    @ApiModelProperty(value = "实验室房间号", required = true)
     private String room;
 
     /**
@@ -55,6 +65,7 @@ public class ScheduleDTO {
      * not-null:true
      * default:''
      */
+    @ApiModelProperty(value = "备注", required = true)
     private String remark;
 
     /**
@@ -62,6 +73,7 @@ public class ScheduleDTO {
      * not-null:true
      * default:''
      */
+    @ApiModelProperty(value = "专业", required = true)
     private String major;
 
     /**
@@ -69,6 +81,7 @@ public class ScheduleDTO {
      * not-null:true
      * default:''
      */
+    @ApiModelProperty(value = "班级", required = true)
     private String classs;
 
     /**
@@ -76,6 +89,7 @@ public class ScheduleDTO {
      * not-null:true
      * default:'0'
      */
+    @ApiModelProperty(value = "学生人数", required = true)
     private Integer studentNum;
 
     /**
@@ -83,6 +97,7 @@ public class ScheduleDTO {
      * not-null:true
      * default:''
      */
+    @ApiModelProperty(value = "课程", required = true)
     private String subject;
 
     /**
@@ -90,6 +105,7 @@ public class ScheduleDTO {
      * not-null:true
      * default:'24'
      */
+    @ApiModelProperty(value = "课时", required = true)
     private Integer hours;
 
     /**
@@ -97,6 +113,7 @@ public class ScheduleDTO {
      * not-null:true
      * default:'0'
      */
+    @ApiModelProperty(value = "0:必修/1:选修", required = true)
     private Integer compulsoryElective;
 
     /**
@@ -104,6 +121,7 @@ public class ScheduleDTO {
      * not-null:true
      * default:''
      */
+    @ApiModelProperty(value = "任课老师", required = true)
     private String teacher;
 
     /**
@@ -111,6 +129,7 @@ public class ScheduleDTO {
      * not-null:true
      * default:'0'
      */
+    @ApiModelProperty(value = "编号", required = true)
     private String numberr;
 
     public Integer getId() {

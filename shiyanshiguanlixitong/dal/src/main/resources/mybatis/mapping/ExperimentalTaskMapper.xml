@@ -74,7 +74,7 @@
     <select id="queryById" parameterType="Object" resultMap="ExperimentalTaskMap">
         select <include refid="fields"/> from experimental_task where id = #{id}
     </select>
-    <select id="queryByNum" parameterType="Object" resultMap="ExperimentalTaskMap">
+    <select id="queryByNum" parameterType="String" resultMap="ExperimentalTaskMap">
         select <include refid="fields"/> from experimental_task where numberr = #{numberr}
     </select>
     <select id="queryByPage" parameterType="com.xupt.dal.dto.ExperimentalTaskDTO" resultMap="ExperimentalTaskMap">
@@ -87,6 +87,6 @@
         delete from experimental_task where id = #{id}
     </delete>
     <select id="count" parameterType="com.xupt.dal.dto.ExperimentalTaskDTO" resultType="Integer">
-        select count(0) from experimental_task <include refid="searchFields"/> limit #{offSet},#{pageSize}
+        select count(0) from experimental_task <include refid="searchFields"/>
     </select>
 </mapper>

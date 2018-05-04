@@ -1,12 +1,15 @@
 package com.xupt.dal.model;
 
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * @author: lenovo
  * @time: 2018-04-18 00:21:40
  * @description: schedule()
  */
+@ApiModel(value = "排课计划", description = "user2")
 public class ScheduleEntity {
     /**
      * 
@@ -20,6 +23,7 @@ public class ScheduleEntity {
      * not-null:true
      * default:'1'
      */
+    @ApiModelProperty(value = "周次", required = true)
     private Integer weekly;
 
     /**
@@ -27,6 +31,7 @@ public class ScheduleEntity {
      * not-null:true
      * default:'1'
      */
+    @ApiModelProperty(value = "星期", required = true)
     private Integer week;
 
     /**
@@ -34,6 +39,7 @@ public class ScheduleEntity {
      * not-null:true
      * default:'0'
      */
+    @ApiModelProperty(value = "时间段", required = true)
     private Integer timeslot;
 
     /**
@@ -41,6 +47,7 @@ public class ScheduleEntity {
      * not-null:true
      * default:''
      */
+    @ApiModelProperty(value = "任务安排", required = true)
     private String arrange;
 
     /**
@@ -48,6 +55,7 @@ public class ScheduleEntity {
      * not-null:true
      * default:''
      */
+    @ApiModelProperty(value = "操作", required = true)
     private String operator;
 
     /**
@@ -55,6 +63,7 @@ public class ScheduleEntity {
      * not-null:true
      * default:'1'
      */
+    @ApiModelProperty(value = "实验室房间号", required = true)
     private String room;
 
     /**
@@ -62,6 +71,7 @@ public class ScheduleEntity {
      * not-null:true
      * default:''
      */
+    @ApiModelProperty(value = "备注", required = true)
     private String remark;
 
     /**
