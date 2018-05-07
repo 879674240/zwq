@@ -68,8 +68,11 @@
         </set>
     </sql>
     <sql id="searchFields">
-        <trim prefixOverrides="AND">
+        <trim prefix="WHERE" prefixOverrides="AND|OR">
             <if test="id != null">AND id=#{id}</if>
+            <if test="weekly != null">AND weekly=#{weekly}</if>
+            <if test="room != null">AND room=#{room}</if>
+            <if test="operator != null">AND operator=#{operator}</if>
         </trim>
     </sql>
     <insert id="insert" parameterType="com.xupt.dal.model.ScheduleEntity" keyProperty="id" useGeneratedKeys="true">
@@ -84,8 +87,8 @@
     <select id="queryAll"  resultMap="ScheduleMap">
         select <include refid="fields"/> from schedule
     </select>
-    <select id="queryAllOrder"  resultMap="ScheduleMap">
-        select <include refid="fields"/> from schedule order by weekly ASC,week ASC,timeSlot ASC
+    <select id="queryAllOrder"  parameterType="com.xupt.dal.model.ScheduleEntity" resultMap="ScheduleMap">
+        select <include refid="fields"/> from schedule <include refid="searchFields"/> order by weekly ASC,week ASC,timeSlot ASC
     </select>
     <select id="queryByTime" parameterType="Object" resultMap="ScheduleMap">
         select <include refid="fields"/> from schedule where weekly = #{weekly} and week = #{week} and timeSlot = #{timeSlot} and room = #{room}

@@ -1,8 +1,12 @@
 package com.xupt.service.dto;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 /**
  * 日志DTO
  */
+@ApiModel(value = "日志DTO", description = "task")
 public class ExperiLogDTO {
     /**
      *
@@ -16,6 +20,7 @@ public class ExperiLogDTO {
      * not-null:true
      * default:'1'
      */
+    @ApiModelProperty(value = "周次", required = true)
     private String weekly;
 
     /**
@@ -23,6 +28,7 @@ public class ExperiLogDTO {
      * not-null:true
      * default:'1'
      */
+    @ApiModelProperty(value = "星期", required = true)
     private String week;
 
     /**
@@ -30,6 +36,7 @@ public class ExperiLogDTO {
      * not-null:true
      * default:'0'
      */
+    @ApiModelProperty(value = "时间段", required = true)
     private String timeslot;
 
     /**
@@ -37,6 +44,7 @@ public class ExperiLogDTO {
      * not-null:true
      * default:''
      */
+    @ApiModelProperty(value = "任务安排", required = true)
     private String arrange;
 
     /**
@@ -44,6 +52,7 @@ public class ExperiLogDTO {
      * not-null:true
      * default:''
      */
+    @ApiModelProperty(value = "操作人", required = true)
     private String operator;
 
     /**
@@ -51,6 +60,7 @@ public class ExperiLogDTO {
      * not-null:true
      * default:'1'
      */
+    @ApiModelProperty(value = "实验室编号", required = true)
     private String room;
 
     /**
@@ -58,12 +68,14 @@ public class ExperiLogDTO {
      * not-null:true
      * default:''
      */
+    @ApiModelProperty(value = "备注", required = true)
     private String remark;
     /**
      * 专业
      * not-null:true
      * default:''
      */
+    @ApiModelProperty(value = "专业", required = true)
     private String major;
 
     /**
@@ -71,6 +83,7 @@ public class ExperiLogDTO {
      * not-null:true
      * default:''
      */
+    @ApiModelProperty(value = "班级", required = true)
     private String classs;
 
     /**
@@ -78,6 +91,7 @@ public class ExperiLogDTO {
      * not-null:true
      * default:'0'
      */
+    @ApiModelProperty(value = "学生人数", required = true)
     private Integer studentNum;
 
     /**
@@ -85,6 +99,7 @@ public class ExperiLogDTO {
      * not-null:true
      * default:''
      */
+    @ApiModelProperty(value = "课程", required = true)
     private String subject;
 
     /**
@@ -92,6 +107,7 @@ public class ExperiLogDTO {
      * not-null:true
      * default:'24'
      */
+    @ApiModelProperty(value = "课时", required = true)
     private Integer hours;
 
     /**
@@ -99,6 +115,7 @@ public class ExperiLogDTO {
      * not-null:true
      * default:'0'
      */
+    @ApiModelProperty(value = "必修/选修", required = true)
     private String compulsoryElective;
 
     /**
@@ -106,6 +123,7 @@ public class ExperiLogDTO {
      * not-null:true
      * default:''
      */
+    @ApiModelProperty(value = "任课老师", required = true)
     private String teacher;
 
     /**
@@ -113,6 +131,7 @@ public class ExperiLogDTO {
      * not-null:true
      * default:'0'
      */
+    @ApiModelProperty(value = "编号", required = true)
     private String numberr;
 
     public Integer getId() {

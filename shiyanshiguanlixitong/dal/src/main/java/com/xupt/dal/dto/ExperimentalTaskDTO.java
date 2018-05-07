@@ -62,7 +62,7 @@ public class ExperimentalTaskDTO {
      * not-null:true
      * default:'0'
      */
-    private Integer numberr;
+    private String numberr;
 
     /**
      * 偏移量
@@ -134,11 +134,11 @@ public class ExperimentalTaskDTO {
         return compulsoryElective;
     }
 
-    public void setNumberr(Integer numberr) {
+    public void setNumberr(String numberr) {
         this.numberr = numberr;
     }
 
-    public Integer getNumberr() {
+    public String getNumberr() {
         return numberr;
     }
 

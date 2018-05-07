@@ -1,12 +1,15 @@
 package com.xupt.dal.model;
 
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * @author: lenovo
  * @time: 2018-04-18 11:16:20
  * @description: laboratory_assets()
  */
+@ApiModel(value = "实验室资产", description = "task")
 public class LaboratoryAssetsEntity {
     /**
      * id
@@ -20,6 +23,7 @@ public class LaboratoryAssetsEntity {
      * not-null:true
      * default:''
      */
+    @ApiModelProperty(value = "资产编号", required = true)
     private String num;
 
     /**
@@ -27,6 +31,7 @@ public class LaboratoryAssetsEntity {
      * not-null:true
      * default:''
      */
+    @ApiModelProperty(value = "资产名称", required = true)
     private String name;
 
     /**
@@ -34,6 +39,7 @@ public class LaboratoryAssetsEntity {
      * not-null:true
      * default:''
      */
+    @ApiModelProperty(value = "资产状态", required = true)
     private String status;
 
     /**
@@ -41,6 +47,7 @@ public class LaboratoryAssetsEntity {
      * not-null:true
      * default:''
      */
+    @ApiModelProperty(value = "所属实验室", required = true)
     private String belong;
 
     /**
@@ -48,6 +55,7 @@ public class LaboratoryAssetsEntity {
      * not-null:true
      * default:''
      */
+    @ApiModelProperty(value = "负责人", required = true)
     private String personInCharge;
 
     /**
@@ -55,6 +63,7 @@ public class LaboratoryAssetsEntity {
      * not-null:true
      * default:''
      */
+    @ApiModelProperty(value = "备注", required = true)
     private String remark;
 
     public void setId(Integer id) {

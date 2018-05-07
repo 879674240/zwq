@@ -87,7 +87,7 @@ public class ExperimentalTaskEntity {
      * not-null:true
      * default:''
      */
-    private String reserve1;
+    private Integer reserve1;
 
     /**
      * 预留字段2
@@ -168,11 +168,11 @@ public class ExperimentalTaskEntity {
         return numberr;
     }
 
-    public void setReserve1(String reserve1) {
+    public void setReserve1(Integer reserve1) {
         this.reserve1 = reserve1;
     }
 
-    public String getReserve1() {
+    public Integer getReserve1() {
         return reserve1;
     }
 

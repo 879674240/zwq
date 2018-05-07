@@ -66,7 +66,10 @@
     <select id="queryById" parameterType="Object" resultMap="LaboratoryAssetsMap">
         select <include refid="fields"/> from laboratory_assets where id = #{id}
     </select>
+    <select id="queryBynum" parameterType="String" resultMap="LaboratoryAssetsMap">
+        select <include refid="fields"/> from laboratory_assets where num = #{num}
+    </select>
     <select id="count" parameterType="com.xupt.dal.dto.LaboratoryAssetsDTO" resultType="Integer">
-        select count(0) from laboratory_assets <include refid="searchFields"/> limit #{offSet},#{pageSize}
+        select count(0) from laboratory_assets <include refid="searchFields"/>
     </select>
 </mapper>

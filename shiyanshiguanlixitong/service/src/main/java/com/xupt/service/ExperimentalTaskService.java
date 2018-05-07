@@ -32,6 +32,7 @@ public class ExperimentalTaskService {
             if(experimentalTaskEntity != null){
                 return result;
             }
+            entity.setReserve1(entity.getStudentNum()*entity.getHours());
             result = experimentalTaskMapper.insert(entity);
         }catch (Exception e){
             throw new BizException("实验任务录入异常!");

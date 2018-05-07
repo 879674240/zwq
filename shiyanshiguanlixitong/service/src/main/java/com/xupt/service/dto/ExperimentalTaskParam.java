@@ -66,7 +66,7 @@ public class ExperimentalTaskParam {
      * default:'0'
      */
     @ApiModelProperty(value = "编号", required = true)
-    private Integer numberr;
+    private String numberr;
 
     /**
      * 当前页
@@ -140,11 +140,11 @@ public class ExperimentalTaskParam {
         this.compulsoryElective = compulsoryElective;
     }
 
-    public Integer getNumberr() {
+    public String getNumberr() {
         return numberr;
     }
 
-    public void setNumberr(Integer numberr) {
+    public void setNumberr(String numberr) {
         this.numberr = numberr;
     }
 

@@ -139,15 +139,15 @@ public class ExperimentalTaskController {
         ExperimentalTaskEntity experimentalTaskEntity=null;
         try {
             experimentalTaskEntity = experimentalTaskService.queryById(id);
+            response.setData(experimentalTaskEntity);
+            response.setCode(1);
+            response.setMessage("获取实验任务成功！");
         }catch (Exception e){
             if (e instanceof BizException){
                 response.setCode(0);
                 response.setMessage("获取实验任务异常！");
             }
         }
-        response.setData(experimentalTaskEntity);
-        response.setCode(1);
-        response.setMessage("获取实验任务成功！");
         return response;
     }
 }

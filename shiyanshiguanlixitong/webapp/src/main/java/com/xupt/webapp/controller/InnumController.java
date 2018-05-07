@@ -30,18 +30,19 @@ public class InnumController {
     @RequestMapping(value = "/insert",method = RequestMethod.POST)
     public Response<Integer> insert(@ApiParam(value = "枚举类实体",required = true) @RequestBody InnumEntity innumEntity){
         Response<Integer> response = new Response<>();
-        response.setCode(0);
+
         int result = 0;
         try {
             result = innumService.insert(innumEntity);
+            response.setMessage("插入成功！");
+            response.setCode(1);
+            response.setData(result);
         }catch (Exception e){
             if (e instanceof BizException){
                 response.setMessage("插入失败！");
+                response.setCode(0);
             }
         }
-        response.setMessage("插入成功！");
-        response.setCode(1);
-        response.setData(result);
         return response;
     }
 
@@ -55,18 +56,18 @@ public class InnumController {
     @RequestMapping(value = "/update",method = RequestMethod.POST)
     public Response<Integer> update(@ApiParam(value = "枚举类实体",required = true) @RequestBody InnumEntity innumEntity){
         Response<Integer> response = new Response<>();
-        response.setCode(0);
         int result = 0;
         try {
             result = innumService.update(innumEntity);
+            response.setMessage("修改成功！");
+            response.setCode(1);
+            response.setData(result);
         }catch (Exception e){
             if (e instanceof BizException){
                 response.setMessage("修改失败！");
+                response.setCode(0);
             }
         }
-        response.setMessage("修改成功！");
-        response.setCode(1);
-        response.setData(result);
         return response;
     }
 
@@ -80,18 +81,18 @@ public class InnumController {
     @RequestMapping(value = "/delete",method = RequestMethod.POST)
     public Response<Integer> delete(@ApiParam(value = "id列表",required = true) @RequestBody ListParam listParam){
         Response<Integer> response = new Response<>();
-        response.setCode(0);
         int result = 0;
         try {
             result = innumService.delete(listParam.getIdList());
+            response.setMessage("删除成功！");
+            response.setCode(1);
+            response.setData(result);
         }catch (Exception e){
             if (e instanceof BizException){
                 response.setMessage("删除失败！");
+                response.setCode(0);
             }
         }
-        response.setMessage("删除成功！");
-        response.setCode(1);
-        response.setData(result);
         return response;
     }
 
@@ -105,7 +106,6 @@ public class InnumController {
     @RequestMapping(value = "/query",method = RequestMethod.POST)
     public Response<List<KeyValueDTO>> query(@ApiParam(value = "id列表",required = true) @RequestBody InnumParam innumParam){
         Response<List<KeyValueDTO>> response = new Response<>();
-        response.setCode(0);
        List<KeyValueDTO> keyValueDTOS = null;
         try {
             keyValueDTOS = innumService.query(innumParam);
@@ -116,6 +116,8 @@ public class InnumController {
         }catch (Exception e){
             if (e instanceof BizException){
                 response.setMessage("获取数据失败！");
+                response.setCode(0);
+                return response;
             }
         }
         response.setMessage("获取数据成功！");

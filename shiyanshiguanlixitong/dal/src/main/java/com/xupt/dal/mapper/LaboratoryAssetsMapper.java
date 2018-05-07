@@ -19,5 +19,6 @@ public interface LaboratoryAssetsMapper {
     int delete(@Param("id")Integer id);
     List<LaboratoryAssetsEntity> query(LaboratoryAssetsDTO laboratoryAssetsDTO);
     LaboratoryAssetsEntity queryById(@Param("id") Integer id);
+    LaboratoryAssetsEntity queryBynum(@Param("num") String num);
     int count(LaboratoryAssetsDTO laboratoryAssetsDTO);
 }

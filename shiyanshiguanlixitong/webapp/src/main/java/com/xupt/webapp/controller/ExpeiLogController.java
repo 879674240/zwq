@@ -1,10 +1,14 @@
 package com.xupt.webapp.controller;
 
 import com.xupt.component.Response;
+import com.xupt.dal.model.ScheduleEntity;
 import com.xupt.service.ExperiLogService;
+import com.xupt.service.dto.ExpeiLogParam;
 import com.xupt.service.dto.ExperiLogDTO;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -17,15 +21,23 @@ import java.util.List;
 public class ExpeiLogController {
     @Resource
     ExperiLogService experiLogService;
-    @RequestMapping(value = "/query")
-    public Response<List<ExperiLogDTO>> query(){
+
+    @CrossOrigin("*")
+    @ApiOperation(value = "查询实验日志", notes = "查询实验日志", httpMethod = "POST", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/query",method = RequestMethod.POST)
+    public Response<List<ExperiLogDTO>> query(@ApiParam(value = "日志查询条件",required = true) @RequestBody ExpeiLogParam expeiLogParam){
         Response<List<ExperiLogDTO>> response = new Response<>();
         List<ExperiLogDTO> experiLogDTOS = null;
         try {
-            experiLogDTOS = experiLogService.queryLog();
-            response.setCode(1);
-            response.setData(experiLogDTOS);
-            response.setMessage("查询日志成功！");
+            experiLogDTOS = experiLogService.queryLog(expeiLogParam);
+            if (experiLogDTOS==null){
+                response.setCode(1);
+                response.setMessage("没有查询到相关日志！");
+            }else{
+                response.setCode(1);
+                response.setData(experiLogDTOS);
+                response.setMessage("查询日志成功！");
+            }
         }catch (Exception e){
             response.setCode(0);
             response.setMessage("查询日志失败！");

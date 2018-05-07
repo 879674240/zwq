@@ -27,6 +27,10 @@ public class LaboratoryAssetsService {
     public int insert(LaboratoryAssetsEntity entity) throws  BizException{
         int result = 0;
         try {
+            LaboratoryAssetsEntity entity1 = laboratoryAssetsMapper.queryBynum(entity.getNum());
+            if(entity1!=null){
+                return 0;
+            }
             result = laboratoryAssetsMapper.insert(entity);
         }catch (Exception e){
             throw new BizException("资产录入时数据库异常!");
@@ -52,14 +56,16 @@ public class LaboratoryAssetsService {
 
     /**
      * 删除资产记录
-     * @param id
+     * @param idList
      * @return
      * @throws BizException
      */
-    public int delete(@Param("id")Integer id) throws BizException{
+    public int delete(List<Integer> idList) throws BizException{
         int result = 0;
         try {
-            result = laboratoryAssetsMapper.delete(id);
+            for(Integer id:idList){
+                result = laboratoryAssetsMapper.delete(id);
+            }
         }catch (Exception e){
             throw new BizException("删除资产时数据库异常!");
         }
@@ -97,7 +103,7 @@ public class LaboratoryAssetsService {
      * @return
      * @throws BizException
      */
-    public LaboratoryAssetsEntity queryById(@Param("id") Integer id) throws BizException{
+    public LaboratoryAssetsEntity queryById(Integer id) throws BizException{
         LaboratoryAssetsEntity laboratoryAssetsEntitie = null;
         try {
             laboratoryAssetsEntitie = laboratoryAssetsMapper.queryById(id);

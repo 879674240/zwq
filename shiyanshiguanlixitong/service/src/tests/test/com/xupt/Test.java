@@ -53,6 +53,7 @@ public class Test {
                 }
             }
         }
+
         JSONArray jsonArray = JSONArray.parseArray(laststr);
         List<TableDTO> tableDTOS = jsonArray.toJavaList(TableDTO.class);
         if(jsonArray.size()>0){

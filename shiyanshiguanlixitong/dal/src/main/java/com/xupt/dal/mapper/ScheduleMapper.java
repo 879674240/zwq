@@ -19,7 +19,7 @@ public interface ScheduleMapper {
     List<ScheduleEntity> queryByLabRoom(@Param("room") String room);
     int hourCount(@Param("arrange") String arrange);
     List<ScheduleEntity> queryAll();
-    List<ScheduleEntity> queryAllOrder();
+    List<ScheduleEntity> queryAllOrder(ScheduleEntity scheduleEntity);
     int deleteBytime(ScheduleEntity entity);
     ScheduleEntity queryByTime(@Param("weekly")Integer weekly,@Param("week")Integer week,
                                @Param("timeSlot")Integer timeSlot,@Param("room")String room);

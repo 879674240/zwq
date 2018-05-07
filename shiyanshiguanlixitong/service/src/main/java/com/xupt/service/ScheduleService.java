@@ -9,6 +9,7 @@ import com.xupt.dal.mapper.ScheduleMapper;
 import com.xupt.dal.model.ExperimentalTaskEntity;
 import com.xupt.dal.model.InnumEntity;
 import com.xupt.dal.model.ScheduleEntity;
+import com.xupt.service.Tool.Template;
 import com.xupt.service.dto.ScheduleDTO;
 import com.xupt.service.dto.TableDTO;
 import org.springframework.beans.BeanUtils;
@@ -65,7 +66,6 @@ public class ScheduleService {
         int result;
         ScheduleEntity scheduleEntity1;
         try {
-            scheduleEntity.setWeekly(scheduleEntity.getWeekly()-1);
             scheduleEntity1 = scheduleMapper.queryByTime(scheduleEntity.getWeekly(),scheduleEntity.getWeek(),
                     0,scheduleEntity.getRoom());
             if (scheduleEntity1!=null){
@@ -103,30 +103,13 @@ public class ScheduleService {
         return result;
     }
 
+    /**
+     * 将数据库中对应课程放入排课表
+     * @param room
+     * @return
+     */
     public List<TableDTO> query(String room){
-        String laststr="";
-        String path = "D:\\data.txt";
-        File file=new File(path);// 打开文件
-        BufferedReader reader=null;
-        try{
-            FileInputStream in = new FileInputStream(file);
-            reader=new BufferedReader(new InputStreamReader(in,"UTF-8"));// 读取文件
-            String tempString=null;
-            while((tempString=reader.readLine())!=null){
-                laststr=laststr+tempString;
-            }
-            reader.close();
-        }catch(IOException e){
-            e.printStackTrace();
-        }finally{
-            if(reader!=null){
-                try{
-                    reader.close();
-                }catch(IOException el){
-                }
-            }
-        }
-        JSONArray jsonArray = JSONArray.parseArray(laststr);
+        JSONArray jsonArray = JSONArray.parseArray(Template.getTemplate());
         List<TableDTO> tableDTOS = jsonArray.toJavaList(TableDTO.class);
         if(jsonArray.size()>0){
             for(int i=0;i<jsonArray.size();i++){
@@ -209,30 +192,12 @@ public class ScheduleService {
         return tableDTOS;
     }
 
+    /**
+     * 初始化排课表
+     * @return
+     */
     public List<TableDTO> queryEmpty(){
-        String laststr="";
-        String path = "D:\\data.txt";
-        File file=new File(path);// 打开文件
-        BufferedReader reader=null;
-        try{
-            FileInputStream in = new FileInputStream(file);
-            reader=new BufferedReader(new InputStreamReader(in,"UTF-8"));// 读取文件
-            String tempString=null;
-            while((tempString=reader.readLine())!=null){
-                laststr=laststr+tempString;
-            }
-            reader.close();
-        }catch(IOException e){
-            e.printStackTrace();
-        }finally{
-            if(reader!=null){
-                try{
-                    reader.close();
-                }catch(IOException el){
-                }
-            }
-        }
-        JSONArray jsonArray = JSONArray.parseArray(laststr);
+        JSONArray jsonArray = JSONArray.parseArray(Template.getTemplate());
         List<TableDTO> tableDTOS = jsonArray.toJavaList(TableDTO.class);
         return tableDTOS;
     }
