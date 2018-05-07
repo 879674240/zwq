@@ -33,7 +33,7 @@ public class ExperiLogService {
         InnumEntity innumEntity = null;
         List<ExperiLogDTO> experiLogDTOS = new ArrayList<>();
         try {
-            scheduleEntities = scheduleMapper.queryAll();
+            scheduleEntities = scheduleMapper.queryAllOrder();
             for (ScheduleEntity scheduleEntity:scheduleEntities) {
                 ExperiLogDTO experiLogDTO = new ExperiLogDTO();
                 experimentalTaskEntity = experimentalTaskMapper.queryByNum(scheduleEntity.getArrange());
@@ -44,7 +44,7 @@ public class ExperiLogService {
                 experiLogDTO.setWeekly(String.valueOf(scheduleEntity.getWeekly()));
                 experiLogDTO.setWeek(String.valueOf(scheduleEntity.getWeek()));
                 experiLogDTO.setTimeslot(String.valueOf(scheduleEntity.getTimeslot()));
-                experiLogDTO.setCompulsoryElective(String.valueOf(experiLogDTO.getCompulsoryElective()));
+                experiLogDTO.setCompulsoryElective(experiLogDTO.getCompulsoryElective());
                 experiLogDTO.setWeekly("第"+experiLogDTO.getWeekly()+"周");
                 switch(experiLogDTO.getWeek()){
                     case "1":
@@ -76,13 +76,6 @@ public class ExperiLogService {
                     default:
                         experiLogDTO.setTimeslot("晚上");break;
                 }
-                switch(experiLogDTO.getCompulsoryElective()){
-                    case "0":
-                        experiLogDTO.setTimeslot("必修");break;
-                    default:
-                        experiLogDTO.setTimeslot("选修");break;
-                }
-
                 experiLogDTOS.add(experiLogDTO);
             }
         }catch (Exception e){

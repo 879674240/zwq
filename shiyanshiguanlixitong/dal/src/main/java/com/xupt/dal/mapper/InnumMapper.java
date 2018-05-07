@@ -14,10 +14,12 @@ import java.util.List;
 @Repository
 public interface InnumMapper {
     int insert(InnumEntity entity);
-    List<InnumEntity> query(@Param("type") Integer type);
-    List<InnumEntity> queryByOrder(@Param("type") Integer type,@Param("order")Integer order);
+    List<InnumEntity> query(@Param("type") String type);
+    List<InnumEntity> queryByOrder(@Param("type") String type,@Param("order")Integer order);
     InnumEntity queryById(@Param("id")Integer id);
     InnumEntity queryByKey(@Param("key")String key);
+    InnumEntity queryByValue(@Param("value")String value);
+    List<InnumEntity> queryAll();
     int update(InnumEntity entity);
     int delete(@Param("id")Integer id);
 

@@ -16,8 +16,11 @@ public interface ScheduleMapper {
     int insert(ScheduleEntity entity);
     int update(ScheduleEntity entity);
     int delete(@Param("id")Integer id);
-    List<ScheduleEntity> queryByLabRoom(@Param("room") Integer room);
+    List<ScheduleEntity> queryByLabRoom(@Param("room") String room);
+    int hourCount(@Param("arrange") String arrange);
     List<ScheduleEntity> queryAll();
+    List<ScheduleEntity> queryAllOrder();
+    int deleteBytime(ScheduleEntity entity);
     ScheduleEntity queryByTime(@Param("weekly")Integer weekly,@Param("week")Integer week,
                                @Param("timeSlot")Integer timeSlot,@Param("room")String room);
 }

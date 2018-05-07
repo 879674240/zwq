@@ -1,8 +1,10 @@
-package com.xupt.dal.model;
+package com.xupt.service.dto;
 
-
+import com.xupt.dal.model.InnumEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+
+import java.util.List;
 
 /**
  * @author: lenovo
@@ -10,9 +12,8 @@ import io.swagger.annotations.ApiModelProperty;
  * @description: innum()
  */
 @ApiModel(value = "枚举类实体", description = "innum")
-public class InnumEntity {
+public class InnumSysDTO {
     /**
-     * 
      * not-null:true
      * default:'null'
      */
@@ -35,14 +36,6 @@ public class InnumEntity {
     private String value;
 
     /**
-     * 所属
-     * not-null:true
-     * default:'0'
-     */
-    @ApiModelProperty(value = "所属实验室", required = true)
-    private Integer order;
-
-    /**
      * 类型
      * not-null:true
      * default:'0'
@@ -50,44 +43,51 @@ public class InnumEntity {
     @ApiModelProperty(value = "类型", required = true)
     private String type;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    /**
+     * 教室编号集合
+     * not-null:true
+     * default:'0'
+     */
+    @ApiModelProperty(value = "教室编号集合", required = true)
+    private List<InnumEntity> innumEntityList;
 
     public Integer getId() {
         return id;
     }
 
-    public void setKey(String key) {
-        this.key = key;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getKey() {
         return key;
     }
 
-    public void setValue(String value) {
-        this.value = value;
+    public void setKey(String key) {
+        this.key = key;
     }
 
     public String getValue() {
         return value;
     }
 
-    public void setOrder(Integer order) {
-        this.order = order;
-    }
-
-    public Integer getOrder() {
-        return order;
-    }
-
-    public void setType(String type) {
-        this.type = type;
+    public void setValue(String value) {
+        this.value = value;
     }
 
     public String getType() {
         return type;
     }
 
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public List<InnumEntity> getInnumEntityList() {
+        return innumEntityList;
+    }
+
+    public void setInnumEntityList(List<InnumEntity> innumEntityList) {
+        this.innumEntityList = innumEntityList;
+    }
 }

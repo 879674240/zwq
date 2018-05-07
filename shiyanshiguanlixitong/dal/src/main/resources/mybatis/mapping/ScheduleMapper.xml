@@ -78,8 +78,14 @@
     <select id="queryByLabRoom" parameterType="Object" resultMap="ScheduleMap">
         select <include refid="fields"/> from schedule where room = #{room}
     </select>
+    <select id="hourCount" parameterType="Object" resultType="Integer">
+        select count(0) from schedule where arrange = #{arrange}
+    </select>
     <select id="queryAll"  resultMap="ScheduleMap">
         select <include refid="fields"/> from schedule
+    </select>
+    <select id="queryAllOrder"  resultMap="ScheduleMap">
+        select <include refid="fields"/> from schedule order by weekly ASC,week ASC,timeSlot ASC
     </select>
     <select id="queryByTime" parameterType="Object" resultMap="ScheduleMap">
         select <include refid="fields"/> from schedule where weekly = #{weekly} and week = #{week} and timeSlot = #{timeSlot} and room = #{room}
@@ -89,5 +95,8 @@
     </update>
     <delete id="delete" parameterType="Object">
         delete from schedule where id = #{id}
+    </delete>
+    <delete id="deleteBytime" parameterType="com.xupt.dal.model.ScheduleEntity">
+        delete from schedule where week = #{week} and weekly = #{weekly} and room = #{room}
     </delete>
 </mapper>

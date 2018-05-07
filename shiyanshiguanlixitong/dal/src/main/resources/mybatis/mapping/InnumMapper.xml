@@ -46,6 +46,9 @@
     <select id="query" parameterType="Object" resultMap="InnumMap">
         select * from innum where `type` = #{type}
     </select>
+    <select id="queryAll" resultMap="InnumMap">
+        select * from innum
+    </select>
     <select id="queryByOrder" parameterType="Object" resultMap="InnumMap">
         select * from innum where `type` =#{type} and `order` = #{order}
     </select>
@@ -54,6 +57,9 @@
     </select>
     <select id="queryByKey" parameterType="Object" resultMap="InnumMap">
         select * from innum where `key` =#{key}
+    </select>
+    <select id="queryByValue" parameterType="Object" resultMap="InnumMap">
+        select * from innum where `value` =#{value}
     </select>
     <update id="update" parameterType="com.xupt.dal.model.InnumEntity">
         update innum <include refid="updateFields"/> where id = #{id}
