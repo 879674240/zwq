@@ -21,22 +21,57 @@ public class InnumController {
     @Resource
     InnumService innumService;
     /**
-     * 增加枚举类型
+     * 增加实验室
      * @param innumEntity
      * @return
      */
     @CrossOrigin("*")
-    @ApiOperation(value = "插入枚举类", notes = "插入枚举类", httpMethod = "POST", produces = MediaType.APPLICATION_JSON_VALUE)
-    @RequestMapping(value = "/insert",method = RequestMethod.POST)
+    @ApiOperation(value = "增加实验室", notes = "增加实验室", httpMethod = "POST", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/insertShiyanshi",method = RequestMethod.POST)
     public Response<Integer> insert(@ApiParam(value = "枚举类实体",required = true) @RequestBody InnumEntity innumEntity){
         Response<Integer> response = new Response<>();
 
         int result = 0;
         try {
-            result = innumService.insert(innumEntity);
-            response.setMessage("插入成功！");
-            response.setCode(1);
-            response.setData(result);
+            result = innumService.insertShiyanshi(innumEntity);
+            if(result==0){
+                response.setMessage("该实验室已经存在！");
+                response.setCode(1);
+            }else{
+                response.setMessage("插入成功！");
+                response.setCode(1);
+                response.setData(result);
+            }
+        }catch (Exception e){
+            if (e instanceof BizException){
+                response.setMessage("插入失败！");
+                response.setCode(0);
+            }
+        }
+        return response;
+    }
+    /**
+     * 增加实验室编号
+     * @param innumEntity
+     * @return
+     */
+    @CrossOrigin("*")
+    @ApiOperation(value = "增加实验室编号", notes = "增加实验室编号", httpMethod = "POST", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/insertClassroom",method = RequestMethod.POST)
+    public Response<Integer> insertClassroom(@ApiParam(value = "枚举类实体",required = true) @RequestBody InnumEntity innumEntity){
+        Response<Integer> response = new Response<>();
+
+        int result = 0;
+        try {
+            result = innumService.insertClassroom(innumEntity);
+            if(result==0){
+                response.setMessage("该实验室编号已经存在！");
+                response.setCode(1);
+            }else{
+                response.setMessage("插入成功！");
+                response.setCode(1);
+                response.setData(result);
+            }
         }catch (Exception e){
             if (e instanceof BizException){
                 response.setMessage("插入失败！");
@@ -47,14 +82,14 @@ public class InnumController {
     }
 
     /**
-     * 修改枚举类型
+     * 修改实验室或者教室
      * @param innumEntity
      * @return
      */
     @CrossOrigin("*")
-    @ApiOperation(value = "更新枚举类", notes = "更新枚举类", httpMethod = "POST", produces = MediaType.APPLICATION_JSON_VALUE)
-    @RequestMapping(value = "/update",method = RequestMethod.POST)
-    public Response<Integer> update(@ApiParam(value = "枚举类实体",required = true) @RequestBody InnumEntity innumEntity){
+    @ApiOperation(value = "修改实验室或者教室", notes = "修改实验室或者教室", httpMethod = "POST", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/updateShiyanshi",method = RequestMethod.POST)
+    public Response<Integer> updateShiyanshi(@ApiParam(value = "枚举类实体",required = true) @RequestBody InnumEntity innumEntity){
         Response<Integer> response = new Response<>();
         int result = 0;
         try {
@@ -97,62 +132,27 @@ public class InnumController {
     }
 
     /**
-     * 查询该类型中所有枚举类
-     * @param innumParam
-     * @return
-     */
-    @CrossOrigin("*")
-    @ApiOperation(value = "查询所有枚举类", notes = "查询所有枚举类", httpMethod = "POST", produces = MediaType.APPLICATION_JSON_VALUE)
-    @RequestMapping(value = "/query",method = RequestMethod.POST)
-    public Response<List<KeyValueDTO>> query(@ApiParam(value = "id列表",required = true) @RequestBody InnumParam innumParam){
-        Response<List<KeyValueDTO>> response = new Response<>();
-       List<KeyValueDTO> keyValueDTOS = null;
-        try {
-            keyValueDTOS = innumService.query(innumParam);
-            if (keyValueDTOS ==null){
-                response.setMessage("没有获取到数据！");
-                return response;
-            }
-        }catch (Exception e){
-            if (e instanceof BizException){
-                response.setMessage("获取数据失败！");
-                response.setCode(0);
-                return response;
-            }
-        }
-        response.setMessage("获取数据成功！");
-        response.setCode(1);
-        response.setData(keyValueDTOS);
-        return response;
-    }
-
-    /**
      * 查询该类型中所属类型的所有枚举类
      * @param innumParam
      * @return
      */
     @CrossOrigin("*")
-    @ApiOperation(value = "查询枚举类", notes = "查询该类型中所属类型的所有枚举类", httpMethod = "POST", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "查询该类型中所属类型的所有枚举类", notes = "查询该类型中所属类型的所有枚举类", httpMethod = "POST", produces = MediaType.APPLICATION_JSON_VALUE)
     @RequestMapping(value = "/queryByOrder",method = RequestMethod.POST)
-    public Response<List<KeyValueDTO>> queryByOrder(@ApiParam(value = "id列表",required = true) @RequestBody InnumParam innumParam){
-        Response<List<KeyValueDTO>> response = new Response<>();
-        List<KeyValueDTO> keyValueDTOS = null;
+    public Response<List<InnumClassroomDTO>> queryByOrder(@ApiParam(value = "id列表",required = true) @RequestBody InnumParam innumParam){
+        Response<List<InnumClassroomDTO>> response = new Response<>();
+        List<InnumClassroomDTO> innumClassroomDTOS = null;
         try {
-            keyValueDTOS = innumService.queryByOrder(innumParam);
-            if (keyValueDTOS ==null){
-                response.setMessage("没有获取到数据！");
-                response.setCode(0);
-                return response;
-            }
+            innumClassroomDTOS = innumService.queryByOrder(innumParam);
+            response.setMessage("获取数据成功！");
+            response.setCode(1);
+            response.setData(innumClassroomDTOS);
         }catch (Exception e){
             if (e instanceof BizException){
                 response.setMessage("获取数据失败！");
                 response.setCode(0);
             }
         }
-        response.setMessage("获取数据成功！");
-        response.setCode(1);
-        response.setData(keyValueDTOS);
         return response;
     }
 

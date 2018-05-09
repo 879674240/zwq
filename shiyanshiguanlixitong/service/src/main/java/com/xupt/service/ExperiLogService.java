@@ -38,9 +38,7 @@ public class ExperiLogService {
         List<ExperiLogDTO> experiLogDTOS = new ArrayList<>();
         ScheduleEntity scheduleEntitytemp = new ScheduleEntity();
         BeanUtils.copyProperties(expeiLogParam,scheduleEntitytemp);
-        if(expeiLogParam.getWeekly()==-1){
-            scheduleEntitytemp.setWeekly(null);
-        }else{
+        if(scheduleEntitytemp.getWeekly()!=null){
             scheduleEntitytemp.setWeekly(scheduleEntitytemp.getWeekly()-1);
         }
         if("".equals(expeiLogParam.getOperator())){

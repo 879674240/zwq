@@ -1,16 +1,32 @@
 package com.xupt.service;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.xupt.dal.mapper.UserinfoMapper;
 import com.xupt.dal.model.UserinfoEntity;
+import com.xupt.service.Tool.Base64Util;
+import com.xupt.service.Tool.JedisUtil;
+import com.xupt.service.Tool.MD5Util;
+import com.xupt.service.Tool.TokenUtil;
+import com.xupt.service.dto.LoginParam;
+import com.xupt.service.dto.Payload;
 import org.springframework.stereotype.Service;
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
 
 import javax.annotation.Resource;
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
+
+import static com.xupt.service.Tool.HMACSHA256Util.HMACSHA256;
 
 @Service
 public class UserinfoService {
     @Resource
     private UserinfoMapper userinfoMapper;
+    @Resource
+    JedisPool jedisPool;
     /**
      * 查询所有用户信息
      * @return
@@ -51,5 +67,28 @@ public class UserinfoService {
             e.getStackTrace();
         }
         return result;
+    }
+
+    public String loginToken(LoginParam loginParam){
+        String token = TokenUtil.tokenCreat();
+        try {
+            UserinfoEntity userinfoEntity = userinfoMapper.queryByName(loginParam.getName());
+            if(userinfoEntity==null){
+                return "111";
+            }
+            if(MD5Util.EncoderByMd5(loginParam.getPassword()).equals(userinfoEntity.getPassword())){
+                Jedis jedis = jedisPool.getResource();
+                jedis.setex(token, 86400, loginParam.getName());
+                jedis.close();
+                return token;
+            }else{
+                return "000";
+            }
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return token;
     }
 }

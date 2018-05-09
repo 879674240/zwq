@@ -28,6 +28,13 @@ public class ExpeiLogController {
     public Response<List<ExperiLogDTO>> query(@ApiParam(value = "日志查询条件",required = true) @RequestBody ExpeiLogParam expeiLogParam){
         Response<List<ExperiLogDTO>> response = new Response<>();
         List<ExperiLogDTO> experiLogDTOS = null;
+        if(expeiLogParam.getWeekly()!=null){
+            if(expeiLogParam.getWeekly()<1 || expeiLogParam.getWeekly()>18){
+                response.setCode(0);
+                response.setMessage("请输入1-18周的周次！");
+                return response;
+            }
+        }
         try {
             experiLogDTOS = experiLogService.queryLog(expeiLogParam);
             if (experiLogDTOS==null){

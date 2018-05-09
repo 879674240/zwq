@@ -25,18 +25,44 @@ public class InnumService {
     @Resource
     ScheduleMapper scheduleMapper;
     /**
-     * 增加枚举类型
+     * 增加实验室
      * @param innumEntity
      * @return
      */
-    public Integer insert(InnumEntity innumEntity) throws BizException {
+    public Integer insertShiyanshi(InnumEntity innumEntity) throws BizException {
         int result;
         try {
-
+            InnumEntity innumEntity1 = innumMapper.queryByValue(innumEntity.getValue());
+            if(innumEntity1!=null){
+                return 0;
+            }
+            innumEntity.setKey(innumEntity.getValue());
+            innumEntity.setType("实验室");
             result = innumMapper.insert(innumEntity);
         }catch (Exception e){
-            logger.debug("插入枚举类异常!");
-            throw new BizException("插入枚举类异常!");
+            logger.debug("插入实验室异常!");
+            throw new BizException("插入实验室异常!");
+        }
+        return result;
+    }
+    /**
+     * 增加实验室编号
+     * @param innumEntity
+     * @return
+     */
+    public Integer insertClassroom(InnumEntity innumEntity) throws BizException {
+        int result;
+        try {
+            InnumEntity innumEntity1 = innumMapper.queryByValue(innumEntity.getValue());
+            if(innumEntity1!=null){
+                return 0;
+            }
+            innumEntity.setKey(innumEntity.getValue());
+            innumEntity.setType("教室编号");
+            result = innumMapper.insert(innumEntity);
+        }catch (Exception e){
+            logger.debug("插入教室编号异常!");
+            throw new BizException("插入教室编号异常!");
         }
         return result;
     }
@@ -49,7 +75,11 @@ public class InnumService {
     public Integer update(InnumEntity innumEntity) throws BizException{
         int result;
         try {
-            result = innumMapper.update(innumEntity);
+            InnumEntity innumEntity1 = new InnumEntity();
+            innumEntity1.setId(innumEntity.getId());
+            innumEntity1.setValue(innumEntity.getValue());
+            innumEntity1.setKey(innumEntity.getValue());
+            result = innumMapper.update(innumEntity1);
         }catch (Exception e){
             logger.debug("修改枚举类异常!");
             throw new BizException("修改枚举类异常!");
@@ -66,6 +96,13 @@ public class InnumService {
         int result = 0;
         try {
             for(Integer id:idList){
+                InnumEntity innumEntity = innumMapper.queryById(id);
+                if("实验室".equals(innumEntity.getType())){
+                    List<InnumEntity> innumEntities = innumMapper.queryByOrder("教室编号",id);
+                    for(InnumEntity innumEntity1:innumEntities){
+                        result = innumMapper.delete(innumEntity1.getId());
+                    }
+                }
                 result = innumMapper.delete(id);
             }
         }catch (Exception e){
@@ -76,48 +113,35 @@ public class InnumService {
     }
 
     /**
-     * 查询该类型中所有枚举类
-     * @param innumParam
-     * @return
-     */
-    public List<KeyValueDTO> query(InnumParam innumParam) throws BizException{
-        List<InnumEntity> innumEntities;
-        List<KeyValueDTO> keyValueDTOS = new ArrayList<>();
-        try {
-            innumEntities = innumMapper.query(innumParam.getType());
-        }catch (Exception e){
-            logger.debug("查找枚举类异常!");
-            throw new BizException("查找枚举类异常!");
-        }
-        for (InnumEntity innumEntity:innumEntities){
-            KeyValueDTO keyValueDTO = new KeyValueDTO();
-            keyValueDTO.setKey(innumEntity.getKey());
-            keyValueDTO.setValue(innumEntity.getValue());
-            keyValueDTOS.add(keyValueDTO);
-        }
-        return keyValueDTOS;
-    }
-    /**
      * 查询该类型中所属类型的所有枚举类
      * @param innumParam
      * @return
      */
-    public List<KeyValueDTO> queryByOrder(InnumParam innumParam) throws BizException{
-        List<InnumEntity> innumEntities;
-        List<KeyValueDTO> keyValueDTOS = new ArrayList<>();
+    public List<InnumClassroomDTO> queryByOrder(InnumParam innumParam) throws BizException{
+        List<InnumClassroomDTO> innumClassroomDTOS = new ArrayList<>();
         try {
-            innumEntities = innumMapper.queryByOrder(innumParam.getType(),innumParam.getOrder());
+            List<InnumEntity> innumEntities = innumMapper.queryByOrder(innumParam.getType(),innumParam.getOrder());
+            if("教室编号".equals(innumParam.getType())){
+                for(InnumEntity innumEntity:innumEntities){
+                    InnumClassroomDTO innumClassroomDTO = new InnumClassroomDTO();
+                    InnumEntity innumEntity1 = innumMapper.queryById(innumEntity.getOrder());
+                    BeanUtils.copyProperties(innumEntity,innumClassroomDTO);
+                    innumClassroomDTO.setShiyanshi(innumEntity1.getValue());
+                    innumClassroomDTOS.add(innumClassroomDTO);
+                }
+            }else{
+                for(InnumEntity innumEntity:innumEntities){
+                    InnumClassroomDTO innumClassroomDTO = new InnumClassroomDTO();
+                    BeanUtils.copyProperties(innumEntity,innumClassroomDTO);
+                    innumClassroomDTOS.add(innumClassroomDTO);
+                }
+            }
+
         }catch (Exception e){
             logger.debug("查找枚举类异常!");
             throw new BizException("查找枚举类异常!");
         }
-        for (InnumEntity innumEntity:innumEntities){
-            KeyValueDTO keyValueDTO = new KeyValueDTO();
-            keyValueDTO.setKey(innumEntity.getKey());
-            keyValueDTO.setValue(innumEntity.getValue());
-            keyValueDTOS.add(keyValueDTO);
-        }
-        return keyValueDTOS;
+        return innumClassroomDTOS;
     }
 
     /**

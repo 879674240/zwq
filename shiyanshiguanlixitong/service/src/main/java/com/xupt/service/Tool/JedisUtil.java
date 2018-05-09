@@ -26,13 +26,13 @@ public abstract class JedisUtil {
         }
     }
 
-    public void setKeyObj(String key,Object value){
+    public static void setKeyObj(String key,Object value){
         Jedis jedis = getJedis();
         jedis.set(key.getBytes(),SerializeUtil.serialize(value));
         returnResource(jedis);
     }
 
-    public Object getKeyObj(String key){
+    public static Object getKeyObj(String key){
         Jedis jedis = getJedis();
         byte[] bytes = jedis.get(key.getBytes());
         Object object = SerializeUtil.unserialize(bytes);
@@ -40,13 +40,13 @@ public abstract class JedisUtil {
         return object;
     }
 
-    public void setKey(String key,String value){
+    public static void setKey(String key,int seconds,String value){
         Jedis jedis = getJedis();
-        jedis.set(key,value);
+        jedis .setex(key,seconds, value);
         returnResource(jedis);
     }
 
-    public String getKey(String key){
+    public static String getKey(String key){
         Jedis jedis = getJedis();
         String value = jedis.get(key);
         returnResource(jedis);
