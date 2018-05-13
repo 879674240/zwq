@@ -62,6 +62,6 @@
         select * from userinfo where `name` = #{name}
     </select>
     <update id="updateByName" parameterType="Object" >
-        update userinfo set password=#{passwoed} where `name` = #{name}
+        update userinfo set password=#{password} where `name` = #{name}
     </update>
 </mapper>

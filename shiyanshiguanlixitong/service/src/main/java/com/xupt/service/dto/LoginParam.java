@@ -21,6 +21,14 @@ public class LoginParam {
     @ApiModelProperty(value = "密码", required = true)
     private String password;
 
+    /**
+     * 新密码
+     * not-null:true
+     * default:'1'
+     */
+    @ApiModelProperty(value = "新密码", required = true)
+    private String newpassword;
+
     public String getName() {
         return name;
     }
@@ -35,5 +43,13 @@ public class LoginParam {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getNewpassword() {
+        return newpassword;
+    }
+
+    public void setNewpassword(String newpassword) {
+        this.newpassword = newpassword;
     }
 }

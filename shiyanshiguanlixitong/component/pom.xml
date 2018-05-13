@@ -23,7 +23,7 @@
             <artifactId>lombok</artifactId>
         </dependency>
 
-        <!--api文档提取-->
+        <!--api文档提取 用的swagger2-->
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>

@@ -27,14 +27,6 @@ public class UserinfoService {
     private UserinfoMapper userinfoMapper;
     @Resource
     JedisPool jedisPool;
-    /**
-     * 查询所有用户信息
-     * @return
-     */
-    public List<UserinfoEntity> query(){
-        List<UserinfoEntity> userinfoEntitys = userinfoMapper.query();
-        return userinfoEntitys;
-    }
 
     /**
      * 查询用户信息
@@ -51,24 +43,50 @@ public class UserinfoService {
      */
     public int insert(UserinfoEntity userinfoEntity){
         int result = 0;
+        String name = userinfoEntity.getName();
+        String password = userinfoEntity.getPassword();
         try {
-             result = userinfoMapper.insert(userinfoEntity);
+            List<UserinfoEntity> userinfoEntitys = userinfoMapper.query();
+            for (UserinfoEntity userinfoEntityTemp:userinfoEntitys){
+                if (name.equals(userinfoEntityTemp.getName())){
+                    return -1;
+                }
+            }
+            String temp = MD5Util.EncoderByMd5(userinfoEntity.getPassword());
+            userinfoEntity.setPassword(temp);
+            userinfoEntity.setType(0);
+            result = userinfoMapper.insert(userinfoEntity);
         }catch (Exception e){
             e.getStackTrace();
         }
         return result;
     }
 
-    public int update(String name,String password){
-        int result = 0;
-        try {
-            result = userinfoMapper.updateByName(name,password);
-        }catch (Exception e){
-            e.getStackTrace();
+    /**
+     * 修改密码
+     * @param loginParam
+     * @return
+     */
+    public int update(LoginParam loginParam) {
+        Integer result = 0;
+        UserinfoEntity userinfoEntity = userinfoMapper.queryByName(loginParam.getName());
+        if (userinfoEntity != null) {
+            if (loginParam.getPassword().equals(userinfoEntity.getPassword())) {
+                result = userinfoMapper.updateByName(loginParam.getName(),loginParam.getNewpassword());
+                return result;
+            }else{
+                return 0;
+            }
+        }else{
+            return -1;
         }
-        return result;
     }
 
+    /**
+     * token登录
+     * @param loginParam
+     * @return
+     */
     public String loginToken(LoginParam loginParam){
         String token = TokenUtil.tokenCreat();
         try {

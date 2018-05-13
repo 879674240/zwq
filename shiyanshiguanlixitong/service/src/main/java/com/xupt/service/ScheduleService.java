@@ -6,9 +6,11 @@ import com.xupt.component.BizException;
 import com.xupt.dal.mapper.ExperimentalTaskMapper;
 import com.xupt.dal.mapper.InnumMapper;
 import com.xupt.dal.mapper.ScheduleMapper;
+import com.xupt.dal.mapper.UserinfoMapper;
 import com.xupt.dal.model.ExperimentalTaskEntity;
 import com.xupt.dal.model.InnumEntity;
 import com.xupt.dal.model.ScheduleEntity;
+import com.xupt.dal.model.UserinfoEntity;
 import com.xupt.service.Tool.Template;
 import com.xupt.service.dto.ScheduleDTO;
 import com.xupt.service.dto.TableDTO;
@@ -28,6 +30,8 @@ public class ScheduleService {
     ExperimentalTaskMapper experimentalTaskMapper;
     @Resource
     InnumMapper innumMapper;
+    @Resource
+    UserinfoMapper userinfoMapper;
     /**
      * 查询排课计划
      * @param room
@@ -79,6 +83,8 @@ public class ScheduleService {
                     return 0;
                 }
             }else{
+                UserinfoEntity userinfoEntity = userinfoMapper.queryByName(scheduleEntity.getOperator());
+                scheduleEntity.setOperator(userinfoEntity.getRealname());
                 result = scheduleMapper.insert(scheduleEntity);
             }
         }catch (Exception e){

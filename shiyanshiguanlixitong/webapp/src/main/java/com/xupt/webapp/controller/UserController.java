@@ -1,5 +1,6 @@
 package com.xupt.webapp.controller;
 
+import com.alibaba.druid.util.StringUtils;
 import com.xupt.component.HttpStatus;
 import com.xupt.component.Response;
 import com.xupt.dal.model.UserinfoEntity;
@@ -10,9 +11,12 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -24,56 +28,93 @@ import java.util.List;
 public class UserController {
     @Resource
     UserinfoService userinfoService;
+    @Resource
+    JedisPool jedisPool;
 
 
     /**
      * 注册
-     * @param name
-     * @param password
+     * @param userinfoEntity
      * @return
      */
     @RequestMapping(value = "/register")
-    public Response<Integer> register(@RequestParam("name") String name, @RequestParam("password") String password){
+    public Response<Integer> register(@ApiParam(value = "用户信息",required = true) @RequestBody UserinfoEntity userinfoEntity){
         Response<Integer> response = new Response<>();
-        response.setCode(0);
-        response.setMessage("注册失败！");
-        if (com.alibaba.druid.util.StringUtils.isEmpty(name) || com.alibaba.druid.util.StringUtils.isEmpty(password)){
+        String name = userinfoEntity.getName();
+        String password = userinfoEntity.getPassword();
+        if (StringUtils.isEmpty(name) || StringUtils.isEmpty(password) || StringUtils.isEmpty(userinfoEntity.getRealname())){
+            response.setCode(0);
+            response.setMessage("账号密码等关键信息不能为空！");
             return response;
         }
-        List<UserinfoEntity> userinfoEntitys = userinfoService.query();
-        for (UserinfoEntity userinfoEntityTemp:userinfoEntitys){
-            if (name.equals(userinfoEntityTemp.getName())){
-                response.setMessage("该用户已存在！");
-                return response;
+        try {
+            int result = userinfoService.insert(userinfoEntity);
+            if(result==-1){
+                response.setCode(0);
+                response.setMessage("该用户已注册!");
+            }else{
+                response.setCode(1);
+                response.setMessage("注册成功!");
+                response.setData(1);
             }
+        }catch (Exception e){
+            response.setCode(0);
+            response.setMessage("注册异常!");
         }
-        UserinfoEntity userinfoEntity = new UserinfoEntity();
-        userinfoEntity.setName(name);
-        userinfoEntity.setPassword(password);
-        int result = userinfoService.insert(userinfoEntity);
-        response.setCode(1);
-        response.setMessage("注册成功");
-        response.setData(1);
         return response;
     }
 
     /**
      * 修改密码
-     * @param name
-     * @param password
+     * @param loginParam
      * @return
      */
-    @RequestMapping(value = "/update")
-    public Response<Integer> update(@RequestParam("name") String name, @RequestParam("password") String password){
+    @CrossOrigin("*")
+    @ApiOperation(value = "修改密码", notes = "修改密码", httpMethod = "POST", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/update",method = RequestMethod.POST)
+    public Response<Integer> update(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @ApiParam(value = "修改密码",required = true) @RequestBody LoginParam loginParam){
         Response<Integer> response = new Response<>();
-        response.setCode(0);
-        response.setMessage("修改密码！");
-        if (com.alibaba.druid.util.StringUtils.isEmpty(name) || com.alibaba.druid.util.StringUtils.isEmpty(password)){
+        Integer result;
+        if (StringUtils.isEmpty(loginParam.getPassword()) || StringUtils.isEmpty(loginParam.getNewpassword())){
+            response.setCode(0);
+            response.setMessage("请输入密码！");
             return response;
         }
-        userinfoService.update(name,password);
-        response.setCode(1);
-        response.setMessage("修改密码成功！");
+        try {
+            String authorization = httpServletRequest.getHeader("Authorization");
+            if(authorization==null){
+                httpServletResponse.setStatus(HttpStatus.SC_UNAUTHORIZED);
+                response.setCode(0);
+                response.setMessage("未授权！");
+                return response;
+            }
+            Jedis jedis = jedisPool.getResource();
+            String temp = jedis.get(authorization);
+            jedis.close();
+            if(temp==null){
+                response.setCode(0);
+                response.setMessage("未授权！");
+                httpServletResponse.setStatus(HttpStatus.SC_UNAUTHORIZED);
+                return response;
+            }
+            loginParam.setName(temp);
+            result = userinfoService.update(loginParam);
+            if(result==-1){
+                response.setCode(0);
+                response.setMessage("输入账号不存在！");
+            }else if(result==0){
+                response.setCode(0);
+                response.setMessage("输入密码错误！");
+            }else{
+                response.setCode(1);
+                response.setData(result);
+                response.setMessage("修改成功");
+            }
+        }catch (Exception e){
+            response.setCode(0);
+            response.setMessage("修改密码异常！");
+            return response;
+        }
         return response;
     }
 
@@ -102,7 +143,7 @@ public class UserController {
                 response.setCode(0);
                 response.setMessage("账号错误！");
             }else{
-                response.setCode(0);
+                response.setCode(1);
                 response.setData(result);
                 response.setMessage("登录成功");
             }

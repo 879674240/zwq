@@ -1,7 +1,6 @@
 package com.xupt.webapp.controller;
 
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
+import com.xupt.component.HttpStatus;
 import com.xupt.component.Response;
 import com.xupt.dal.model.ScheduleEntity;
 import com.xupt.service.ScheduleService;
@@ -12,8 +11,12 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.util.List;
 
@@ -22,6 +25,8 @@ import java.util.List;
 public class ScheduleController {
     @Resource
     ScheduleService scheduleService;
+    @Resource
+    JedisPool jedisPool;
     /**
      * 实验室房间号来查看课程安排
      * @param room
@@ -53,10 +58,27 @@ public class ScheduleController {
     @CrossOrigin("*")
     @ApiOperation(value = "安排实验", notes = "安排实验", httpMethod = "POST", produces = MediaType.APPLICATION_JSON_VALUE)
     @RequestMapping(value = "/arrange",method = RequestMethod.POST)
-    public Response<Integer> arrange(@ApiParam(value = "实验安排模型",required = true) @RequestBody ScheduleEntity scheduleEntity){
+    public Response<Integer> arrange(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @ApiParam(value = "实验安排模型",required = true) @RequestBody ScheduleEntity scheduleEntity){
         Response<Integer> response = new Response<>();
         int result = 0;
         try {
+            String authorization = httpServletRequest.getHeader("Authorization");
+            if(authorization==null){
+                httpServletResponse.setStatus(HttpStatus.SC_UNAUTHORIZED);
+                response.setCode(0);
+                response.setMessage("未授权！");
+                return response;
+            }
+            Jedis jedis = jedisPool.getResource();
+            String temp = jedis.get(authorization);
+            jedis.close();
+            if(temp==null){
+                response.setCode(0);
+                response.setMessage("未授权！");
+                httpServletResponse.setStatus(HttpStatus.SC_UNAUTHORIZED);
+                return response;
+            }
+            scheduleEntity.setOperator(temp);
             result = scheduleService.arrange(scheduleEntity);
             if(result==0){
                 response.setCode(1);

@@ -31,10 +31,10 @@ public class SwaggerConfig {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("基础平台 RESTful APIs")
-                .description("基础平台 RESTful 风格的接口文档，内容详细，极大的减少了前后端的沟通成本，同时确保代码与文档保持高度一致，极大的减少维护文档的时间。")
-                .termsOfServiceUrl("http://xiachengwei5.coding.me")
-                .contact("Xia")
+                .title("实验室管理系统 APIs")
+                .description("实验室管理系统 RESTful 风格的接口文档，内容详细，极大的减少了前后端的沟通成本，同时确保代码与文档保持高度一致，极大的减少维护文档的时间。 http://localhost:8080/v2/api-docs")
+                .termsOfServiceUrl("http://39.105.113.244:8088/shi/home/taskenter.html")
+                .contact("支文强")
                 .version("1.0.0")
                 .build();
     }
