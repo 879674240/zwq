@@ -69,6 +69,12 @@
             <if test="phonenum != null">AND phonenum like concat(concat("%",#{phonenum}),"%")</if>
         </trim>
     </sql>
+    <sql id="updateFieldssecond">
+        <set>
+            <if test="idno != null">idno=#{idno},</if>
+            <if test="passwd != null">passwd=#{passwd},</if>
+        </set>
+    </sql>
     <insert id="insert" parameterType="Object" keyProperty="id" useGeneratedKeys="true">
         INSERT INTO admin(<include refid="insertFields"/>) values(<include refid="insertValues"/>)
     </insert>
@@ -87,4 +93,10 @@
     <delete id="delete" parameterType="Object">
         delete from admin where id = #{id}
     </delete>
+    <select id="queryByName" parameterType="String" resultMap="AdminMap">
+        select <include refid="fields"/> from admin where idno = #{idno}
+    </select>
+    <update id="updateByName" parameterType="com.xupt.dal.model.AdminEntity">
+        update admin <include refid="updateFieldssecond"/> where idno = #{idno}
+    </update>
 </mapper>

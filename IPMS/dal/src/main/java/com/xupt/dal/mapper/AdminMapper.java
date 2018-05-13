@@ -19,4 +19,6 @@ public interface AdminMapper {
     AdminEntity queryById(@Param("id") Integer id);
     int update(AdminEntity adminEntity);
     int delete(@Param("id")Integer id);
+    AdminEntity queryByName(@Param("idno")String idno);
+    int updateByName(AdminEntity adminEntity);
 }

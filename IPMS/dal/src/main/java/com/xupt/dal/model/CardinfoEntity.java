@@ -4,7 +4,7 @@ package com.xupt.dal.model;
 
 /**
  * @author: lenovo
- * @time: 2018-04-23 15:06:56
+ * @time: 2018-05-03 14:01:51
  * @description: cardinfo()
  */
 public class CardinfoEntity {
@@ -16,18 +16,18 @@ public class CardinfoEntity {
     private Integer id;
 
     /**
-     * 卡号
-     * not-null:true
-     * default:''
-     */
-    private String idno;
-
-    /**
      * 卡编号
      * not-null:true
      * default:''
      */
     private String cardno;
+
+    /**
+     * userinfo表的idno
+     * not-null:true
+     * default:''
+     */
+    private String idno;
 
     /**
      * 类型
@@ -43,6 +43,20 @@ public class CardinfoEntity {
      */
     private Integer remain;
 
+    /**
+     * 办卡时间
+     * not-null:true
+     * default:''
+     */
+    private String carstart;
+
+    /**
+     * 到期时间
+     * not-null:true
+     * default:''
+     */
+    private String carend;
+
     public void setId(Integer id) {
         this.id = id;
     }
@@ -51,20 +65,20 @@ public class CardinfoEntity {
         return id;
     }
 
-    public void setIdno(String idno) {
-        this.idno = idno;
-    }
-
-    public String getIdno() {
-        return idno;
-    }
-
     public void setCardno(String cardno) {
         this.cardno = cardno;
     }
 
     public String getCardno() {
         return cardno;
+    }
+
+    public void setIdno(String idno) {
+        this.idno = idno;
+    }
+
+    public String getIdno() {
+        return idno;
     }
 
     public void setTypes(String types) {
@@ -81,6 +95,22 @@ public class CardinfoEntity {
 
     public Integer getRemain() {
         return remain;
+    }
+
+    public void setCarstart(String carstart) {
+        this.carstart = carstart;
+    }
+
+    public String getCarstart() {
+        return carstart;
+    }
+
+    public void setCarend(String carend) {
+        this.carend = carend;
+    }
+
+    public String getCarend() {
+        return carend;
     }
 
 }

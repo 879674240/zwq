@@ -79,4 +79,28 @@ public class StopController {
         }
         return response;
     }
+
+    @CrossOrigin("*")
+    @ApiOperation(value = "反向寻车", notes = "反向寻车", httpMethod = "POST", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/querySpace",method=RequestMethod.POST)
+    public Response<StopEntity> querySpace(@RequestBody CarnumParam carnumParam){
+        Response<StopEntity> response = new Response<>();
+        StopEntity stopEntity = null;
+        try {
+            stopEntity = stopService.querySpace(carnumParam.getCarnum());
+            if(stopEntity==null){
+                response.setCode(0);
+                response.setMessage("没有查到该车信息！");
+            }else{
+                response.setData(stopEntity);
+                response.setCode(1);
+                response.setMessage("获取车位信息成功！");
+            }
+        }catch (Exception e){
+            response.setCode(0);
+            response.setMessage("获取车位信息异常！");
+        }
+        return response;
+    }
+
 }

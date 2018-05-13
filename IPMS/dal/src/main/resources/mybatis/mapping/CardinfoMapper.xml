@@ -3,36 +3,44 @@
 <mapper namespace="com.xupt.dal.mapper.CardinfoMapper">
     <resultMap id="CardinfoMap" type="com.xupt.dal.model.CardinfoEntity">
         <result column="id" property="id"/>
-        <result column="idno" property="idno"/>
         <result column="cardno" property="cardno"/>
+        <result column="idno" property="idno"/>
         <result column="types" property="types"/>
         <result column="remain" property="remain"/>
+        <result column="carstart" property="carstart"/>
+        <result column="carend" property="carend"/>
     </resultMap>
     <sql id="fields">
-        id,idno,cardno,types,remain
+        id,cardno,idno,types,remain,carstart,carend
     </sql>
     <sql id="insertValues">
         <trim suffixOverrides=",">
-            <if test="idno != null">#{idno},</if>
             <if test="cardno != null">#{cardno},</if>
+            <if test="idno != null">#{idno},</if>
             <if test="types != null">#{types},</if>
             <if test="remain != null">#{remain},</if>
+            <if test="carstart != null">#{carstart},</if>
+            <if test="carend != null">#{carend},</if>
         </trim>
     </sql>
     <sql id="insertFields">
         <trim suffixOverrides=",">
-            <if test="idno != null">idno,</if>
             <if test="cardno != null">cardno,</if>
+            <if test="idno != null">idno,</if>
             <if test="types != null">types,</if>
             <if test="remain != null">remain,</if>
+            <if test="carstart != null">carstart,</if>
+            <if test="carend != null">carend,</if>
         </trim>
     </sql>
     <sql id="updateFields">
         <set>
-            <if test="idno != null">idno=#{idno},</if>
             <if test="cardno != null">cardno=#{cardno},</if>
+            <if test="idno != null">idno=#{idno},</if>
             <if test="types != null">types=#{types},</if>
             <if test="remain != null">remain=#{remain},</if>
+            <if test="carstart != null">carstart=#{carstart},</if>
+            <if test="carend != null">carend=#{carend},</if>
         </set>
     </sql>
     <sql id="searchFields">
@@ -60,6 +68,9 @@
     </select>
     <update id="update" parameterType="com.xupt.dal.model.CardinfoEntity">
         update cardinfo <include refid="updateFields"/> where id = #{id}
+    </update>
+    <update id="updateByCardno" parameterType="com.xupt.dal.model.CardinfoEntity">
+        update cardinfo <set>remain = #{remain}</set> where cardno = #{cardno}
     </update>
     <delete id="delete" parameterType="Object">
         delete from cardinfo where id = #{id}

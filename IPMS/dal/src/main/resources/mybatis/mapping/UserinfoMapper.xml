@@ -65,6 +65,12 @@
             <if test="tel != null">AND tel like concat(concat("%",#{tel}),"%")</if>
         </trim>
     </sql>
+    <sql id="updateFieldssecond">
+        <set>
+            <if test="idno != null">idno=#{idno},</if>
+            <if test="passwd != null">passwd=#{passwd},</if>
+        </set>
+    </sql>
     <insert id="insert" parameterType="Object" keyProperty="id" useGeneratedKeys="true">
         INSERT INTO userinfo(<include refid="insertFields"/>) values(<include refid="insertValues"/>)
     </insert>
@@ -89,4 +95,10 @@
     <select id="queryAll" resultMap="UserinfoMap">
         select <include refid="fields"/> from userinfo
     </select>
+    <select id="queryByName" parameterType="String" resultMap="UserinfoMap">
+        select <include refid="fields"/> from userinfo where idno = #{idno}
+    </select>
+    <update id="updateByName" parameterType="com.xupt.dal.model.UserinfoEntity">
+        update userinfo <include refid="updateFieldssecond"/> where idno = #{idno}
+    </update>
 </mapper>

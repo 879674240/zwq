@@ -6,6 +6,8 @@ import com.xupt.dto.ParkingInfo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -20,6 +22,8 @@ public class StopService {
     UserinfoMapper userinfoMapper;
     @Resource
     CarinfoMapper carinfoMapper;
+    @Resource
+    CollectMapper collectMapper;
     /**
      * 添加停车信息
      * @param stopEntity
@@ -36,6 +40,19 @@ public class StopService {
         parkingEntity.setPosition(stopEntity.getCarposi());
         parkingEntity.setStatus(1);
         parkingMapper.updateByPosi(parkingEntity);
+
+        CollectEntity collectEntity = new CollectEntity();
+        CarinfoEntity carinfoEntity = carinfoMapper.queryCarnum(stopEntity.getCarnum());
+        String carddriverno = carinfoEntity.getCardriverno();
+        UserinfoEntity userinfoEntity = userinfoMapper.queryByCardriverno(carddriverno);
+        collectEntity.setUsername(userinfoEntity.getUsername());
+        CardinfoEntity cardinfoEntity = cardinfoMapper.queryByIdno(userinfoEntity.getIdno());
+        collectEntity.setCardno(cardinfoEntity.getCardno());
+        collectEntity.setCarnum(stopEntity.getCarnum());
+        Date date = new Date();
+        SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        collectEntity.setStarttime(sf.format(date));
+        collectMapper.insert(collectEntity);
         return result;
     }
 
@@ -61,5 +78,10 @@ public class StopService {
         }
         parkingInfo.setTypes(types);
         return parkingInfo;
+    }
+
+    public StopEntity querySpace(String carnum){
+        StopEntity stopEntity = stopMapper.queryByCarnum(carnum);
+        return stopEntity;
     }
 }

@@ -54,4 +54,10 @@
     <select id="queryByCardno" parameterType="Object" resultMap="StopMap">
         select <include refid="fields"/> from stop where cardno = #{cardno}
     </select>
+    <delete id="deleteByCarnum" parameterType="String">
+        delete from stop where carnum = #{carnum}
+    </delete>
+    <select id="queryByCarnum" parameterType="String" resultMap="StopMap">
+        select <include refid="fields"/> from stop where carnum = #{carnum}
+    </select>
 </mapper>

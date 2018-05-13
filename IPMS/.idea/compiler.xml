@@ -12,5 +12,12 @@
         <module name="webapp" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel target="8">
+      <module name="common" target="1.8" />
+      <module name="dal" target="1.8" />
+      <module name="IPMS" target="1.8" />
+      <module name="service" target="1.8" />
+      <module name="webapp" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>

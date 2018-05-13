@@ -15,4 +15,6 @@ public interface StopMapper {
     StopEntity queryByCardno(@Param("cardno")String cardno);
     int updateById(@Param("id") Integer id);
     StopEntity getById(@Param("id") Integer id);
+    int deleteByCarnum(@Param("carnum")String carnum);
+    StopEntity queryByCarnum(@Param("carnum")String carnum);
 }

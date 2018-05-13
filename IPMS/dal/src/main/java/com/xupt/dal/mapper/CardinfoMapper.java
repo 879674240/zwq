@@ -18,6 +18,7 @@ public interface CardinfoMapper {
     CardinfoEntity queryById(@Param("id")Integer id);
     int count(CardinfoDTO cardinfoDTO);
     int update(CardinfoEntity cardinfoEntity);
+    int updateByCardno(CardinfoEntity cardinfoEntity);
     int delete(@Param("id")Integer id);
     List<CardinfoEntity> queryAll();
     CardinfoEntity queryByIdno(@Param("idno")String idno);

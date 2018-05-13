@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xupt.dal.mapper.CollectMapper">
+    <resultMap id="CollectMap" type="com.xupt.dal.model.CollectEntity">
+        <result column="id" property="id"/>
+        <result column="username" property="username"/>
+        <result column="cardno" property="cardno"/>
+        <result column="carnum" property="carnum"/>
+        <result column="starttime" property="starttime"/>
+        <result column="endtime" property="endtime"/>
+        <result column="totalmoney" property="totalmoney"/>
+    </resultMap>
+    <sql id="fields">
+        id,username,cardno,carnum,starttime,endtime,totalmoney
+    </sql>
+    <sql id="insertValues">
+        <trim suffixOverrides=",">
+            <if test="username != null">#{username},</if>
+            <if test="cardno != null">#{cardno},</if>
+            <if test="carnum != null">#{carnum},</if>
+            <if test="starttime != null">#{starttime},</if>
+            <if test="endtime != null">#{endtime},</if>
+            <if test="totalmoney != null">#{totalmoney},</if>
+        </trim>
+    </sql>
+    <sql id="insertFields">
+        <trim suffixOverrides=",">
+            <if test="username != null">username,</if>
+            <if test="cardno != null">cardno,</if>
+            <if test="carnum != null">carnum,</if>
+            <if test="starttime != null">starttime,</if>
+            <if test="endtime != null">endtime,</if>
+            <if test="totalmoney != null">totalmoney,</if>
+        </trim>
+    </sql>
+    <sql id="updateFields">
+        <set>
+            <if test="username != null">username=#{username},</if>
+            <if test="cardno != null">cardno=#{cardno},</if>
+            <if test="carnum != null">carnum=#{carnum},</if>
+            <if test="starttime != null">starttime=#{starttime},</if>
+            <if test="endtime != null">endtime=#{endtime},</if>
+            <if test="totalmoney != null">totalmoney=#{totalmoney},</if>
+        </set>
+    </sql>
+    <sql id="searchFields">
+        <trim prefixOverrides="AND">
+            <if test="id != null">AND id=#{id}</if>
+        </trim>
+    </sql>
+    <insert id="insert" parameterType="Object" keyProperty="id" useGeneratedKeys="true">
+        INSERT INTO collect(<include refid="insertFields"/>) values(<include refid="insertValues"/>)
+    </insert>
+    <select id="queryByCarnum" parameterType="String" resultMap="CollectMap">
+        select <include refid="fields"/> from collect where carnum = #{carnum}
+    </select>
+    <update id="updateByCarnum" parameterType="com.xupt.dal.model.CollectEntity">
+        update collect <set>endtime = #{endtime},totalmoney=#{totalmoney}</set> where carnum = #{carnum}
+    </update>
+    <delete id="deleteByCarnum" parameterType="String">
+        delete from collect where carnum = #{carnum}
+    </delete>
+</mapper>

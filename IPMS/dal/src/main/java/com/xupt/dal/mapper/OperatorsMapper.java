@@ -20,4 +20,6 @@ public interface OperatorsMapper {
     OperatorsEntity queryByIdno(String idno);
     int update(OperatorsEntity entity);
     int delete(@Param("id")Integer id);
+    OperatorsEntity queryByName(@Param("idno")String idno);
+    int updateByName(OperatorsEntity entity);
 }

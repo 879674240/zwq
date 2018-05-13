@@ -83,4 +83,10 @@
     <delete id="delete" parameterType="Object">
         delete from operators where id = #{id}
     </delete>
+    <select id="queryByName" parameterType="String" resultMap="OperatorsMap">
+        select <include refid="fields"/> from operators where idno = #{idno}
+    </select>
+    <update id="updateByName" parameterType="com.xupt.dal.model.OperatorsEntity">
+        update operators <include refid="updateFields"/> where idno = #{idno}
+    </update>
 </mapper>
