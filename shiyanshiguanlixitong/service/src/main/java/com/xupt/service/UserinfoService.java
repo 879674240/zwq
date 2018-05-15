@@ -71,7 +71,7 @@ public class UserinfoService {
         Integer result = 0;
         UserinfoEntity userinfoEntity = userinfoMapper.queryByName(loginParam.getName());
         if (userinfoEntity != null) {
-            if (loginParam.getPassword().equals(userinfoEntity.getPassword())) {
+            if (loginParam.getPassword().equals(userinfoEntity.getPassword())){
                 result = userinfoMapper.updateByName(loginParam.getName(),loginParam.getNewpassword());
                 return result;
             }else{

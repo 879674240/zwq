@@ -15,13 +15,15 @@ public class LoginInterceptor implements HandlerInterceptor {
 
     @Resource
     JedisPool jedisPool;
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         System.out.println("拦截器preHandel方法");
 
         String tokenfromweb = request.getHeader("Authorization");
+        String tokenfromweb1 = request.getHeader("authorization");
         if(tokenfromweb==null){
-            response.setStatus(HttpStatus.SC_UNAUTHORIZED);
+            //response.setStatus(HttpStatus.SC_UNAUTHORIZED);
             return false;
         }
         Jedis jedis = jedisPool.getResource();

@@ -69,7 +69,6 @@ public class UserController {
      * @param loginParam
      * @return
      */
-    @CrossOrigin("*")
     @ApiOperation(value = "修改密码", notes = "修改密码", httpMethod = "POST", produces = MediaType.APPLICATION_JSON_VALUE)
     @RequestMapping(value = "/update",method = RequestMethod.POST)
     public Response<Integer> update(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @ApiParam(value = "修改密码",required = true) @RequestBody LoginParam loginParam){
@@ -123,7 +122,6 @@ public class UserController {
      * @param loginParam
      * @return
      */
-    @CrossOrigin("*")
     @ApiOperation(value = "登录token验证", notes = "登录token验证", httpMethod = "POST", produces = MediaType.APPLICATION_JSON_VALUE)
     @RequestMapping(value = "/loginToken",method = RequestMethod.POST)
     public Response<String> loginToken(@ApiParam(value = "日志查询条件",required = true) @RequestBody LoginParam loginParam){

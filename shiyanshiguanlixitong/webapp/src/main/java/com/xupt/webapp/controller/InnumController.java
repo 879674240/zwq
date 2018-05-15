@@ -25,7 +25,6 @@ public class InnumController {
      * @param innumEntity
      * @return
      */
-    @CrossOrigin("*")
     @ApiOperation(value = "增加实验室", notes = "增加实验室", httpMethod = "POST", produces = MediaType.APPLICATION_JSON_VALUE)
     @RequestMapping(value = "/insertShiyanshi",method = RequestMethod.POST)
     public Response<Integer> insert(@ApiParam(value = "枚举类实体",required = true) @RequestBody InnumEntity innumEntity){
@@ -55,7 +54,6 @@ public class InnumController {
      * @param innumEntity
      * @return
      */
-    @CrossOrigin("*")
     @ApiOperation(value = "增加实验室编号", notes = "增加实验室编号", httpMethod = "POST", produces = MediaType.APPLICATION_JSON_VALUE)
     @RequestMapping(value = "/insertClassroom",method = RequestMethod.POST)
     public Response<Integer> insertClassroom(@ApiParam(value = "枚举类实体",required = true) @RequestBody InnumEntity innumEntity){
@@ -86,7 +84,6 @@ public class InnumController {
      * @param innumEntity
      * @return
      */
-    @CrossOrigin("*")
     @ApiOperation(value = "修改实验室或者教室", notes = "修改实验室或者教室", httpMethod = "POST", produces = MediaType.APPLICATION_JSON_VALUE)
     @RequestMapping(value = "/updateShiyanshi",method = RequestMethod.POST)
     public Response<Integer> updateShiyanshi(@ApiParam(value = "枚举类实体",required = true) @RequestBody InnumEntity innumEntity){
@@ -111,7 +108,6 @@ public class InnumController {
      * @param listParam
      * @return
      */
-    @CrossOrigin("*")
     @ApiOperation(value = "删除枚举类", notes = "删除枚举类", httpMethod = "POST", produces = MediaType.APPLICATION_JSON_VALUE)
     @RequestMapping(value = "/delete",method = RequestMethod.POST)
     public Response<Integer> delete(@ApiParam(value = "id列表",required = true) @RequestBody ListParam listParam){
@@ -136,7 +132,6 @@ public class InnumController {
      * @param innumParam
      * @return
      */
-    @CrossOrigin("*")
     @ApiOperation(value = "查询该类型中所属类型的所有枚举类", notes = "查询该类型中所属类型的所有枚举类", httpMethod = "POST", produces = MediaType.APPLICATION_JSON_VALUE)
     @RequestMapping(value = "/queryByOrder",method = RequestMethod.POST)
     public Response<List<InnumClassroomDTO>> queryByOrder(@ApiParam(value = "id列表",required = true) @RequestBody InnumParam innumParam){
@@ -161,7 +156,6 @@ public class InnumController {
      * @param id
      * @return
      */
-    @CrossOrigin("*")
     @ApiOperation(value = "按id查询枚举类", notes = "按id查询枚举类", httpMethod = "POST", produces = MediaType.APPLICATION_JSON_VALUE)
     @RequestMapping(value = "/queryById",method = RequestMethod.POST)
     public Response<InnumEntity> queryById(Integer id){
@@ -190,7 +184,6 @@ public class InnumController {
      * @param
      * @return
      */
-    @CrossOrigin("*")
     @ApiOperation(value = "查询所有枚举类", notes = "查询所有枚举类", httpMethod = "POST", produces = MediaType.APPLICATION_JSON_VALUE)
     @RequestMapping(value = "/queryAll",method = RequestMethod.POST)
     public Response<InnumAllDTO> queryAll(){
@@ -218,7 +211,6 @@ public class InnumController {
      * @param
      * @return
      */
-    @CrossOrigin("*")
     @ApiOperation(value = "按实验室查询教室编号", notes = "按实验室查询教室编号", httpMethod = "POST", produces = MediaType.APPLICATION_JSON_VALUE)
     @RequestMapping(value = "/queryByshiyanshi",method = RequestMethod.POST)
     public Response<List<InnumEntity>> queryByshiyanshi(@ApiParam(value = "实验室名称",required = true) @RequestBody InnumshiyanshiDTO innumshiyanshiDTO){

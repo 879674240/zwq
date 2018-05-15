@@ -22,7 +22,6 @@ public class ExpeiLogController {
     @Resource
     ExperiLogService experiLogService;
 
-    @CrossOrigin("*")
     @ApiOperation(value = "查询实验日志", notes = "查询实验日志", httpMethod = "POST", produces = MediaType.APPLICATION_JSON_VALUE)
     @RequestMapping(value = "/query",method = RequestMethod.POST)
     public Response<List<ExperiLogDTO>> query(@ApiParam(value = "日志查询条件",required = true) @RequestBody ExpeiLogParam expeiLogParam){

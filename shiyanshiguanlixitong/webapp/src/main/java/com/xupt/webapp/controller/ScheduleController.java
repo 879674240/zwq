@@ -32,7 +32,6 @@ public class ScheduleController {
      * @param room
      * @return
      */
-    @CrossOrigin("*")
     @ApiOperation(value = "实验室房间号来查看课程安排", notes = "实验室房间号来查看课程安排", httpMethod = "POST", produces = MediaType.APPLICATION_JSON_VALUE)
     @RequestMapping(value = "/query",method = RequestMethod.POST)
     public Response<List<ScheduleDTO>> query(@ApiParam(value = "实验室房间号",required = true) @RequestBody String room){
@@ -55,7 +54,6 @@ public class ScheduleController {
      * @param scheduleEntity
      * @return
      */
-    @CrossOrigin("*")
     @ApiOperation(value = "安排实验", notes = "安排实验", httpMethod = "POST", produces = MediaType.APPLICATION_JSON_VALUE)
     @RequestMapping(value = "/arrange",method = RequestMethod.POST)
     public Response<Integer> arrange(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @ApiParam(value = "实验安排模型",required = true) @RequestBody ScheduleEntity scheduleEntity){
@@ -106,7 +104,6 @@ public class ScheduleController {
      * @param id
      * @return
      */
-    @CrossOrigin("*")
     @ApiOperation(value = "删除实验", notes = "删除实验", httpMethod = "POST", produces = MediaType.APPLICATION_JSON_VALUE)
     @RequestMapping(value = "/delete",method = RequestMethod.POST)
     public Response<Integer> delete(@ApiParam(value = "所删除id集合",required = true) @RequestBody Integer id){
@@ -125,7 +122,6 @@ public class ScheduleController {
         return response;
     }
 
-    @CrossOrigin("*")
     @ApiOperation(value = "实验室房间号来查看课程安排", notes = "实验室房间号来查看课程安排", httpMethod = "POST", produces = MediaType.APPLICATION_JSON_VALUE)
     @RequestMapping(value = "/queryAll",method = RequestMethod.POST)
     public List<TableDTO> queryAll(@ApiParam(value = "教室编号",required = true) @RequestBody ScheduleRoomDTO scheduleRoomDTO){
@@ -137,7 +133,6 @@ public class ScheduleController {
         }
         return tableDTOS;
     }
-    @CrossOrigin("*")
     @ApiOperation(value = "初始化课表", notes = "初始化课表", httpMethod = "POST", produces = MediaType.APPLICATION_JSON_VALUE)
     @RequestMapping(value = "/queryEmpty",method = RequestMethod.POST)
     public List<TableDTO> queryEmpty(){

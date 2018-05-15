@@ -28,7 +28,6 @@ public class LaboratorController {
      * @param laboratoryAssetsEntity
      * @return
      */
-    @CrossOrigin("*")
     @ApiOperation(value = "录入实验室资产", notes = "录入实验室资产", httpMethod = "POST", produces = MediaType.APPLICATION_JSON_VALUE)
     @RequestMapping(value = "/insert",method = RequestMethod.POST)
     public Response<Integer> insert(@ApiParam(value = "实验室资产",required = true) @RequestBody LaboratoryAssetsEntity laboratoryAssetsEntity){
@@ -58,7 +57,6 @@ public class LaboratorController {
      * @param laboratoryAssetsEntity
      * @return
      */
-    @CrossOrigin("*")
     @ApiOperation(value = "修改资产信息", notes = "修改资产信息", httpMethod = "POST", produces = MediaType.APPLICATION_JSON_VALUE)
     @RequestMapping(value = "/update",method = RequestMethod.POST)
     public Response<Integer> update(@ApiParam(value = "实验室资产",required = true) @RequestBody LaboratoryAssetsEntity laboratoryAssetsEntity){
@@ -85,7 +83,6 @@ public class LaboratorController {
      * @param laboratoryAssetsParam
      * @return
      */
-    @CrossOrigin("*")
     @ApiOperation(value = "查询实验室资产", notes = "查询实验室资产", httpMethod = "POST", produces = MediaType.APPLICATION_JSON_VALUE)
     @RequestMapping(value = "/query",method = RequestMethod.POST)
     public Response<PageResult<List<LaboratoryAssetsEntity>>> query(@ApiParam(value = "实验室资产",required = true) @RequestBody LaboratoryAssetsParam laboratoryAssetsParam){
@@ -112,7 +109,6 @@ public class LaboratorController {
      * @param id
      * @return
      */
-    @CrossOrigin("*")
     @ApiOperation(value = "按id查询", notes = "按id查询实验室资产，用于回显功能", httpMethod = "POST", produces = MediaType.APPLICATION_JSON_VALUE)
     @RequestMapping(value = "/queryById",method = RequestMethod.POST)
     public Response<LaboratoryAssetsEntity> queryById(Integer id){
@@ -138,7 +134,6 @@ public class LaboratorController {
      * @param listParam
      * @return
      */
-    @CrossOrigin("*")
     @ApiOperation(value = "删除实验室资产记录", notes = "删除实验室资产记录", httpMethod = "POST", produces = MediaType.APPLICATION_JSON_VALUE)
     @RequestMapping(value = "/delete",method = RequestMethod.POST)
     public Response<Integer> delete(@ApiParam(value = "实验室资产",required = true) @RequestBody ListParam listParam){

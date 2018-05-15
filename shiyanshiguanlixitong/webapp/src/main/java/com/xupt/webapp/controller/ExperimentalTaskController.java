@@ -28,7 +28,6 @@ public class ExperimentalTaskController {
      * @param experimentalTaskEntity
      * @return
      */
-    @CrossOrigin("*")
     @ApiOperation(value = "插入实验任务", notes = "插入实验任务", httpMethod = "POST", produces = MediaType.APPLICATION_JSON_VALUE)
     @RequestMapping(value = "/insert",method = RequestMethod.POST)
     public Response<Integer> insert(@ApiParam(value = "实验任务",required = true) @RequestBody ExperimentalTaskEntity experimentalTaskEntity){
@@ -57,7 +56,6 @@ public class ExperimentalTaskController {
      * @param experimentalTaskEntity
      * @return
      */
-    @CrossOrigin("*")
     @ApiOperation(value = "更新实验任务", notes = "更新实验任务", httpMethod = "POST", produces = MediaType.APPLICATION_JSON_VALUE)
     @RequestMapping(value = "/update",method = RequestMethod.POST)
     public Response<Integer> update(@ApiParam(value = "实验任务",required = true) @RequestBody ExperimentalTaskEntity experimentalTaskEntity){
@@ -81,7 +79,6 @@ public class ExperimentalTaskController {
      * @param experimentalTaskParam
      * @return
      */
-    @CrossOrigin("*")
     @ApiOperation(value = "分页查询", notes = "分页查询", httpMethod = "POST", produces = MediaType.APPLICATION_JSON_VALUE)
     @RequestMapping(value = "/queryByPage",method = RequestMethod.POST)
     public Response<PageResult<List<ExperimentalTaskEntity>>> queryByPage(@ApiParam(value = "实验任务",required = true) @RequestBody ExperimentalTaskParam experimentalTaskParam){
@@ -106,7 +103,6 @@ public class ExperimentalTaskController {
      * @param listParam
      * @return
      */
-    @CrossOrigin("*")
     @ApiOperation(value = "删除实验任务", notes = "删除实验任务", httpMethod = "POST", produces = MediaType.APPLICATION_JSON_VALUE)
     @RequestMapping(value = "/delete",method = RequestMethod.POST)
     public Response<Integer> delete(@ApiParam(value = "所删除id集合",required = true) @RequestBody ListParam listParam){
@@ -131,7 +127,6 @@ public class ExperimentalTaskController {
      * @param id
      * @return
      */
-    @CrossOrigin("*")
     @ApiOperation(value = "获取实验任务", notes = "获取实验任务", httpMethod = "POST", produces = MediaType.APPLICATION_JSON_VALUE)
     @RequestMapping(value = "/queryById",method = RequestMethod.POST)
     public Response<ExperimentalTaskEntity> queryById(@RequestParam("id")Integer id){

@@ -41,18 +41,35 @@
     <mvc:interceptors>
         <mvc:interceptor>
            <!--默认拦截的连接-->
-            <mvc:mapping path="/api/test/*"/>
+            <mvc:mapping path="/api/*/*"/>
             <!--不拦截的连接-->
             <mvc:exclude-mapping path="/api/user/loginToken"/>
+            <mvc:exclude-mapping path="/api/user/register"/>
+            <mvc:exclude-mapping path="/api/innum/queryByOrder"/>
             <bean class="com.xupt.webapp.interceptor.LoginInterceptor"></bean>
         </mvc:interceptor>
         <mvc:interceptor>
             <!--默认拦截的连接-->
-            <mvc:mapping path="/api/*/*"/>
+            <mvc:mapping path="/api/test/*"/>
+            <!--不拦截的连接-->
+            <mvc:exclude-mapping path="/api/user/loginToken"/>
             <bean class="com.xupt.webapp.interceptor.LogInterceptor"></bean>
         </mvc:interceptor>
     </mvc:interceptors>
 
+    <mvc:cors>
+
+        <mvc:mapping path="/**"
+
+                     allowed-origins="*"
+
+                     allowed-methods="POST, GET, OPTIONS, DELETE, PUT"
+
+                     allowed-headers="Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With"
+
+                     allow-credentials="true" />
+
+    </mvc:cors>
     <mvc:resources location="classpath:/META-INF/resources/" mapping="swagger-ui.html"/>
     <mvc:resources location="classpath:/META-INF/resources/webjars/" mapping="/webjars/**"/>
 

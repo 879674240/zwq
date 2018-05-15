@@ -30,7 +30,6 @@ public class StatisticsController {
      * @param experimentalTaskParam
      * @return
      */
-    @CrossOrigin("*")
     @ApiOperation(value = "查询实验数据", notes = "查询实验数据", httpMethod = "POST", produces = MediaType.APPLICATION_JSON_VALUE)
     @RequestMapping(value = "/query",method = RequestMethod.POST)
     public Response<PageResult<List<StatisticsDTO>>> query(@ApiParam(value = "实验编码",required = true) @RequestBody ExperimentalTaskParam experimentalTaskParam){
