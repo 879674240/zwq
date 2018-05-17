@@ -84,8 +84,10 @@ public class ScheduleController {
             }else if(result==2){
                 response.setCode(1);
                 response.setMessage("删除成功！");
-            }
-            else{
+            }else if(result==3){
+                response.setCode(1);
+                response.setMessage("您没有权限修改此课程！");
+            } else{
                 response.setCode(1);
                 response.setData(result);
                 response.setMessage("插入实验安排数据成功！");

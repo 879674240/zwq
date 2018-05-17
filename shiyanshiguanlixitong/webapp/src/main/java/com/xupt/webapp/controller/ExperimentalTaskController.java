@@ -79,6 +79,7 @@ public class ExperimentalTaskController {
      * @param experimentalTaskParam
      * @return
      */
+    @CrossOrigin("*")
     @ApiOperation(value = "分页查询", notes = "分页查询", httpMethod = "POST", produces = MediaType.APPLICATION_JSON_VALUE)
     @RequestMapping(value = "/queryByPage",method = RequestMethod.POST)
     public Response<PageResult<List<ExperimentalTaskEntity>>> queryByPage(@ApiParam(value = "实验任务",required = true) @RequestBody ExperimentalTaskParam experimentalTaskParam){

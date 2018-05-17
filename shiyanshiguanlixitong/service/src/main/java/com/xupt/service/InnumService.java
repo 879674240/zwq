@@ -174,24 +174,7 @@ public class InnumService {
             return null;
         }
         for(InnumEntity innumEntity:innumEntities){
-           if(innumEntity.getType().equals("课程")){
-                InnumKechengDTO innumKechengDTO = new InnumKechengDTO();
-                String key = innumEntity.getKey();
-                ExperimentalTaskEntity experimentalTaskEntity = experimentalTaskMapper.queryByNum(key);
-                int time = 0;
-                if(experimentalTaskEntity!=null){
-                    time = experimentalTaskEntity.getHours();
-                    innumKechengDTO.setClasss(experimentalTaskEntity.getClasss());
-                    innumKechengDTO.setTeacher(experimentalTaskEntity.getTeacher());
-                    innumKechengDTO.setStudentNum(experimentalTaskEntity.getStudentNum());
-                    innumKechengDTO.setCompulsory(experimentalTaskEntity.getCompulsoryElective());
-                }
-                int hourCount = scheduleMapper.hourCount(key);
-                BeanUtils.copyProperties(innumEntity,innumKechengDTO);
-                innumKechengDTO.setTime(time);
-                innumKechengDTO.setTimed(hourCount);
-                innumKechengDTOS.add(innumKechengDTO);
-            }else if(innumEntity.getType().equals("实验室")){
+           if(innumEntity.getType().equals("实验室")){
                InnumSysDTO innumSysDTO = new InnumSysDTO();
                BeanUtils.copyProperties(innumEntity,innumSysDTO);
                 List<InnumEntity> innumEntities1 = innumMapper.queryByOrder("教室编号",innumEntity.getId());
@@ -200,6 +183,26 @@ public class InnumService {
                bianhao.add(innumSysDTO);
             }
         }
+
+        List<ExperimentalTaskEntity> experimentalTaskEntities = experimentalTaskMapper.queryAll();
+        for(ExperimentalTaskEntity experimentalTaskEntity:experimentalTaskEntities){
+            InnumKechengDTO innumKechengDTO = new InnumKechengDTO();
+            int time = 0;
+            int hourCount = scheduleMapper.hourCount(experimentalTaskEntity.getNumberr());
+            time = experimentalTaskEntity.getHours();
+            innumKechengDTO.setClasss(experimentalTaskEntity.getClasss());
+            innumKechengDTO.setTeacher(experimentalTaskEntity.getTeacher());
+            innumKechengDTO.setStudentNum(experimentalTaskEntity.getStudentNum());
+            innumKechengDTO.setCompulsory(experimentalTaskEntity.getCompulsoryElective());
+            innumKechengDTO.setKey(experimentalTaskEntity.getNumberr());
+            innumKechengDTO.setValue(experimentalTaskEntity.getSubject());
+            innumKechengDTO.setOrder(1);
+            innumKechengDTO.setType("课程");
+            innumKechengDTO.setTime(time);
+            innumKechengDTO.setTimed(hourCount);
+            innumKechengDTOS.add(innumKechengDTO);
+        }
+
         innumAllDTO.setKecheng(innumKechengDTOS);
         innumAllDTO.setHaoma(bianhao);
         return innumAllDTO;

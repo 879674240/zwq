@@ -80,6 +80,9 @@
     <select id="queryByPage" parameterType="com.xupt.dal.dto.ExperimentalTaskDTO" resultMap="ExperimentalTaskMap">
         select <include refid="fields"/> from experimental_task <include refid="searchFields"/> limit #{offSet},#{pageSize}
     </select>
+    <select id="queryAll" resultMap="ExperimentalTaskMap">
+        select <include refid="fields"/> from experimental_task
+    </select>
     <update id="update" parameterType="com.xupt.dal.model.ExperimentalTaskEntity">
         update experimental_task <include refid="updateFields"/> where id=#{id}
     </update>
@@ -89,4 +92,5 @@
     <select id="count" parameterType="com.xupt.dal.dto.ExperimentalTaskDTO" resultType="Integer">
         select count(0) from experimental_task <include refid="searchFields"/>
     </select>
+
 </mapper>

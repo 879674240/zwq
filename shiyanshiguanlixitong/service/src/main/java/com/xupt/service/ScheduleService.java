@@ -72,18 +72,21 @@ public class ScheduleService {
         try {
             scheduleEntity1 = scheduleMapper.queryByTime(scheduleEntity.getWeekly(),scheduleEntity.getWeek(),
                     0,scheduleEntity.getRoom());
+            UserinfoEntity userinfoEntity = userinfoMapper.queryByName(scheduleEntity.getOperator());
             if (scheduleEntity1!=null){
                 /**
                  * 若编号相同，则删除
                  */
                 if(scheduleEntity1.getArrange().equals(scheduleEntity.getArrange())){
-                    scheduleMapper.deleteBytime(scheduleEntity);
-                    return 2;
+                    if(scheduleEntity1.getOperator().equals(userinfoEntity.getRealname())){
+                        scheduleMapper.deleteBytime(scheduleEntity);
+                        return 2;
+                    }
+                    return 3;
                 }else{
                     return 0;
                 }
             }else{
-                UserinfoEntity userinfoEntity = userinfoMapper.queryByName(scheduleEntity.getOperator());
                 scheduleEntity.setOperator(userinfoEntity.getRealname());
                 result = scheduleMapper.insert(scheduleEntity);
             }

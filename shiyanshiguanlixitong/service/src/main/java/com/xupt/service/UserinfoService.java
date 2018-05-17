@@ -71,15 +71,20 @@ public class UserinfoService {
         Integer result = 0;
         UserinfoEntity userinfoEntity = userinfoMapper.queryByName(loginParam.getName());
         if (userinfoEntity != null) {
-            if (loginParam.getPassword().equals(userinfoEntity.getPassword())){
-                result = userinfoMapper.updateByName(loginParam.getName(),loginParam.getNewpassword());
-                return result;
-            }else{
-                return 0;
+            try {
+                if (MD5Util.EncoderByMd5(loginParam.getPassword()).equals(userinfoEntity.getPassword())){
+                    result = userinfoMapper.updateByName(loginParam.getName(),MD5Util.EncoderByMd5(loginParam.getNewpassword()));
+                    return result;
+                }else{
+                    return 0;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }else{
             return -1;
         }
+        return 0;
     }
 
     /**
